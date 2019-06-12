@@ -1,0 +1,25 @@
+td{
+    border:solid;
+    font-size:50px;
+}
+table{
+    direction: rtl;
+    border-collapse: collapse;
+    width: 40%;
+    height: 1%;
+    position: absolute;
+    margin-top:-52%;
+    margin-left:9%;
+}
+#searchNational{
+    display: inline-block;
+    position: absolute;
+}
+#getIdentity{
+    display: inline-block;
+    // position: absolute;
+    // margin-left: 71%;
+}
+#headerToVoting{
+    position: absolute
+}
