@@ -1,0 +1,9 @@
+<h1>
+  מנהל ראשי
+</h1>
+
+<input type="button" value="הכנסת מנהלי ערים" (click)="addHeadManager()">
+<input type="button" value="בחר מפלגות מתוך הרשימה" (click)="chooseAgreeFaction()">
+
+<!-- הכפתור לא יהיה מאופשר עד לסיום הבחירות -->
+<input type="button" value="צפה בתוצאות ספירת קולות" [disabled]="closeBallotBox()" (click)="addHeadManager()">

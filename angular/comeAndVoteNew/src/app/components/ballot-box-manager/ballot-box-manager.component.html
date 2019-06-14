@@ -1,0 +1,28 @@
+<table>
+  <br>
+  <br>
+  <br>
+  <input type="text" id="getIdentity" placeholder="הכנס תעודת אזרח" [(ngModel)]="tz">
+  <input type="button" class="btn btn-secondary btn-lg" id="searchNational" value="חיפוש" (click)="searchNationalByTz()"> 
+  <tr>
+    <td>תעודת זהות</td>
+    <td>שם מלא</td>
+    <td>רחוב</td>
+    <td>מיקוד</td>
+    <td>מספר בית</td>
+    <td>האם בחר</td>
+    <td>אישור בוחר</td>
+  </tr>
+  <!-- מעבר על המערך של האזרחים באותו קלפי -->
+  <tr *ngFor="let arr of arrNational">
+    <td>{{arr.Identity}}</td>
+    <td>{{arr.fullName}}</td>
+    <td>{{arr.street}}</td>
+    <td>{{arr.zipCode}}</td>
+    <td>{{arr.numHouse}}</td>
+    <td>{{arr.IsChoose}}</td>
+    <td>
+      <input type="button" class="btn btn-secondary btn-lg" value="אישור" (click)="openFactionBlock(arr)">
+    </td>
+  </tr>
+</table>

@@ -142,7 +142,6 @@ namespace WebApi.Controllers
 
 
         #region מנהל קלפי
-
         //שינוי שדה הבוחר ל-בחר
         [HttpGet]
         [ResponseType(typeof(Managers))]

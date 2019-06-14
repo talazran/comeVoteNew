@@ -1,0 +1,12 @@
+<h1 id="titleOfblockVote">בחר את המפלגה שברצונך</h1>
+<table class="form-group row">
+  <tr *ngFor="let p of arrFaction">
+    <td>
+      <!-- בעת לחיצה על תמונה ישמר קוד המפלגה -->
+      <img class="col-sm-5" src="../../../assets/factionPic/{{p.factionPic}}" [ngStyle]="{'border-color':getIsClickPicFaction()?'red':'white'}" (click)="clickOnFactionPic(p.Id)">
+    </td>
+  </tr>
+</table>
+
+<!-- רק בעת לחיצה על אישור יתווסף קול למפלגה ושדה הבוחר ישתנה ל-בחר -->
+<input type="button" value="אישור בחירה" class="btn btn-secondary btn-lg" (click)="okFaction()">

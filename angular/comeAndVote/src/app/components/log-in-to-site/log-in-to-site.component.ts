@@ -74,6 +74,6 @@ export class LogInToSiteComponent implements OnInit {
         alert("שם משתמש או סיסמא שגויים");
     });
   }
-
+  
   ngOnInit() {}
 }

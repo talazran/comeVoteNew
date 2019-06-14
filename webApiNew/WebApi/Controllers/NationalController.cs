@@ -69,7 +69,17 @@ namespace WebApi.Controllers
         [Route("addTzNationalToList/{Identity}")]
         public void AddTzNationalToList(string Identity)
         {
-           saveTzOfNational.Add(Identity);
+            int flag = 0;
+            foreach (var item in saveTzOfNational)
+            {
+                if (item.Equals(Identity))
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag == 0)//רק אם לא נמצאה התעודת זהות היא תתוסף
+               saveTzOfNational.Add(Identity);
         }
 
         //בדיקה האם אזרח קיים באוסף

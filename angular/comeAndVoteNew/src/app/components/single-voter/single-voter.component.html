@@ -1,0 +1,20 @@
+<input id="backAllNational" class="btn btn-secondary btn-lg" type="button" value="חזרה לרשימת האזרחים" (click)="backAllNational()">
+<table>
+    <tr>
+        <td>תעודת זהות</td>
+        <td>שם מלא</td>
+        <td>רחוב</td>
+        <td>מיקוד</td>
+        <td>מספר בית</td>
+        <td>אישור בוחר</td>
+    </tr>
+    <tr>
+        <td>{{singleVoter.Identity}}</td>
+        <td>{{singleVoter.fullName}}</td>
+        <td>{{singleVoter.street}}</td>
+        <td>{{singleVoter.zipCode}}</td>
+        <td>{{singleVoter.numHouse}}</td>
+        <td>
+            <input type="button" class="btn btn-secondary btn-lg" value="אישור" (click)="openFactionBlock()">
+        </td>
+</table>

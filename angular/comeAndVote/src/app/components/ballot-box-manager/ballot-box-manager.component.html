@@ -11,10 +11,8 @@
     <td>רחוב</td>
     <td>מיקוד</td>
     <td>מספר בית</td>
-    <!-- <td>קוד עיר</td>
-    <td>מספר קלפי</td> -->
+    <td>האם בחר?</td>
     <td>אישור בוחר</td>
-    <!-- <td>האם בחר?</td> -->
   </tr>
   <!-- מעבר על המערך של האזרחים באותו קלפי -->
   <tr *ngFor="let arr of arrNational">
@@ -23,8 +21,7 @@
     <td>{{arr.street}}</td>
     <td>{{arr.zipCode}}</td>
     <td>{{arr.numHouse}}</td>
-    <!-- <td>{{arr.city}}</td>
-    <td>{{arr.numBallot}}</td> -->
+    <td>{{arr.IsChoose}}</td>
     <td>
       <!-- כפתור אישור לא עובד -->
       <input type="button" value="אישור" (click)="openFactionBlock()">

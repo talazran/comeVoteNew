@@ -1,0 +1,55 @@
+<!-- מנהל ראשי -->
+<form id="enterHeadManager" *ngIf="checkManager()==1">
+  <h1>LOGIN</h1>
+  <label>שם משתמש:</label>
+
+  <input type="text" id="userName" [(ngModel)]="userName" name="userName">
+  <br>
+  <label>סיסמא:</label>
+
+  <input type="password" id="password" [(ngModel)]="password" name="password">
+  <br>
+  <br>
+  <input id="enter" type="submit" value="כניסה" (click)="enterHeadManager()">
+</form>
+
+<!-- מנהל עיר -->
+<form id="enterCityManager" *ngIf="checkManager()==2">
+  <h1>LOGIN</h1>
+  <label>שם משתמש:</label>
+  <input type="text" id="userName" [(ngModel)]="userName" name="userName">
+  <br>
+  <label>סיסמא:</label>
+  <input type="password" name="password" [(ngModel)]="password">
+  <br>
+  <br>
+  <select [(ngModel)]="cityOfManager" name="cityName">
+    <option hidden>העיר בה הנך מנהל:</option>
+    <option *ngFor="let c of optionCity">{{c.cityName}}</option>
+  </select>
+  <br>
+  <br>
+  <input id="enter" type="submit" value="כניסה" (click)="enterCityManager()">
+</form>
+
+<!-- מנהל קלפי -->
+<form id="enterBallotBoxManager" *ngIf="checkManager()==3">
+  <h1>LOGIN</h1>
+  <label>שם משתמש:</label>
+  <input type="text" id="userName" [(ngModel)]="userName" name="userName">
+  <br>
+  <label>סיסמא:</label>
+  <input type="password" id="password" [(ngModel)]="password" name="password">
+  <br>
+  <label>מספר קלפי:</label>
+  <input type="number" id="numBallotBox" [(ngModel)]="numOfBalloBox" name="numBallotBox">
+  <br>
+  <br>
+  <select [(ngModel)]="cityOfBallotBox" name="cityName">
+    <option hidden>עיר הקלפי:</option>
+    <option *ngFor="let c of optionCity" [value]="c.id">{{c.cityName}}</option>
+  </select>
+  <br>
+  <br>
+  <input id="enter" type="submit" value="כניסה" (click)="enterBallotBoxManager()">
+</form>
