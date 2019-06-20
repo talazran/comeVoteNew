@@ -49,8 +49,9 @@ export class NationalService {
     return this.http.get(`http://localhost:60289/api/City/PutNowCountValidInCity/${cityId}`);
   }
   //במידה והאזרח מורשה לבחור הוא ישמר בתוך אוסף בסרבר
-  addTzNational(Identity:string)
+  addTzNational(addTznational:National):Observable<National>
   {
-    return this.http.get(`http://localhost:60289/api/National/addTzNationalToList/${Identity}`);
+    debugger;
+    return this.http.post<National>(`http://localhost:60289/api/National/addTzNationalToList/`,addTznational);
   }
 }

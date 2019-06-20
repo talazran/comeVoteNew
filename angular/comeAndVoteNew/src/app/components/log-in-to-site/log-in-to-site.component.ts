@@ -66,12 +66,12 @@ export class LogInToSiteComponent implements OnInit {
   {
     //שמירת המשתנים מספר קלפי ועיר קלפי בסרביס
     //כדי שאוכל לשלוף את ערכם מקומפוננט אחר
-    debugger;
     this.manager.saveNumAndCityBallotBox(this.numOfBalloBox,this.cityOfBallotBox);
-
+    
     this.manager.checkIsBallotBoxManager(this.userName,this.password,this.numOfBalloBox,this.cityOfBallotBox).subscribe((data)=>{
       if(data)
-        this.route.navigate(['openBallotBoxManager']);//פתיחת הדף של המנהל קלפי
+        //פתיחת הדף של המנהל קלפי
+        this.route.navigate(['openBallotBoxManager']);
       else
         alert("שם משתמש או סיסמא שגויים");
     });

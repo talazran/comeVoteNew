@@ -5,6 +5,7 @@ import { NationalService } from 'src/app/services/national.service';
 import { National } from 'src/app/classes/national';
 import { ActivatedRoute, Route } from '@angular/router';
 import { Router } from '@angular/router';
+import { disableBindings } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-faction-block-for-vote',
@@ -29,7 +30,7 @@ export class FactionBlockForVoteComponent implements OnInit {
     //נתונים שנשלחים ב-url
     // this.route.params.subscribe(params => this.nationalVoter.Identity = params.idVoter);
   }
-
+  
   ngOnInit() { }
 
   //בעת לחיצה על פתק של מפלגה
@@ -39,7 +40,11 @@ export class FactionBlockForVoteComponent implements OnInit {
   }
 
   okFaction() {
+    debugger;
     //הוספת קול למפלגה שנלחצה
     this.national.addVoteToFaction(this.idFaction).subscribe(res => {});
+    debugger;
+    //הסרת האזרח מהטבלה של המאושרים
+    this.national.deleteNationalByTz(this.national.getNational()).subscribe(res=>{});
   }
 }

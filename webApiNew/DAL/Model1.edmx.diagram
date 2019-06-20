@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8ee7e44c52e545ac8ec3638db00ea041" Name="Diagram1">
-        <EntityTypeShape EntityType="ComputerizedVotingModel.BallotBox" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerizedVotingModel.City" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerizedVotingModel.Factions" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerizedVotingModel.FinalResults" Width="1.5" PointX="8" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerizedVotingModel.Managers" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerizedVotingModel.ManagersStatus" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerizedVotingModel.National" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerizedVotingModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerizedVotingModel.Voting" Width="1.5" PointX="5.75" PointY="10.125" IsExpanded="true" />
-        <AssociationConnector Association="ComputerizedVotingModel.FK_BallotBox1_City1" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerizedVotingModel.FK_Managers_BallotBox" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerizedVotingModel.FK_Managers_City1" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerizedVotingModel.FK_National1_City1" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerizedVotingModel.FK_FinalResults1_Factions1" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerizedVotingModel.FK_FinalResults1_Voting" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerizedVotingModel.FK_Managers_ManagersStatus" ManuallyRouted="false" />
+      <Diagram DiagramId="a134a1a3d5c34cf99f15e313c4126603" Name="Diagram1">
+        <EntityTypeShape EntityType="ComputerizedVotingNewModel.BallotBox" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerizedVotingNewModel.City" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerizedVotingNewModel.Factions" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerizedVotingNewModel.FinalResults" Width="1.5" PointX="8" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerizedVotingNewModel.IsAgreeToVote" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerizedVotingNewModel.Managers" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerizedVotingNewModel.ManagersStatus" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerizedVotingNewModel.National" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerizedVotingNewModel.Voting" Width="1.5" PointX="5.75" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="ComputerizedVotingNewModel.FK_BallotBox1_City1" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerizedVotingNewModel.FK_Managers_BallotBox" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerizedVotingNewModel.FK_Managers_City1" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerizedVotingNewModel.FK_National1_City1" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerizedVotingNewModel.FK_FinalResults1_Factions1" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerizedVotingNewModel.FK_FinalResults1_Voting" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerizedVotingNewModel.FK_Managers_ManagersStatus" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

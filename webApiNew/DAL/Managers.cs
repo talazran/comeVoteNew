@@ -21,6 +21,7 @@ namespace DAL
         public string NumStatus { get; set; }
         public Nullable<int> MCity { get; set; }
         public Nullable<int> MNumBallotBox { get; set; }
+        public string MailM { get; set; }
     
         public virtual BallotBox BallotBox { get; set; }
         public virtual City City { get; set; }

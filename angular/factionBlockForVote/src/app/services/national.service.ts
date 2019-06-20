@@ -10,17 +10,29 @@ import { Factions } from '../classes/factions';
 })
 export class NationalService {
   singleVoter: National;
+  tz:string;
 
   constructor(private http: HttpClient) { }
-  //צריך
-   //הוספת קול למפלגה שנלחצה
-   addVoteToFaction(idFaction: number) {
+  //הוספת קול למפלגה שנלחצה
+  addVoteToFaction(idFaction: number) {
     return this.http.get(`http://localhost:60289/api/National/PutVotersInFaction/${idFaction}`);
   }
 
   //בדיקה האם הוא קיים ברשימת המאושרים
-  checkIsExistNational(tzNational:string)
-  {
+  checkIsExistNational(tzNational: string) {
     return this.http.get(`http://localhost:60289/api/National/checkIsExistNational/${tzNational}`);
+  }
+
+  //הסרת אזרח מהאוסף
+  deleteNationalByTz(tzNational: string): Observable<any> {
+    return this.http.delete(`http://localhost:60289/api/National/checkIsExistNational/${tzNational}`);
+  }
+  //שמירת תעודת זהות של אזרח
+  savaNational(tzNational: string) {
+    this.tz = tzNational;
+  }
+  //החזרת התעודת זהות של האזרח
+  getNational() {
+    return this.tz;
   }
 }

@@ -18,6 +18,7 @@ export class HomeVoterComponent implements OnInit {
 
   enterFactionBlockForVote() {
     this.national.checkIsExistNational(this.tzNational).subscribe(data => {
+      debugger;
       if (data)
         this.route.navigate(['openFactionBlockForVote']);
       else

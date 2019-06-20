@@ -13,10 +13,10 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ComputerizedVotingEntities : DbContext
+    public partial class ComputerizedVotingNewEntities : DbContext
     {
-        public ComputerizedVotingEntities()
-            : base("name=ComputerizedVotingEntities")
+        public ComputerizedVotingNewEntities()
+            : base("name=ComputerizedVotingNewEntities")
         {
         }
     
@@ -29,10 +29,10 @@ namespace DAL
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Factions> Factions { get; set; }
         public virtual DbSet<FinalResults> FinalResults { get; set; }
+        public virtual DbSet<IsAgreeToVote> IsAgreeToVote { get; set; }
         public virtual DbSet<Managers> Managers { get; set; }
         public virtual DbSet<ManagersStatus> ManagersStatus { get; set; }
         public virtual DbSet<National> National { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Voting> Voting { get; set; }
     }
 }

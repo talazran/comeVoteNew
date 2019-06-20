@@ -14,7 +14,7 @@ namespace WebApi.Controllers
     [RoutePrefix("api/Managers")]
     public class ManagersController : ApiController
     {
-        ComputerizedVotingEntities db = new ComputerizedVotingEntities();
+        ComputerizedVotingNewEntities db = new ComputerizedVotingNewEntities();
         
         //הזדהות במערכת לגבי מנהל ראשי
         //הפונקציה עובדת

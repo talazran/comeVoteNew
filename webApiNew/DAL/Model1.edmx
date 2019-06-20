@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ComputerizedVotingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ComputerizedVotingNewModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BallotBox">
           <Key>
             <PropertyRef Name="id" />
@@ -42,6 +42,13 @@
           <Property Name="idVote" Type="int" Nullable="false" />
           <Property Name="numberOfVote" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="IsAgreeToVote">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tz" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="Managers">
           <Key>
             <PropertyRef Name="MIdentity" />
@@ -53,6 +60,7 @@
           <Property Name="NumStatus" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="MCity" Type="int" />
           <Property Name="MNumBallotBox" Type="int" />
+          <Property Name="MailM" Type="nchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="ManagersStatus">
           <Key>
@@ -73,16 +81,6 @@
           <Property Name="cityId" Type="int" Nullable="false" />
           <Property Name="numBallot" Type="int" Nullable="false" />
           <Property Name="IsChoose" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Voting">
           <Key>
@@ -177,15 +175,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ComputerizedVotingModelStoreContainer">
+        <EntityContainer Name="ComputerizedVotingNewModelStoreContainer">
           <EntitySet Name="BallotBox" EntityType="Self.BallotBox" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Factions" EntityType="Self.Factions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FinalResults" EntityType="Self.FinalResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IsAgreeToVote" EntityType="Self.IsAgreeToVote" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ManagersStatus" EntityType="Self.ManagersStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="National" EntityType="Self.National" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voting" EntityType="Self.Voting" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BallotBox1_City1" Association="Self.FK_BallotBox1_City1">
             <End Role="City" EntitySet="City" />
@@ -220,7 +218,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ComputerizedVotingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ComputerizedVotingNewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="BallotBox">
           <Key>
             <PropertyRef Name="id" />
@@ -266,6 +264,13 @@
           <NavigationProperty Name="Factions" Relationship="Self.FK_FinalResults1_Factions1" FromRole="FinalResults" ToRole="Factions" />
           <NavigationProperty Name="Voting" Relationship="Self.FK_FinalResults1_Voting" FromRole="FinalResults" ToRole="Voting" />
         </EntityType>
+        <EntityType Name="IsAgreeToVote">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tz" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="Managers">
           <Key>
             <PropertyRef Name="MIdentity" />
@@ -277,6 +282,7 @@
           <Property Name="NumStatus" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MCity" Type="Int32" />
           <Property Name="MNumBallotBox" Type="Int32" />
+          <Property Name="MailM" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="BallotBox" Relationship="Self.FK_Managers_BallotBox" FromRole="Managers" ToRole="BallotBox" />
           <NavigationProperty Name="City" Relationship="Self.FK_Managers_City1" FromRole="Managers" ToRole="City" />
           <NavigationProperty Name="ManagersStatus" Relationship="Self.FK_Managers_ManagersStatus" FromRole="Managers" ToRole="ManagersStatus" />
@@ -302,16 +308,6 @@
           <Property Name="numBallot" Type="Int32" Nullable="false" />
           <Property Name="IsChoose" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="City" Relationship="Self.FK_National1_City1" FromRole="National" ToRole="City" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Voting">
           <Key>
@@ -407,15 +403,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ComputerizedVotingEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ComputerizedVotingNewEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BallotBox" EntityType="Self.BallotBox" />
           <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Factions" EntityType="Self.Factions" />
           <EntitySet Name="FinalResults" EntityType="Self.FinalResults" />
+          <EntitySet Name="IsAgreeToVote" EntityType="Self.IsAgreeToVote" />
           <EntitySet Name="Managers" EntityType="Self.Managers" />
           <EntitySet Name="ManagersStatus" EntityType="Self.ManagersStatus" />
           <EntitySet Name="National" EntityType="Self.National" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Voting" EntityType="Self.Voting" />
           <AssociationSet Name="FK_BallotBox1_City1" Association="Self.FK_BallotBox1_City1">
             <End Role="City" EntitySet="City" />
@@ -451,9 +447,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ComputerizedVotingModelStoreContainer" CdmEntityContainer="ComputerizedVotingEntities">
+        <EntityContainerMapping StorageEntityContainer="ComputerizedVotingNewModelStoreContainer" CdmEntityContainer="ComputerizedVotingNewEntities">
           <EntitySetMapping Name="BallotBox">
-            <EntityTypeMapping TypeName="ComputerizedVotingModel.BallotBox">
+            <EntityTypeMapping TypeName="ComputerizedVotingNewModel.BallotBox">
               <MappingFragment StoreEntitySet="BallotBox">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="numBallot" ColumnName="numBallot" />
@@ -462,7 +458,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="City">
-            <EntityTypeMapping TypeName="ComputerizedVotingModel.City">
+            <EntityTypeMapping TypeName="ComputerizedVotingNewModel.City">
               <MappingFragment StoreEntitySet="City">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="areaKod" ColumnName="areaKod" />
@@ -473,7 +469,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Factions">
-            <EntityTypeMapping TypeName="ComputerizedVotingModel.Factions">
+            <EntityTypeMapping TypeName="ComputerizedVotingNewModel.Factions">
               <MappingFragment StoreEntitySet="Factions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="factionName" ColumnName="factionName" />
@@ -485,7 +481,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FinalResults">
-            <EntityTypeMapping TypeName="ComputerizedVotingModel.FinalResults">
+            <EntityTypeMapping TypeName="ComputerizedVotingNewModel.FinalResults">
               <MappingFragment StoreEntitySet="FinalResults">
                 <ScalarProperty Name="idFaction" ColumnName="idFaction" />
                 <ScalarProperty Name="idVote" ColumnName="idVote" />
@@ -493,8 +489,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="IsAgreeToVote">
+            <EntityTypeMapping TypeName="ComputerizedVotingNewModel.IsAgreeToVote">
+              <MappingFragment StoreEntitySet="IsAgreeToVote">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tz" ColumnName="tz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Managers">
-            <EntityTypeMapping TypeName="ComputerizedVotingModel.Managers">
+            <EntityTypeMapping TypeName="ComputerizedVotingNewModel.Managers">
               <MappingFragment StoreEntitySet="Managers">
                 <ScalarProperty Name="MIdentity" ColumnName="MIdentity" />
                 <ScalarProperty Name="MFullName" ColumnName="MFullName" />
@@ -503,11 +507,12 @@
                 <ScalarProperty Name="NumStatus" ColumnName="NumStatus" />
                 <ScalarProperty Name="MCity" ColumnName="MCity" />
                 <ScalarProperty Name="MNumBallotBox" ColumnName="MNumBallotBox" />
+                <ScalarProperty Name="MailM" ColumnName="MailM" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ManagersStatus">
-            <EntityTypeMapping TypeName="ComputerizedVotingModel.ManagersStatus">
+            <EntityTypeMapping TypeName="ComputerizedVotingNewModel.ManagersStatus">
               <MappingFragment StoreEntitySet="ManagersStatus">
                 <ScalarProperty Name="numStatus" ColumnName="numStatus" />
                 <ScalarProperty Name="status" ColumnName="status" />
@@ -515,7 +520,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="National">
-            <EntityTypeMapping TypeName="ComputerizedVotingModel.National">
+            <EntityTypeMapping TypeName="ComputerizedVotingNewModel.National">
               <MappingFragment StoreEntitySet="National">
                 <ScalarProperty Name="Identity" ColumnName="Identity" />
                 <ScalarProperty Name="fullName" ColumnName="fullName" />
@@ -528,19 +533,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ComputerizedVotingModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Voting">
-            <EntityTypeMapping TypeName="ComputerizedVotingModel.Voting">
+            <EntityTypeMapping TypeName="ComputerizedVotingNewModel.Voting">
               <MappingFragment StoreEntitySet="Voting">
                 <ScalarProperty Name="kodVote" ColumnName="kodVote" />
                 <ScalarProperty Name="dateVote" ColumnName="dateVote" />

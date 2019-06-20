@@ -1,12 +1,22 @@
-img{
-    width: 12%;
-    height: 11%;
-    
-    // display: inline-block;
-}
 #titleOfblockVote{
-    position: absolute;
-    margin-top: -45%;
-    margin-left: 34%;
     color:blue;    
+}
+
+.wrapper {
+    position: absolute;
+    width: 100%;
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-bottom: 5px;
+    cursor: pointer;
+
+    &.active-faction {
+        border: 2px solid red;
+    }
 }

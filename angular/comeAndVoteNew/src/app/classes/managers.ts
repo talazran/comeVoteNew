@@ -6,8 +6,9 @@ export class Managers {
     NumStatus:string;
     MCity:number;
     MNumBallotBox:number;
+    MailM:string;
 
-    constructor( MIdentity:string,MFullName:string,MUserName:string,MPassword:string,NumStatus:string, MCity:number,MNumBallotBox:number)
+    constructor( MIdentity?:string,MFullName?:string,MUserName?:string,MPassword?:string,NumStatus?:string, MCity?:number,MNumBallotBox?:number,MailM?:string)
     {
         this.MIdentity=MIdentity;
         this.MFullName=MFullName;
@@ -16,5 +17,6 @@ export class Managers {
         this.NumStatus=NumStatus;
         this.MCity=MCity;
         this.MNumBallotBox=MNumBallotBox;
+        this.MailM=MailM;
     }
 }

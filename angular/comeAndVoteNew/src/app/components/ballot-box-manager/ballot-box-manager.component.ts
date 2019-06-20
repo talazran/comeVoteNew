@@ -60,10 +60,8 @@ export class BallotBoxManagerComponent implements OnInit {
       {
         //הוספת קול לעיר של הבוחר
         this.national.addVoteToCity(national.cityId).subscribe(res => { });
-        //שמירת תעודת הזהות של האזרח באוסף ב-webApi
-        this.national.addTzNational(national.Identity).subscribe(res=>{});
-        
-        //this.route.navigate(['openFactionBlockForVote']);
+        //שמירת תעודת הזהות של האזרח בטבלה ב-webApi
+        this.national.addTzNational(national).subscribe(res=>{});
       }
       else
         alert("משתמש זה כבר בחר");
