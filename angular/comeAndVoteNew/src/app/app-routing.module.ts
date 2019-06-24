@@ -7,8 +7,10 @@ import { BallotBoxManagerComponent } from './components/ballot-box-manager/ballo
 import { FactionBlockForVoteComponent } from './components/faction-block-for-vote/faction-block-for-vote.component';
 import { SingleVoterComponent } from './components/single-voter/single-voter.component';
 import { AgreeFactinsComponent } from './components/agree-factins/agree-factins.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
+  
   {
     path: 'headManager',
     component: LogInToSiteComponent,

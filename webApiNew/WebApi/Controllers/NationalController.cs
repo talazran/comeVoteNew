@@ -97,7 +97,6 @@ namespace WebApi.Controllers
             return CreatedAtRoute("DefaultApi", new { id = tzToNational.Identity }, tzToNational);
         }
         //הפונקציה עבדה
-        //בדיקה האם אזרח קיים באוסף
         [HttpGet]
         [Route("checkIsExistNational/{Identity}")]
         public bool CheckIsExistNational(string Identity)
@@ -108,8 +107,8 @@ namespace WebApi.Controllers
                 return true;
             return false;
         }
-
-        //הסרת האזרח מהאוסף
+        //הפונקציה עבדה
+        //הסרת האזרח מהטבלה
         [HttpDelete]
         [ResponseType(typeof(IsAgreeToVote))]
         [Route("deleteTzNationalToList/{Identity}")]
@@ -120,9 +119,7 @@ namespace WebApi.Controllers
             {
                 return NotFound();
             }
-            IsAgreeToVote tzOfNational = new IsAgreeToVote();
-            tzOfNational.tz = Identity;
-            db.IsAgreeToVote.Remove(tzOfNational);
+            db.IsAgreeToVote.Remove(isAgree);
             db.SaveChanges();
 
             return Ok(isAgree);

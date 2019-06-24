@@ -1,7 +1,7 @@
 
 // מנהל ראשי
 #enterHeadManager{
-    height: 42vh;
+    height: 49vh;
     display: inline-block;
     direction: rtl;
     border: solid;
@@ -10,6 +10,7 @@
     margin-left: -30%;
     position: absolute;
     margin-top: 10%;
+    border-radius: 29px;
 }
 // מנהל עיר
 #enterCityManager{
@@ -20,9 +21,9 @@
     width: 21vw;
     padding: 2%;
     margin-left: -30%;
-    // margin-top: 9%;
     position: absolute;
     margin-top: 8%;
+    border-radius: 29px;
 }
 // מנהל קלפי
 #enterBallotBoxManager{
@@ -35,6 +36,7 @@
     margin-left: -30%;
     position: absolute;
     margin-top: 8%;
+    border-radius: 29px;
 }
 //כפתור כניסה מה-logIn
 #enter{

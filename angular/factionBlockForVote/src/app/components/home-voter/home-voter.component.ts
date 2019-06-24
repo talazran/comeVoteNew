@@ -12,17 +12,27 @@ export class HomeVoterComponent implements OnInit {
   tzNational: string;
 
   constructor(private national: NationalService, private route: Router) { }
+  //האם לחצו על הכפתור ואותו אזרח אכן מאושר לבחירה
+  isAgree:boolean=true;
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   enterFactionBlockForVote() {
     this.national.checkIsExistNational(this.tzNational).subscribe(data => {
-      debugger;
-      if (data)
+      if (data) {
+        this.national.savaNational(this.tzNational);
+        this.isAgree=false;
         this.route.navigate(['openFactionBlockForVote']);
+      }
       else
         alert("אינך קיים במערכת");
     });
+  }
+
+  //האם מאושר לבחירה
+  //שלא יוצג הכפתור והתיבת טקסט בעת תצוגת פתקי המפלגות
+  isAgreeToVote()
+  {
+    return this.isAgree;
   }
 }

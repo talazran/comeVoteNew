@@ -1,7 +1,20 @@
-<div id="headerInHome">
+
+<div id="header" class="tags">
+    <a routerLink="headManager" (click)="kindOfManager(1)">ראשי</a>
+</div>
+
+<div id="city" class="tags">
+    <a routerLink="cityManager" (click)="kindOfManager(2)">ערים</a>
+</div>
+
+<div id="ballotBox" class="tags">
+    <a routerLink="ballotBoxManager" (click)="kindOfManager(3)">קלפיות</a>
+</div>
+
+<!-- <div id="headerInHome">
   <a routerLink="headManager" (click)="kindOfManager(1)">ראשי</a>
   <a routerLink="cityManager" (click)="kindOfManager(2)">ערים</a>
   <a routerLink="ballotBoxManager" (click)="kindOfManager(3)">קלפיות</a>
-</div>
+</div> -->
 
 <img id="logo" src="..\..\assets\factionPic\menoraWithOpasity.png">

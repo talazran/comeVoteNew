@@ -10,7 +10,7 @@ import { Factions } from '../classes/factions';
 })
 export class NationalService {
   singleVoter: National;
-  tz:string;
+  tz: string;
 
   constructor(private http: HttpClient) { }
   //הוספת קול למפלגה שנלחצה
@@ -24,8 +24,8 @@ export class NationalService {
   }
 
   //הסרת אזרח מהאוסף
-  deleteNationalByTz(tzNational: string): Observable<any> {
-    return this.http.delete(`http://localhost:60289/api/National/checkIsExistNational/${tzNational}`);
+  deleteNationalByTz(tzNational: string) {
+    return this.http.delete(`http://localhost:60289/api/National/deleteTzNationalToList/${tzNational}`);
   }
   //שמירת תעודת זהות של אזרח
   savaNational(tzNational: string) {

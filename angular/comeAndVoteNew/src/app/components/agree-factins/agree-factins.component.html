@@ -4,7 +4,7 @@
     <div class="col-auto" *ngFor="let p of arrFaction">
         <!-- בעת לחיצה על תמונה ישמר קוד המפלגה -->
         <div class="img" [class.active-faction]="p.Id == idFaction" (click)="clickOnFactionPic(p.Id)" [style.backgroundImage]="'url(../../../assets/factionPic/' + p.factionPic + ')'"></div>
-        <input type="button" value="אישור"  (click)="agreeOrNotFaction(p.Id)">
-        <input type="button" value="ביטול"  (click)="agreeOrNotFaction(p.Id)">
+        <input type="button" value="אישור"  (click)="agreeFaction(p.Id)">
+        <input type="button" value="ביטול"  (click)="notAgreeFaction(p.Id)">
       </div>
   </div>

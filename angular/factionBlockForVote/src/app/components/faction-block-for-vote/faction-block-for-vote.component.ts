@@ -22,6 +22,8 @@ export class FactionBlockForVoteComponent implements OnInit {
   nationalVoter = new National();
   //קוד מפלגה
   idFaction: number;
+  // האם לחצו על אישור בחירה
+  isClick: boolean = true;
 
   constructor(private manager: ManagersService, private national: NationalService, private route: ActivatedRoute, private routeNavigate: Router) {
     //שמירת מערך המפלגות
@@ -30,7 +32,7 @@ export class FactionBlockForVoteComponent implements OnInit {
     //נתונים שנשלחים ב-url
     // this.route.params.subscribe(params => this.nationalVoter.Identity = params.idVoter);
   }
-  
+
   ngOnInit() { }
 
   //בעת לחיצה על פתק של מפלגה
@@ -41,10 +43,20 @@ export class FactionBlockForVoteComponent implements OnInit {
 
   okFaction() {
     debugger;
+    this.isClick=false;
     //הוספת קול למפלגה שנלחצה
-    this.national.addVoteToFaction(this.idFaction).subscribe(res => {});
-    debugger;
+    this.national.addVoteToFaction(this.idFaction).subscribe(res => { });
+
     //הסרת האזרח מהטבלה של המאושרים
-    this.national.deleteNationalByTz(this.national.getNational()).subscribe(res=>{});
+    this.national.deleteNationalByTz(this.national.getNational()).subscribe(res => {
+      if (res)
+        this.routeNavigate.navigate(['returnHomePage']);
+    });
+  }
+
+  // בדיקה האם נלחץ על אישור בחירה
+  getIsClick()
+  {
+    return this.isClick;
   }
 }

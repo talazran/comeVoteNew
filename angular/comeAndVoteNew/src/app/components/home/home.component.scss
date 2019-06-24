@@ -11,4 +11,28 @@ a{
     width: 41vw;
     height: 101vh;
     margin-left: 30%;
+    position: absolute;
+    margin-top:2%;
+}
+
+#header{
+    margin-left:69%;
+}
+
+#city{
+    margin-left:49%;
+}
+
+#ballotBox{
+    margin-left:29%;
+}
+    
+.tags{
+    width: 150px;
+    height: 68px;
+    border-radius: 40px;
+    background: #c2d7ea;
+    margin-left: 69%;
+    display: inline-block;
+    position: absolute;
 }

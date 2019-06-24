@@ -82,7 +82,6 @@ export class ManagersService {
   //סימון מפלגה כמאושרת
   isAgreeFactins(idFaction:number):Observable<Factions>
   {
-    debugger;
     return this.http.get<Factions>(`http://localhost:60289/api/Managers/putFieldIsAgree/${idFaction}`)
   }
 }

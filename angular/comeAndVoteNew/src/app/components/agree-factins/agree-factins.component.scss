@@ -1,0 +1,22 @@
+#titleOfblockVote{
+    color:blue;
+}
+
+.wrapper {
+    position: absolute;
+    width: 100%;
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-bottom: 5px;
+    cursor: pointer;
+
+    &.active-faction {
+        border: 2px solid red;
+    }
+}

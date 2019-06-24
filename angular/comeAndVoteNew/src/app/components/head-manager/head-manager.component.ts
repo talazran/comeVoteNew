@@ -23,9 +23,4 @@ export class HeadManagerComponent implements OnInit {
   {
     this.route.navigate(['openAgreeFaction']);
   }
-  //מתי לאפשר את הכפתור
-  closeBallotBox()
-  {
-    
-  }
 }
