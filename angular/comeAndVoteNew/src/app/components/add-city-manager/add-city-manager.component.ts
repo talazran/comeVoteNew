@@ -1,0 +1,58 @@
+import { Component, OnInit } from '@angular/core';
+import { Managers } from 'src/app/classes/managers';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { City } from 'src/app/classes/city';
+import { ManagersService } from 'src/app/services/managers.service';
+import { ActivationEnd } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+
+@Component({
+  selector: 'app-add-city-manager',
+  templateUrl: './add-city-manager.component.html',
+  styleUrls: ['./add-city-manager.component.css']
+})
+export class AddCityManagerComponent implements OnInit {
+
+  registerForm: FormGroup;
+  newCity: Managers = new Managers()
+  submitted: boolean;
+  cities: City[] = [];
+  constructor(private formBuilder: FormBuilder, public managerService: ManagersService,
+    public activeModal:NgbActiveModal) { }
+
+  ngOnInit() {
+    this.managerService.getOptionCity().subscribe(res => {
+      this.cities = res;
+    })
+    this.registerForm = this.formBuilder.group({
+      MIdentity: ['', Validators.required, Validators.minLength(9), Validators.maxLength(9)],
+      MFullName: ['', Validators.required],
+      MUserName: ['', [Validators.required]],
+      MPassword: ['', [Validators.required, Validators.minLength(6)]],
+      MCity: ['', Validators.required],
+      MNumBallotBox: [''],
+      MailM: ['', [Validators.required, Validators.email]]
+    }, {
+        // validator: MustMatch('password', 'confirmPassword')
+      });
+  }
+
+  get f() { return this.registerForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.registerForm.invalid) {
+      return;
+    }
+    debugger;
+    this.managerService.addManagersCity(this.registerForm.value).subscribe(res=>{
+      alert('succsess');
+      this.activeModal.close();
+    },err=>{
+      alert("error")
+    })
+  }
+
+}

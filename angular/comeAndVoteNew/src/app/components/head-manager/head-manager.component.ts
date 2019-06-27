@@ -7,8 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./head-manager.component.scss']
 })
 export class HeadManagerComponent implements OnInit {
-
-  constructor(private route:Router) { }
+closeBallot:boolean=false;
+  constructor(private route:Router) {
+    setInterval(() => { this.closeBallot=true }, 10000);
+   }
 
   ngOnInit() {
   }
@@ -22,5 +24,15 @@ export class HeadManagerComponent implements OnInit {
   chooseAgreeFaction()
   {
     this.route.navigate(['openAgreeFaction']);
+  }
+  //מתי לאפשר את הכפתור
+  closeBallotBox()
+  {
+    return this.closeBallot;
+  }
+
+  managerList()
+  {
+    this.route.navigate(["/cityManagerList"])
   }
 }
