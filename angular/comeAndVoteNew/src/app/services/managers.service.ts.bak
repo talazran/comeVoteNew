@@ -7,8 +7,6 @@ import { National } from '../classes/national';
 import { City } from '../classes/city';
 import { disableBindings } from '@angular/core/src/render3';
 import { Factions } from '../classes/factions';
-import { Time } from '@angular/common';
-import { IsAgreeToVote } from '../classes/is-agree-to-vote';
 
 @Injectable({
   providedIn: 'root'
@@ -84,29 +82,6 @@ export class ManagersService {
   //סימון מפלגה כמאושרת
   isAgreeFactins(idFaction:number):Observable<Factions>
   {
-    debugger;
     return this.http.get<Factions>(`http://localhost:60289/api/Managers/putFieldIsAgree/${idFaction}`)
   }
-
-  //שמירת פרטי בחירות
-  // savaTimeVoting():Observable<IsAgreeToVote>
-  // {
-  //   return this.http.post<National>(`http://localhost:60289/api/National/addTzNationalToList/`,addTznational);
-  // }
-  getManagersCity()
-  {
-    return this.http.get<Managers[]>(`http://localhost:60289/api/Managers/allCityManagers`);
-  }
-  addManagersCity(manager)
-  {
-    return this.http.post(`http://localhost:60289/api/Managers/addManagerCity`,manager);
-  }
-  deleteManagersCity(managerId)
-  {
-    return this.http.delete(`http://localhost:60289/api/Managers/deleteManagerCity/${managerId}`);
-  }
-  editManagersCity(manager:Managers)
-  {
-    return this.http.put(`http://localhost:60289/api/Managers/editManagerCity/${manager.MIdentity}`,manager);
-  }
-} 
+}

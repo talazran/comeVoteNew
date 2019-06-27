@@ -1,13 +1,10 @@
-<input class="buttonOfHeadManager btn btn-secondary btn-lg" id="addCityManager" type="button" value="הכנסת מנהלי ערים" (click)="addHeadManager()">
-<br>
-<br>
-<br>
-<br>
-<input class="buttonOfHeadManager btn btn-secondary btn-lg" id="selectFactionInList" type="button" value="בחר מפלגות מתוך הרשימה" (click)="chooseAgreeFaction()">
-<br>
-<br>
-<br>
-<br>
+<h1>
+  מנהל ראשי
+</h1>
+
+<input type="button" (click)="managerList()" value=" מנהלי ערים">
+<input type="button" value="בחר מפלגות מתוך הרשימה" (click)="chooseAgreeFaction()">
+
 <!-- הכפתור לא יהיה מאופשר עד לסיום הבחירות -->
 <input class="buttonOfHeadManager btn btn-secondary btn-lg" id="showResult" type="button" value="צפה בתוצאות ספירת קולות" [disabled]="closeBallotBox()" (click)="addHeadManager()">
 <br>

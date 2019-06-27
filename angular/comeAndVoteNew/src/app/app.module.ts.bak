@@ -9,22 +9,11 @@ import { BallotBoxManagerComponent } from './components/ballot-box-manager/ballo
 import { LogInToSiteComponent } from './components/log-in-to-site/log-in-to-site.component';
 import {Routes,RouterModule}from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {FormsModule} from '@angular/forms';
 import { FactionBlockForVoteComponent } from './components/faction-block-for-vote/faction-block-for-vote.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SingleVoterComponent } from './components/single-voter/single-voter.component';
 import { AgreeFactinsComponent } from './components/agree-factins/agree-factins.component';
-import { TimeVotingComponent } from './components/time-voting/time-voting.component';
-import { ManagersService } from './services/managers.service';
-import { AgGridModule } from 'ag-grid-angular';
-import { CityManagerListComponent } from './components/city-manager-list/city-manager-list.component';
-import { ActionComponent } from './components/action/action.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AddCityManagerComponent } from './components/add-city-manager/add-city-manager.component';
-import { EditCityManagerComponent } from './components/edit-city-manager/edit-city-manager.component';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
 
 @NgModule({
   declarations:[
@@ -34,15 +23,10 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     CityManagerComponent,
     BallotBoxManagerComponent,
     LogInToSiteComponent,
-    CityManagerListComponent ,
     FactionBlockForVoteComponent,
     ErrorComponent,
     SingleVoterComponent,
-    AgreeFactinsComponent,
-    TimeVotingComponent,
-    ActionComponent,
-    AddCityManagerComponent,
-    EditCityManagerComponent
+    AgreeFactinsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,14 +34,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     HttpClientModule,
     RouterModule,
     FormsModule,
-    AgGridModule.withComponents([ActionComponent]),
-    NgbModule.forRoot(),
-    ReactiveFormsModule,
-    AngularFontAwesomeModule
-
   ],
-  entryComponents:[AddCityManagerComponent,EditCityManagerComponent],
-  providers: [ManagersService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

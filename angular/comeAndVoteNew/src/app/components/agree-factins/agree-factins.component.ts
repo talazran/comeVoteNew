@@ -32,6 +32,7 @@ export class AgreeFactinsComponent implements OnInit {
   }
   agreeOrNotFaction(idFaction:number)
   {
+    // putFieldIsAgree/{idFaction}
     this.manager.isAgreeFactins(idFaction).subscribe(res => {});
   }
 }

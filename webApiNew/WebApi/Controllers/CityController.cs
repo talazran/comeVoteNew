@@ -15,14 +15,19 @@ namespace WebApi.Controllers
     public class CityController : ApiController
     {
         //מופע מסוג המסד נתונים
-        ComputerizedVotingNewEntities db = new ComputerizedVotingNewEntities();
+        DAL.ComputerizedVotingNewEntities db = new ComputerizedVotingNewEntities();
 
         // GET api/<controller>
         [HttpGet]
         [Route("getAllCities")]
-        public IQueryable<City> GetAllCities()//מחזיר את רשימת הערים
+        public List<Models.City> GetAllCities()//מחזיר את רשימת הערים
         {
-            return db.City;
+            List<Models.City> cities = new List<Models.City>();
+            foreach (var item in db.City)
+            {
+                cities.Add(Models.City.convertToDto(item));
+            }
+            return cities ;
         }
 
 
