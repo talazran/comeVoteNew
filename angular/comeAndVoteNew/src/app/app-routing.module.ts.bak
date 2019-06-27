@@ -7,9 +7,10 @@ import { BallotBoxManagerComponent } from './components/ballot-box-manager/ballo
 import { FactionBlockForVoteComponent } from './components/faction-block-for-vote/faction-block-for-vote.component';
 import { SingleVoterComponent } from './components/single-voter/single-voter.component';
 import { AgreeFactinsComponent } from './components/agree-factins/agree-factins.component';
-import { CityManagerListComponent } from './components/city-manager-list/city-manager-list.component';
-import { CityManagerListComponent } from './components/city-manager-list/city-manager-list.component';
+import { HomeComponent } from './components/home/home.component';
+
 const routes: Routes = [
+  
   {
     path: 'headManager',
     component: LogInToSiteComponent,
@@ -25,10 +26,6 @@ const routes: Routes = [
   {
     path: 'openHeadManager',//פתיחת הפונקציונאליות של המנהל הראשי
     component: HeadManagerComponent,
-  },
-  {
-    path: 'cityManagerList',//פתיחת הפונקציונאליות של המנהל הראשי
-    component: CityManagerListComponent,
   },
   {
     path: 'openCityManager',//פתיחת הפונקציונאליות של המנהל עיר

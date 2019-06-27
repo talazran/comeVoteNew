@@ -17,7 +17,7 @@ namespace WebApi.Controllers
     public class NationalController : ApiController
     {
         //מופע מסוג המסד נתונים
-        ComputerizedVoting1Entities11 db = new ComputerizedVoting1Entities11();
+        ComputerizedVotingNewEntities db = new ComputerizedVotingNewEntities();
 
         //שמירת תעודות הזהות של האזרחים המורשים לבחירה
         public List<string> saveTzOfNational = new List<string>();
@@ -58,62 +58,71 @@ namespace WebApi.Controllers
         [Route("PutVotersInFaction/{idFaction}")]
         public IHttpActionResult PutVotersInFaction(int idFaction)
         {
-            Factions faction = db.Factions.Single(x=>x.Id == idFaction);
-            faction.voters +=1;
+            Factions faction = db.Factions.Single(x => x.Id == idFaction);
+            faction.voters += 1;
             db.SaveChanges();
             return Ok(faction);
         }
-
-        //הוספת תעודת זהות של אזרח
-        [HttpGet]
-        [Route("addTzNationalToList/{Identity}")]
-        public void AddTzNationalToList(string Identity)
+        //הפונקציה עבדה
+        //הוספת תעודת זהות של אזרח המציין שהוא רשאי לבחירה
+        [HttpPost]
+        [ActionName("addTzNationalToList")]
+        [ResponseType(typeof(IsAgreeToVote))]
+        [Route("addTzNationalToList")]
+        public IHttpActionResult AddTzNationalToList(National tzToNational) 
         {
-            int flag = 0;
-            foreach (var item in saveTzOfNational)
+            if (!ModelState.IsValid)
             {
-                if (item.Equals(Identity))
-                {
-                    flag = 1;
-                    break;
-                }
+                return BadRequest(ModelState);
             }
-            if (flag == 0)//רק אם לא נמצאה התעודת זהות היא תתוסף
-               saveTzOfNational.Add(Identity);
-        }
+            //ברגע שמצא את התעודת זהות לא ניתן להוסיף שוב
+            IsAgreeToVote n = db.IsAgreeToVote.FirstOrDefault(x => x.tz == tzToNational.Identity);
+            if (n != null)
+                return BadRequest(ModelState);
 
-        //בדיקה האם אזרח קיים באוסף
+            //ברגע שלא מצא את התעודת זהות
+            try
+            {
+                IsAgreeToVote isAgree = new IsAgreeToVote();
+                isAgree.tz = tzToNational.Identity;
+
+                db.IsAgreeToVote.Add(isAgree);
+                db.SaveChanges();
+               
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ModelState);
+            }
+            return CreatedAtRoute("DefaultApi", new { id = tzToNational.Identity }, tzToNational);
+        }
+        //הפונקציה עבדה
         [HttpGet]
         [Route("checkIsExistNational/{Identity}")]
         public bool CheckIsExistNational(string Identity)
         {
-            int flag = 0;
-            foreach (var item in saveTzOfNational)
-            {
-                if (item.Equals(Identity))
-                {
-                    flag = 1;
-                    break;
-                }
-            }
-            if (flag == 1)
+            //בדיקה האם הוא קיים בטבלה
+            IsAgreeToVote isAgreeNational = db.IsAgreeToVote.FirstOrDefault(x=>x.tz==Identity);
+            if (isAgreeNational != null)
                 return true;
             return false;
         }
-
-        //הסרת האזרח מהאוסף
-        [HttpGet]
+        //הפונקציה עבדה
+        //הסרת האזרח מהטבלה
+        [HttpDelete]
+        [ResponseType(typeof(IsAgreeToVote))]
         [Route("deleteTzNationalToList/{Identity}")]
-        public void DeleteTzNationalToList(string Identity)
+        public IHttpActionResult DeleteTzNationalToList(string Identity)
         {
-            foreach (var item in saveTzOfNational)
+            IsAgreeToVote isAgree = db.IsAgreeToVote.FirstOrDefault(x=>x.tz==Identity);
+            if(isAgree==null)
             {
-                if (item.Equals(Identity))
-                {
-                    saveTzOfNational.Remove(Identity);
-                    break;
-                }
+                return NotFound();
             }
+            db.IsAgreeToVote.Remove(isAgree);
+            db.SaveChanges();
+
+            return Ok(isAgree);
         }
     }
 }

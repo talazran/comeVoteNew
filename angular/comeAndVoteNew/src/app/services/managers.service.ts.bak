@@ -82,24 +82,6 @@ export class ManagersService {
   //סימון מפלגה כמאושרת
   isAgreeFactins(idFaction:number):Observable<Factions>
   {
-    debugger;
     return this.http.get<Factions>(`http://localhost:60289/api/Managers/putFieldIsAgree/${idFaction}`)
   }
-  getManagersCity()
-  {
-    return this.http.get<Managers[]>(`http://localhost:60289/api/Managers/allCityManagers`);
-  }
-  addManagersCity(manager)
-  {
-    return this.http.post(`http://localhost:60289/api/Managers/addManagerCity`,manager);
-  }
-  deleteManagersCity(managerId)
-  {
-    return this.http.delete(`http://localhost:60289/api/Managers/deleteManagerCity/${managerId}`);
-  }
-  editManagersCity(manager:Managers)
-  {
-    return this.http.put(`http://localhost:60289/api/Managers/editManagerCity/${manager.MIdentity}`,manager);
-  }
-
 }
