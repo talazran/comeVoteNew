@@ -14,6 +14,7 @@ import { FactionBlockForVoteComponent } from './components/faction-block-for-vot
 import { ErrorComponent } from './components/error/error.component';
 import { SingleVoterComponent } from './components/single-voter/single-voter.component';
 import { AgreeFactinsComponent } from './components/agree-factins/agree-factins.component';
+import { TimeVotingComponent } from './components/time-voting/time-voting.component';
 
 @NgModule({
   declarations:[
@@ -26,7 +27,8 @@ import { AgreeFactinsComponent } from './components/agree-factins/agree-factins.
     FactionBlockForVoteComponent,
     ErrorComponent,
     SingleVoterComponent,
-    AgreeFactinsComponent
+    AgreeFactinsComponent,
+    TimeVotingComponent
   ],
   imports: [
     BrowserModule,

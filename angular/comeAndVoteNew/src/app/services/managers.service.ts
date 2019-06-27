@@ -7,6 +7,8 @@ import { National } from '../classes/national';
 import { City } from '../classes/city';
 import { disableBindings } from '@angular/core/src/render3';
 import { Factions } from '../classes/factions';
+import { Time } from '@angular/common';
+import { IsAgreeToVote } from '../classes/is-agree-to-vote';
 
 @Injectable({
   providedIn: 'root'
@@ -84,4 +86,10 @@ export class ManagersService {
   {
     return this.http.get<Factions>(`http://localhost:60289/api/Managers/putFieldIsAgree/${idFaction}`)
   }
+
+  //שמירת פרטי בחירות
+  // savaTimeVoting():Observable<IsAgreeToVote>
+  // {
+  //   return this.http.post<National>(`http://localhost:60289/api/National/addTzNationalToList/`,addTznational);
+  // }
 }

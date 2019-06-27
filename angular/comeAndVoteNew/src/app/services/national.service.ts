@@ -51,7 +51,6 @@ export class NationalService {
   //במידה והאזרח מורשה לבחור הוא ישמר בתוך אוסף בסרבר
   addTzNational(addTznational:National):Observable<National>
   {
-    debugger;
     return this.http.post<National>(`http://localhost:60289/api/National/addTzNationalToList/`,addTznational);
   }
 }

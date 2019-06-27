@@ -108,8 +108,21 @@ namespace WebApi.Controllers
             db.SaveChanges();
             return Ok(faction);
         }
+        //שמירת פרטי בחירות לשנה הנוכחית
+        [HttpPost]
+        [ResponseType(typeof(Managers))]
+        public IHttpActionResult PostTimeVoting(Managers addBallotBoxManager)//הוספת מנהל קלפי חדש
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            db.Managers.Add(addBallotBoxManager);
+            db.SaveChanges();
 
+            return CreatedAtRoute("DefaultApi", new { id = addBallotBoxManager.MIdentity }, addBallotBoxManager);
+        }
         #endregion
 
 
