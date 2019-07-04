@@ -7,8 +7,19 @@ import { BallotBoxManagerComponent } from './components/ballot-box-manager/ballo
 import { FactionBlockForVoteComponent } from './components/faction-block-for-vote/faction-block-for-vote.component';
 import { SingleVoterComponent } from './components/single-voter/single-voter.component';
 import { AgreeFactinsComponent } from './components/agree-factins/agree-factins.component';
+import { HomeComponent } from './components/home/home.component';
+import { TimeVotingComponent } from './components/time-voting/time-voting.component';
 import { CityManagerListComponent } from './components/city-manager-list/city-manager-list.component';
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+ {path:"home",component:HomeComponent,children:[
+  {
+    path: '',
+    component: LogInToSiteComponent,
+  },
   {
     path: 'headManager',
     component: LogInToSiteComponent,
@@ -63,6 +74,11 @@ const routes: Routes = [
     path: 'openAgreeFaction',//פתיחת הקומפוננטה של פתיחת מפלגות
     component: AgreeFactinsComponent,
   },
+  {
+    path: 'openTimeVoting',//פתיחת הקומפוננטה של הכנסת שמני פתיחת וסגירת קלפיות 
+    component:TimeVotingComponent,
+  },
+ ]}
 ];
 
 @NgModule({

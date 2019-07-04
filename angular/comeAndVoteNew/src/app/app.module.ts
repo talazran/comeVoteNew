@@ -15,6 +15,7 @@ import { FactionBlockForVoteComponent } from './components/faction-block-for-vot
 import { ErrorComponent } from './components/error/error.component';
 import { SingleVoterComponent } from './components/single-voter/single-voter.component';
 import { AgreeFactinsComponent } from './components/agree-factins/agree-factins.component';
+import { TimeVotingComponent } from './components/time-voting/time-voting.component';
 import { ManagersService } from './services/managers.service';
 import { AgGridModule } from 'ag-grid-angular';
 import { CityManagerListComponent } from './components/city-manager-list/city-manager-list.component';
@@ -33,11 +34,12 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     CityManagerComponent,
     BallotBoxManagerComponent,
     LogInToSiteComponent,
+    CityManagerListComponent ,
     FactionBlockForVoteComponent,
     ErrorComponent,
     SingleVoterComponent,
     AgreeFactinsComponent,
-    CityManagerListComponent,
+    TimeVotingComponent,
     ActionComponent,
     AddCityManagerComponent,
     EditCityManagerComponent

@@ -42,7 +42,6 @@ export class FactionBlockForVoteComponent implements OnInit {
   }
 
   okFaction() {
-    debugger;
     this.isClick=false;
     //הוספת קול למפלגה שנלחצה
     this.national.addVoteToFaction(this.idFaction).subscribe(res => { });

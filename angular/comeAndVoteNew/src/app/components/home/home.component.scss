@@ -2,19 +2,26 @@ a{
     margin: -13vw;
     margin-left: 26%;
     font-size: 3vw;
-    color:black;
+    color: white;
 }
 #headerInHome{
     background-color: grey;
 }
-#logo{
-    width: 41vw;
+#mainPic{
+    width: 76vw;
     height: 101vh;
-    margin-left: 30%;
+    margin-left: 12%;
     position: absolute;
-    margin-top:2%;
+    margin-top: 2%;
 }
 
+#logo{
+    width: 15vw;
+    height: 31vh;
+    margin-left: 84%;
+    position: absolute;
+    margin-top: -1%;
+}
 #header{
     margin-left:69%;
 }
@@ -26,13 +33,17 @@ a{
 #ballotBox{
     margin-left:29%;
 }
-    
+
 .tags{
-    width: 150px;
-    height: 68px;
-    border-radius: 40px;
-    background: #c2d7ea;
+    width: 184px;
+    height: 83px;
+    border-radius: 380px;
+    background: #4787cf;
     margin-left: 69%;
     display: inline-block;
     position: absolute;
+    margin-top: 3%;
+    font-family: fb;
+    margin-right: 36%;
+    padding: 1%;
 }

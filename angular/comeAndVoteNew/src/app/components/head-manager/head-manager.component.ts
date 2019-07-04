@@ -25,6 +25,11 @@ closeBallot:boolean=false;
   {
     this.route.navigate(['openAgreeFaction']);
   }
+  //פתיחת הדף של הכנסת זמני פתיחת וסגירת קלפיות
+  addtimeVoting()
+  {
+    this.route.navigate(['openTimeVoting']);
+  }
   //מתי לאפשר את הכפתור
   closeBallotBox()
   {

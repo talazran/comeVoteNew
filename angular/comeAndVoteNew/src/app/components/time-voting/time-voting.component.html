@@ -1,0 +1,15 @@
+<form id="addTimeVoting">
+    <label>הכנס קוד בחירות:</label>
+    <input type="number" id="kodVote" [(ngModel)]="kodVote" name="kodVote">
+    <br>
+    <label>הכנס תאריך בחירות:</label>
+    <input type="date" name="dateVote" [(ngModel)]="dateVote">
+    <br>
+    <label>הכנס פתיחת קלפיות:</label>
+    <input type="time" name="ballotsOpen" [(ngModel)]="ballotsOpen">
+    <br>
+    <label>הכנס סגירת קלפיות</label>
+    <input type="time" name="ballotsClose" [(ngModel)]="ballotsClose">
+    <br>
+    <input id="ok" class="btn btn-secondary btn-lg" type="submit" value="אישור" (click)="saveTimeVoting()">
+  </form>
