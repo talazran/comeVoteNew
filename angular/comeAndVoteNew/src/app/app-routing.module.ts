@@ -8,7 +8,6 @@ import { FactionBlockForVoteComponent } from './components/faction-block-for-vot
 import { SingleVoterComponent } from './components/single-voter/single-voter.component';
 import { AgreeFactinsComponent } from './components/agree-factins/agree-factins.component';
 import { CityManagerListComponent } from './components/city-manager-list/city-manager-list.component';
-import { CityManagerListComponent } from './components/city-manager-list/city-manager-list.component';
 const routes: Routes = [
   {
     path: 'headManager',

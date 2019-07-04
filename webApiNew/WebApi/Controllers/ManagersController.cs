@@ -1,8 +1,6 @@
 ﻿using DAL;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,7 +14,7 @@ namespace WebApi.Controllers
     [RoutePrefix("api/Managers")]
     public class ManagersController : ApiController
     {
-        ComputerizedVoting1Entities11 db = new ComputerizedVoting1Entities11();
+        DAL.ComputerizedVotingNewEntities db = new ComputerizedVotingNewEntities();
 
         //הזדהות במערכת לגבי מנהל ראשי
         //הפונקציה עובדת

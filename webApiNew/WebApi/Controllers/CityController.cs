@@ -15,7 +15,7 @@ namespace WebApi.Controllers
     public class CityController : ApiController
     {
         //מופע מסוג המסד נתונים
-        DAL.ComputerizedVoting1Entities11 db = new ComputerizedVoting1Entities11();
+        DAL.ComputerizedVotingNewEntities db = new ComputerizedVotingNewEntities();
 
         // GET api/<controller>
         [HttpGet]

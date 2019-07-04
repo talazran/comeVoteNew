@@ -6,8 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using DAL;
 using System.Web.Http.Description;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Web.Http.Cors;
 
 namespace WebApi.Controllers
@@ -17,7 +15,7 @@ namespace WebApi.Controllers
     public class NationalController : ApiController
     {
         //מופע מסוג המסד נתונים
-        ComputerizedVoting1Entities11 db = new ComputerizedVoting1Entities11();
+        ComputerizedVotingNewEntities db = new ComputerizedVotingNewEntities();
 
         //שמירת תעודות הזהות של האזרחים המורשים לבחירה
         public List<string> saveTzOfNational = new List<string>();
