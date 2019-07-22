@@ -3,22 +3,22 @@ import { Managers } from 'src/app/classes/managers';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { City } from 'src/app/classes/city';
 import { ManagersService } from 'src/app/services/managers.service';
-import { ActivationEnd } from '@angular/router';
+import { ActivationEnd, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   selector: 'app-add-city-manager',
   templateUrl: './add-city-manager.component.html',
-  styleUrls: ['./add-city-manager.component.css']
+  styleUrls: ['./add-city-manager.component.scss']
 })
 export class AddCityManagerComponent implements OnInit {
 
   registerForm: FormGroup;
-  newCity: Managers = new Managers()
+  newCity: Managers = new Managers();
   submitted: boolean;
   cities: City[] = [];
-  constructor(private formBuilder: FormBuilder, public managerService: ManagersService,
+  constructor(private router:Router,private formBuilder: FormBuilder, public managerService: ManagersService,
     public activeModal:NgbActiveModal) { }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class AddCityManagerComponent implements OnInit {
       MFullName: ['', Validators.required],
       MUserName: ['', [Validators.required]],
       MPassword: ['', [Validators.required, Validators.minLength(6)]],
-      MCity: ['', Validators.required],
+      MCity: ['העיר בה הנך מנהל', Validators.required],
       MNumBallotBox: [''],
       MailM: ['', [Validators.required, Validators.email]]
     }, {
@@ -46,13 +46,12 @@ export class AddCityManagerComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    debugger;
     this.managerService.addManagersCity(this.registerForm.value).subscribe(res=>{
       alert('succsess');
       this.activeModal.close();
     },err=>{
       alert("error")
     })
+    // this.router.navigate(['headManager']);
   }
-
 }

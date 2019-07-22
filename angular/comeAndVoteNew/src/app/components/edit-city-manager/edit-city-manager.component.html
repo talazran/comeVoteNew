@@ -1,30 +1,30 @@
-<div class="">
+<div>
   <div class="container">
       <div class="row">
           <div class="col-md-6 offset-md-3">
-              <h3>עריכת מנהל עיר</h3>
-              <form [formGroup]="registerForm" name="form" (ngSubmit)="onSubmit()">
+              <h3 style="margin-left:51%">עריכת מנהל עיר</h3>
+              <form [formGroup]="registerForm" name="form" (ngSubmit)="onSubmit()" style="direction: rtl;margin-right: 60%; position: relative;">
                   <div class="form-group">
-                      <label>Name</label>
+                      <label>שם מלא:</label>
                       <input type="text" formControlName="MFullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.MFullName.errors }" />
                       <div *ngIf="submitted && f.MFullName.errors" class="invalid-feedback">
                           <div *ngIf="f.MFullName.errors.required">First Name is required</div>
                       </div>
                   </div>
                   <div class="form-group">
-                    <label>Identity </label>
+                    <label>תעודת זהות: </label>
                     <input type="text" formControlName="MIdentity" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.MIdentity.errors }" />
                    
                 </div>
-                  <div class="form-group">
-                    <label>UserName</label>
+                  <!-- <div class="form-group">
+                    <label>שם משתמש:</label>
                     <input type="text" formControlName="MUserName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.MUserName.errors }" />
                     <div *ngIf="submitted && f.MUserName.errors" class="invalid-feedback">
                         <div *ngIf="f.MUserName.errors.required">First Name is required</div>
                     </div>
-                </div>
+                </div> -->
                   <div class="form-group">
-                      <label>Email</label>
+                      <label>מייל:</label>
                       <input type="text" formControlName="MailM" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.MailM.errors }" />
                       <div *ngIf="submitted && f.MailM.errors" class="invalid-feedback">
                           <div *ngIf="f.MailM.errors.required">Email is required</div>
@@ -32,7 +32,7 @@
                       </div>
                   </div>
                   <div class="form-group">
-                      <label>Password</label>
+                      <label>סיסמא:</label>
                       <input type="password" formControlName="MPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.MPassword.errors }" />
                       <div *ngIf="submitted && f.MPassword.errors" class="invalid-feedback">
                           <div *ngIf="f.MPassword.errors.required">Password is required</div>
@@ -40,8 +40,9 @@
                       </div>
                   </div>
                   <div class="form-group">
-                    <label>City</label>
+                    <label>עיר:</label>
                     <select formControlName="MCity">
+                            <option hidden>העיר בה הנך מנהל:</option>
                         <option *ngFor="let city of cities" [ngValue]="city.id">{{city.cityName}}</option>
                     </select>
                 

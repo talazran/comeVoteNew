@@ -67,6 +67,7 @@ namespace WebApi.Controllers
         [Route("findBallotBoxManager/{userName}/{password}/{numOfBalloBox}/{cityOfBallotBox}")]
         public bool FindBallotBoxManager(string userName, string password, int numOfBalloBox, string cityOfBallotBox)
         {
+
             //לקרוא לפונקציה שמצפינה את הסיסמא שהכניס
             //במקום ה-password להשתמש במשתנה שהוחזר החדש שמכיל את ההצפנה
 
@@ -96,33 +97,62 @@ namespace WebApi.Controllers
             return q.ToList();
         }
 
-        //שינוי שדה המפלגה למאושרת או לא מאושרת
+        //שינוי שדה המפלגה למאושרת 
         [HttpGet]
         [ResponseType(typeof(Managers))]
-        [Route("putFieldIsAgree/{idFaction}")]
-        public IHttpActionResult PutFieldIsAgree(int idFaction)
+        [Route("putFieldAgreeFaction/{idFaction}")]
+        public IHttpActionResult PutFieldAgreeFaction(int idFaction)
+        {
+            Factions faction = db.Factions.Single(x => x.Id == idFaction);
+            if (faction.IsAgree == false)
+            {
+                faction.IsAgree = true;
+                db.SaveChanges();
+                return Ok(faction);
+            }
+            return BadRequest();
+        }
+
+        //שינוי שדה המפלגה ל-לא מאושרת 
+        [HttpGet]
+        [ResponseType(typeof(Managers))]
+        [Route("putFieldNotAgreeFaction/{idFaction}")]
+        public IHttpActionResult PutFieldNotAgreeFaction(int idFaction)
         {
             Factions faction = db.Factions.Single(x => x.Id == idFaction);
             if (faction.IsAgree == true)
+            {
                 faction.IsAgree = false;
-            else
-                faction.IsAgree = true;
-            db.SaveChanges();
-            return Ok(faction);
+                db.SaveChanges();
+                return Ok(faction);
+            }
+            return BadRequest();
         }
-        //שמירת פרטי בחירות לשנה הנוכחית
-        //[HttpPost]
-        //[ResponseType(typeof(Managers))]
-        //public IHttpActionResult PostTimeVoting(Managers addBallotBoxManager)//הוספת מנהל קלפי חדש
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
 
-        //    db.Managers.Add(addBallotBoxManager);
-        //    db.SaveChanges();
-        //}
+
+        //שמירת פרטי בחירות לשנה הנוכחית
+        [HttpPost]
+        [Route("addTimeVoting")]
+        [ResponseType(typeof(Voting))]
+        public IHttpActionResult PostTimeVoting([FromBody]Models.Voting formVoting)
+        {
+            try
+            {
+                var voting = Models.Voting.ConvertToDB(formVoting);
+
+                db.Voting.Add(voting);
+                db.SaveChanges();
+                return Ok();
+            }
+
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+        }
+
+
         [HttpPost]
         [Route("addManagerCity")]
         public IHttpActionResult PostManagerCity([FromBody]Models.Manager manager)
@@ -139,10 +169,8 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest();
             }
-
         }
 
         [HttpPut]
@@ -163,11 +191,10 @@ namespace WebApi.Controllers
 
                 return BadRequest();
             }
-
         }
 
         [HttpDelete]
-        [Route("deleteManagerCity/{managerId}")]
+        [Route("deleteManagerCityOrBallotBox/{managerId}")]
         public IHttpActionResult PutManagerCity(string managerId)
         {
             try
@@ -183,6 +210,21 @@ namespace WebApi.Controllers
                 return BadRequest();
             }
 
+        }
+
+        [HttpGet]
+        [Route("allCityManagers")]
+        public List<Models.Manager> AllCityManagers()//מחזיר את רשימת מנהלי ערים
+        {
+            List<Models.Manager> managers = new List<Models.Manager>();
+            var q = from m in db.Managers
+                    where m.NumStatus.Equals("2")//מחפש את המנהלים שהסטטוס שלהם הוא 3 ז''א מנהלי קלפי
+                    select m;
+            foreach (var item in q.ToList())
+            {
+                managers.Add(Models.Manager.ConvertToDto(item));
+            }
+            return managers;
         }
         #endregion
 
@@ -203,37 +245,43 @@ namespace WebApi.Controllers
             return managers;
         }
 
-        [HttpGet]
-        [Route("allCityManagers")]
-        public List<Models.Manager> AllCityManagers()//מחזיר את רשימת מנהלי ערים
+        [HttpPut]
+        [Route("editManagerBallotBox/{managerId}")]
+        public IHttpActionResult PutManagerBallotBox(string managerId, [FromBody]Models.Manager manager)
         {
-            List<Models.Manager> managers = new List<Models.Manager>();
-            var q = from m in db.Managers
-                    where m.NumStatus.Equals("2")//מחפש את המנהלים שהסטטוס שלהם הוא 3 ז''א מנהלי קלפי
-                    select m;
-            foreach (var item in q.ToList())
+            try
             {
-                managers.Add(Models.Manager.ConvertToDto(item));
+                var manager1 = db.Managers.First(p => p.MIdentity == managerId);
+                manager1 = Models.Manager.ConvertToDAL(manager);
+                manager1.City = db.City.First(p => p.id == manager.MCity);
+                manager1.ManagersStatus = db.ManagersStatus.FirstOrDefault(p => p.numStatus == "3");
+                db.SaveChanges();
+                return Ok();
             }
-            return managers;
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost]
         [ResponseType(typeof(Managers))]
-        public IHttpActionResult PostBallotBoxManager(Managers addBallotBoxManager)//הוספת מנהל קלפי חדש
+        public IHttpActionResult PostBallotBoxManager([FromBody]Models.Manager manager)//הוספת מנהל קלפי חדש
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                var managerDal = Models.Manager.ConvertToDAL(manager);
+                managerDal.ManagersStatus = db.ManagersStatus.FirstOrDefault(p => p.numStatus == "3");
+                db.Managers.Add(managerDal);
+                db.SaveChanges();
+                return Ok();
             }
-
-            db.Managers.Add(addBallotBoxManager);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = addBallotBoxManager.MIdentity }, addBallotBoxManager);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
         #endregion
-
 
         #region מנהל קלפי
         //שינוי שדה הבוחר ל-בחר

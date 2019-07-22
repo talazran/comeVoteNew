@@ -1,11 +1,11 @@
-
-<button (click)="newCityManager()">new</button>
+<!-- אוסף כל מנהלי הערים -->
+<input id="return" type="button" value="חזרה למנהל ראשי" (click)="returnHeadManage()">
+<button class="btn btn-secondary btn-lg" (click)="newCityManager()">new</button>
 <ag-grid-angular 
-    style="width: 1000px; height: 250px;" 
+    style="width: 1324px;height: 250px; margin-top: 12%;position: absolute;"
     class="ag-theme-material"
     [rowData]="rowData" 
     [columnDefs]="columnDefs"
     [context]="context"
-    [frameworkComponents]="frameworkComponents"
-    >
+    [frameworkComponents]="frameworkComponents">
 </ag-grid-angular>

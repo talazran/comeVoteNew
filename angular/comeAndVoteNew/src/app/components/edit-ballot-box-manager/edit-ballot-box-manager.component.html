@@ -1,0 +1,69 @@
+<div class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h3>עריכת מנהל קלפי</h3>
+        <form [formGroup]="registerForm" name="form" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label>שם מלא:</label>
+            <input type="text" formControlName="MFullName" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.MFullName.errors }" />
+            <div *ngIf="submitted && f.MFullName.errors" class="invalid-feedback">
+              <div *ngIf="f.MFullName.errors.required">First Name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>תעודת זהות: </label>
+            <input type="text" formControlName="MIdentity" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.MIdentity.errors }" />
+
+          </div>
+          <!-- <div class="form-group">
+            <label>UserName</label>
+            <input type="text" formControlName="MUserName" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.MUserName.errors }" />
+            <div *ngIf="submitted && f.MUserName.errors" class="invalid-feedback">
+              <div *ngIf="f.MUserName.errors.required">First Name is required</div>
+            </div>
+          </div> -->
+          <div class="form-group">
+            <label>מייל:</label>
+            <input type="text" formControlName="MailM" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.MailM.errors }" />
+            <div *ngIf="submitted && f.MailM.errors" class="invalid-feedback">
+              <div *ngIf="f.MailM.errors.required">Email is required</div>
+              <div *ngIf="f.MailM.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>סיסמא:</label>
+            <input type="password" formControlName="MPassword" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.MPassword.errors }" />
+            <div *ngIf="submitted && f.MPassword.errors" class="invalid-feedback">
+              <div *ngIf="f.MPassword.errors.required">Password is required</div>
+              <div *ngIf="f.MPassword.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>עיר:</label>
+            <select formControlName="MCity">
+              <option *ngFor="let city of cities" [ngValue]="city.id">{{city.cityName}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+              <label>עיר הקלפי:</label>
+              <input type="number" formControlName="MNumBallotBox" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.MNumBallotBox.errors }" />
+              <div *ngIf="submitted && f.MNumBallotBox.errors" class="invalid-feedback">
+                <div *ngIf="f.MNumBallotBox.errors.required">NumBallotBox is required</div>
+              </div>
+            </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">עריכה</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

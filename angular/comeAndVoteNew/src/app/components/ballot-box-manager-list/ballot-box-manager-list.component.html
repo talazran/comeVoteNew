@@ -1,0 +1,14 @@
+<!-- מנהל עיר צופה -->
+<!-- באוסף כל מנהלי הקלפיות -->
+<input id="return" type="button" value="חזרה למנהל עיר" (click)="returnCityManage()">
+<button class="btn btn-secondary btn-lg" (click)="newBallotBoxManager()">new</button>
+
+<ag-grid-angular 
+    style="width: 1324px;height: 250px; margin-top: 12%;position: absolute;"
+    class="ag-theme-material"
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs"
+    [context]="context"
+    [frameworkComponents]="frameworkComponents"
+    >
+</ag-grid-angular>

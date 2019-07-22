@@ -4,7 +4,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 @Component({
   selector: 'app-action',
   templateUrl: './action.component.html',
-  styleUrls: ['./action.component.css']
+  styleUrls: ['./action.component.scss']
 })
 export class ActionComponent implements ICellRendererAngularComp {
   public params: any;
@@ -17,19 +17,15 @@ export class ActionComponent implements ICellRendererAngularComp {
     this.params = params;
 
   }
+  
   afterGuiAttached?() {
   }
 
   public invokeParentMethodEdit() {
     this.params.context.componentParent.methodFromParentEdit(this.params.node.rowIndex)
-}
-public invokeParentMethodDelete() {
-  debugger;
-  this.params.context.componentParent.methodFromParentDelete(this.params.node.rowIndex)
-}
-
+  }
+  public invokeParentMethodDelete() {
+    this.params.context.componentParent.methodFromParentDelete(this.params.node.rowIndex)
+  }
   constructor() { }
-
-
-
 }

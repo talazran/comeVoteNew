@@ -199,12 +199,19 @@
     </Compile>
     <Compile Include="Models\BallotBox.cs" />
     <Compile Include="Models\City.cs" />
+    <Compile Include="Models\Factions.cs" />
+    <Compile Include="Models\FinalResults.cs" />
+    <Compile Include="Models\IsAgreeToVote.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\ManagersStatus.cs" />
+    <Compile Include="Models\National.cs" />
+    <Compile Include="Models\Voting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="bin\WebApi.dll" />
+    <Content Include="bin\WebApi.pdb" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

@@ -3,6 +3,7 @@ import { Factions } from 'src/app/classes/factions';
 import { Managers } from 'src/app/classes/managers';
 import { ManagersService } from 'src/app/services/managers.service';
 import { NationalService } from 'src/app/services/national.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agree-factins',
@@ -12,15 +13,15 @@ import { NationalService } from 'src/app/services/national.service';
 export class AgreeFactinsComponent implements OnInit {
   //ניתוב שמור של התמונות
   static srcPic: string = "C:\Users\Tal\Desktop\vote\comeVote\project\webAPI\comeAndVote\src\assets\factionPic";
-   //קוד מפלגה
-   idFaction: number;
+  //קוד מפלגה
+  idFaction: number;
   //מערך המפלגות 
   arrFaction: Factions[];
- 
-  constructor(private manager:ManagersService,private national: NationalService) {
-     //שמירת מערך המפלגות
-     this.manager.getAllFaction().subscribe(data => this.arrFaction = data);
-   }
+
+  constructor(private route:Router,private manager: ManagersService, private national: NationalService) {
+    //שמירת מערך המפלגות
+    this.manager.getAllFaction().subscribe(data => this.arrFaction = data);
+  }
 
   ngOnInit() {
 
@@ -30,9 +31,29 @@ export class AgreeFactinsComponent implements OnInit {
     //איתחול השדה קוד מפלגה
     this.idFaction = idFaction;
   }
-  agreeOrNotFaction(idFaction:number)
-  {
+
+  agreeFaction(idFaction: number) {
     // putFieldIsAgree/{idFaction}
-    this.manager.isAgreeFactins(idFaction).subscribe(res => {});
+    this.manager.agreeFaction(idFaction).subscribe(res => {
+      if (res)
+        alert("המפלגה סומנה כמאושר");
+      else
+        alert("המפלגה כבר מאושרת");
+    });
+  }
+
+  notAgreeFaction(idFaction: number) {
+    // putFieldIsAgree/{idFaction}
+    this.manager.notAgreeFaction(idFaction).subscribe(res => {
+      if (res)
+        alert("המפלגה סומנה כ-לא מאושר ");
+      else
+        alert("המפלגה כבר לא מאושרת");
+    });
+  }
+
+  returnHeadManage()
+  {
+    this.route.navigate(['openHeadManager']);
   }
 }

@@ -9,6 +9,7 @@ import { disableBindings } from '@angular/core/src/render3';
 import { Factions } from '../classes/factions';
 import { Time } from '@angular/common';
 import { IsAgreeToVote } from '../classes/is-agree-to-vote';
+import { Voting } from '../classes/voting';
 
 @Injectable({
   providedIn: 'root'
@@ -82,31 +83,69 @@ export class ManagersService {
   }
 
   //סימון מפלגה כמאושרת
-  isAgreeFactins(idFaction:number):Observable<Factions>
+  agreeFaction(idFaction:number):Observable<Factions>
   {
     debugger;
-    return this.http.get<Factions>(`http://localhost:60289/api/Managers/putFieldIsAgree/${idFaction}`)
+    return this.http.get<Factions>(`http://localhost:60289/api/Managers/putFieldAgreeFaction/${idFaction}`)
   }
 
+  // סימון מפלגה כלא מאושרת
+   notAgreeFaction(idFaction:number):Observable<Factions>
+   {
+     debugger;
+     return this.http.get<Factions>(`http://localhost:60289/api/Managers/putFieldNotAgreeFaction/${idFaction}`)
+   }
+ 
   //שמירת פרטי בחירות
   // savaTimeVoting():Observable<IsAgreeToVote>
   // {
   //   return this.http.post<National>(`http://localhost:60289/api/National/addTzNationalToList/`,addTznational);
   // }
+
+  // שליפת מנהלי ערים
   getManagersCity()
   {
     return this.http.get<Managers[]>(`http://localhost:60289/api/Managers/allCityManagers`);
   }
+  // שליפת מנהלי קלפיות
+  getManagersBallotBox()
+  {
+    return this.http.get<Managers[]>(`http://localhost:60289/api/Managers/allBallotBoxManagers`);
+  }
+  // הוספת מנהל עיר
   addManagersCity(manager)
   {
     return this.http.post(`http://localhost:60289/api/Managers/addManagerCity`,manager);
   }
+  // מחיקת מנהל עיר
   deleteManagersCity(managerId)
   {
-    return this.http.delete(`http://localhost:60289/api/Managers/deleteManagerCity/${managerId}`);
+    return this.http.delete(`http://localhost:60289/api/Managers/deleteManagerCityOrBallotBox/${managerId}`);
   }
+  //מחיקת מנהל קלפי או עיר
+  deleteManagersBallotBox(managerId)
+  {
+    return this.http.delete(`http://localhost:60289/api/Managers/deleteManagerCityOrBallotBox/${managerId}`);
+  }
+  // עריכת מנהל עיר
   editManagersCity(manager:Managers)
   {
+    debugger;
     return this.http.put(`http://localhost:60289/api/Managers/editManagerCity/${manager.MIdentity}`,manager);
   }
-} 
+   // עריכת מנהל קלפי
+   editManagersBallotBox(manager:Managers)
+   {
+     return this.http.put(`http://localhost:60289/api/Managers/editManagerBallotBox/${manager.MIdentity}`,manager);
+   }
+  //  שמירת פרטי הבחירות
+  timeVoting(formVoting:Voting)
+   {
+    return this.http.post(`http://localhost:60289/api/Managers/addTimeVoting`,formVoting);
+   }
+  //Add new BalotBox manager
+  AddNewballotBoxManager(newBalotBoxManageobj:Managers):Observable<Managers>
+  {
+   return this.http.post<Managers>(`http://localhost:60289/api/Managers/postballotBoxManager/`,newBalotBoxManageobj);
+  }
+}

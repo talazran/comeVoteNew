@@ -1,5 +1,7 @@
 #titleOfblockVote{
-    color:blue;
+    color: blue;
+    margin-top: 6%;
+    margin-left: 37%;
 }
 
 .wrapper {
@@ -19,4 +21,9 @@
     &.active-faction {
         border: 2px solid red;
     }
+}
+// חזרה למנהל ראשי
+#return{
+    width: 10%;
+    height: 1%;
 }

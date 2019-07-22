@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-city-manager',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CityManagerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route:Router) { }
 
   ngOnInit() {
   }
-
+  // פתיחת הדף של מנהלי קלפיות
+  openAllBallotBox()
+  {
+    this.route.navigate(["ballotBoxManagerList"]);
+  }
+  // פתיחת הדף של דוח סטטיסטיקת בוחרים
+  statisVoting()
+  {
+    // this.route.navigate(["הקומפוננטה של דסי"]);
+  }
 }

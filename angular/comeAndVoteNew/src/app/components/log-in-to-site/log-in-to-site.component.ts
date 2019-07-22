@@ -67,7 +67,6 @@ export class LogInToSiteComponent implements OnInit {
     //שמירת המשתנים מספר קלפי ועיר קלפי בסרביס
     //כדי שאוכל לשלוף את ערכם מקומפוננט אחר
     this.manager.saveNumAndCityBallotBox(this.numOfBalloBox,this.cityOfBallotBox);
-
     this.manager.checkIsBallotBoxManager(this.userName,this.password,this.numOfBalloBox,this.cityOfBallotBox).subscribe((data)=>{
       if(data)
         //פתיחת הדף של המנהל קלפי

@@ -30,12 +30,10 @@ closeBallot:boolean=false;
   {
     this.route.navigate(['openTimeVoting']);
   }
-  //מתי לאפשר את הכפתור
   closeBallotBox()
   {
     return this.closeBallot;
   }
-
   managerList()
   {
     this.route.navigate(["/cityManagerList"])

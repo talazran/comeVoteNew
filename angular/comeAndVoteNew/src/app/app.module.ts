@@ -10,9 +10,6 @@ import { LogInToSiteComponent } from './components/log-in-to-site/log-in-to-site
 import {Routes,RouterModule}from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { FactionBlockForVoteComponent } from './components/faction-block-for-vote/faction-block-for-vote.component';
-import { ErrorComponent } from './components/error/error.component';
 import { SingleVoterComponent } from './components/single-voter/single-voter.component';
 import { AgreeFactinsComponent } from './components/agree-factins/agree-factins.component';
 import { TimeVotingComponent } from './components/time-voting/time-voting.component';
@@ -24,8 +21,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddCityManagerComponent } from './components/add-city-manager/add-city-manager.component';
 import { EditCityManagerComponent } from './components/edit-city-manager/edit-city-manager.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
-
+import { BallotBoxManagerListComponent } from './components/ballot-box-manager-list/ballot-box-manager-list.component';
+import { EditBallotBoxManagerComponent } from './components/edit-ballot-box-manager/edit-ballot-box-manager.component';
+import { OkNationalComponent } from './components/ok-national/ok-national.component';
+        
 @NgModule({
   declarations:[
     AppComponent,
@@ -34,15 +33,16 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     CityManagerComponent,
     BallotBoxManagerComponent,
     LogInToSiteComponent,
-    CityManagerListComponent ,
-    FactionBlockForVoteComponent,
-    ErrorComponent,
+    CityManagerListComponent,
     SingleVoterComponent,
     AgreeFactinsComponent,
     TimeVotingComponent,
     ActionComponent,
     AddCityManagerComponent,
-    EditCityManagerComponent
+    EditCityManagerComponent,
+    BallotBoxManagerListComponent,
+    EditBallotBoxManagerComponent,
+    OkNationalComponent
   ],
   imports: [
     BrowserModule,

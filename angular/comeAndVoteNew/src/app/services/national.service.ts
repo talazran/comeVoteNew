@@ -44,13 +44,27 @@ export class NationalService {
   }
 
   //הוספת קול לעיר של הבוחר
-  addVoteToCity(cityId:number)
-  {
+  addVoteToCity(cityId: number) {
     return this.http.get(`http://localhost:60289/api/City/PutNowCountValidInCity/${cityId}`);
   }
   //במידה והאזרח מורשה לבחור הוא ישמר בתוך אוסף בסרבר
-  addTzNational(addTznational:National):Observable<National>
-  {
-    return this.http.post<National>(`http://localhost:60289/api/National/addTzNationalToList/`,addTznational);
+  addTzNational(addTznational: National): Observable<National> {
+    return this.http.post<National>(`http://localhost:60289/api/National/addTzNationalToList/`, addTznational);
   }
+  // // סימון אזרח כבחר
+  // okNational(national: National) {
+  //   debugger;
+  //   //שינוי שדה הבוחר ל-בחר
+  //   this.changeFieldIsChoose(national.Identity).subscribe((res) => {
+  //     if (res)//אם האזרח עדיין לא בחר
+  //     {
+  //       //הוספת קול לעיר של הבוחר
+  //       this.addVoteToCity(national.cityId).subscribe(res => { });
+  //       //שמירת תעודת הזהות של האזרח בטבלה ב-webApi
+  //       this.addTzNational(national).subscribe(res => { });
+  //     }
+  //     else
+  //       alert("משתמש זה כבר בחר");
+  //   });
+  // }
 }

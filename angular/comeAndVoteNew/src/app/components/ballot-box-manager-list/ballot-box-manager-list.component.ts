@@ -1,36 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { ManagersService } from 'src/app/services/managers.service';
-import { ActionComponent } from '../action/action.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditCityManagerComponent } from '../edit-city-manager/edit-city-manager.component';
-import { AddCityManagerComponent } from '../add-city-manager/add-city-manager.component';
-import Swal from 'sweetalert2'
+import { ActionComponent } from '../action/action.component';
+import Swal from 'sweetalert2';
+import { EditBallotBoxManagerComponent } from '../edit-ballot-box-manager/edit-ballot-box-manager.component';
 import { Router } from '@angular/router';
-
+import { AddBallotboxManagerComponent } from '../add-ballotbox-manager/add-ballotbox-manager.component';
+import { disableBindings } from '@angular/core/src/render3';
 
 @Component({
-  selector: 'app-city-manager-list',
-  templateUrl: './city-manager-list.component.html',
-  styleUrls: ['./city-manager-list.component.scss']
+  selector: 'app-ballot-box-manager-list',
+  templateUrl: './ballot-box-manager-list.component.html',
+  styleUrls: ['./ballot-box-manager-list.component.scss']
 })
-export class CityManagerListComponent implements OnInit {
-
+export class BallotBoxManagerListComponent implements OnInit {
+  
   private gridApi;
   private gridColumnApi;
-
   private columnDefs;
   private rowData;
   private context;
   private frameworkComponents;
-  constructor(public managerService: ManagersService, private modalService: NgbModal,private route:Router) {
+
+  constructor(private route:Router,public managerService: ManagersService, private modalService: NgbModal) {
     this.columnDefs = [
       { headerName: 'תעודת זהות', field: 'MIdentity', sortable: true, filter: true },
       { headerName: 'שם', field: 'MFullName', sortable: true, filter: true },
-      // { headerName: 'שם משתמש', field: 'MUserName', sortable: true, filter: true },
+      { headerName: 'שם משתמש', field: 'MUserName', sortable: true, filter: true },
       { headerName: 'סיסמה', field: 'MPassword', sortable: true, filter: true },
       { headerName: 'מייל', field: 'MailM', sortable: true, filter: true },
+      { headerName: 'מספר קלפי', field: 'MNumBallotBox', sortable: true, filter: true },
       {
         headerName: 'עיר', field: 'City.cityName', sortable: true, filter: true,
+        // valueFormatter: this.currencyFormatter,
       },
       {
         headerName: 'פעולות', field: 'MailM', sortable: true, filter: true,
@@ -46,13 +48,19 @@ export class CityManagerListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.managerService.getManagersCity().subscribe(res => {
+    this.managerService.getManagersBallotBox().subscribe(res => {
       this.rowData = res;
     })
   }
 
+  returnCityManage()
+  {
+    this.route.navigate(['openCityManager']);
+  }
+
   methodFromParentEdit(cell) {
-    let modalRef = this.modalService.open(EditCityManagerComponent)
+    //העריכה לא עובדת
+    let modalRef = this.modalService.open(EditBallotBoxManagerComponent)
     modalRef.componentInstance.manager=this.rowData[cell]
     modalRef.result.then((result) => {
       Swal.fire({
@@ -62,14 +70,14 @@ export class CityManagerListComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       })
-      this.managerService.getManagersCity().subscribe(res => {
+      this.managerService.getManagersBallotBox().subscribe(res => {
         this.rowData = res;
       })
     }).catch((error) => {
       console.log(error);
     });
   }
-  
+
   methodFromParentDelete(cell) {
 
     Swal.fire({
@@ -83,13 +91,13 @@ export class CityManagerListComponent implements OnInit {
       confirmButtonText: 'מחק!'
     }).then((result) => {
       if (result.value) {
-        this.managerService.deleteManagersCity(this.rowData[cell].MIdentity).subscribe(res=>{
+        this.managerService.deleteManagersBallotBox(this.rowData[cell].MIdentity).subscribe(res=>{
           Swal.fire(
             'Deleted!',
             'Your file has been deleted.',
             'success'
           )
-          this.managerService.getManagersCity().subscribe(res => {
+          this.managerService.getManagersBallotBox().subscribe(res => {
             this.rowData = res;
           })
         })      
@@ -99,8 +107,9 @@ export class CityManagerListComponent implements OnInit {
  
   }
 
-  newCityManager() {
-    let modalRef = this.modalService.open(AddCityManagerComponent)
+  newBallotBoxManager() {
+    debugger;
+    let modalRef = this.modalService.open(AddBallotboxManagerComponent)
     modalRef.result.then((result) => {
       this.managerService.getManagersCity().subscribe(res => {
         this.rowData = res;
@@ -109,13 +118,8 @@ export class CityManagerListComponent implements OnInit {
       console.log(error);
     });
   }
-
+  
   currencyFormatter(params) {
     return params.value.cityName;
-  }
-  // חזרה למנהל ראשי
-  returnHeadManage()
-  {
-    this.route.navigate(['openHeadManager']);
   }
 }

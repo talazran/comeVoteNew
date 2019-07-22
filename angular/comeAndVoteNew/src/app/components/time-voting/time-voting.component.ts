@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ManagersService } from 'src/app/services/managers.service';
 import { Time } from '@angular/common';
+import { Voting } from 'src/app/classes/voting';
 
 @Component({
   selector: 'app-time-voting',
@@ -9,19 +10,24 @@ import { Time } from '@angular/common';
   styleUrls: ['./time-voting.component.scss']
 })
 export class TimeVotingComponent implements OnInit {
-  kodVote:number;
-  dateVote:Date;
-  ballotsOpen:Time;
-  ballotsClose:Time;
+
+  formVoting:Voting=new Voting();
 
   constructor(private route:Router,private manager:ManagersService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   // שמירת פרטי הבחירות
   saveTimeVoting()
   {
-    // this.manager.savaTimeVoting().subscribe(res=>{});
+    debugger;
+    this.manager.timeVoting(this.formVoting).subscribe(res=>{
+      if(res)
+        alert("הנתונים נשמרו בהצלחה");
+    });
+  }
+  returnHeadManage()
+  {
+    this.route.navigate(['openHeadManager']);
   }
 }

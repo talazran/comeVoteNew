@@ -1,12 +1,16 @@
 #addTimeVoting{
-height: 49vh;
-display: inline-block;
-direction: rtl;
-border: solid;
-width: 21vw;
-padding: 2%;
-margin-left: -30%;
-position: absolute;
-margin-top: 10%;
-border-radius: 29px;
+    height: 35vh;
+    border: solid;
+    width: 21vw;
+    border-radius: 29px;
+    margin-left:37%;
+    position: absolute;
+    margin-top: 12%;
+    background-color: #bae6f0;
+    color: #538fd2;
+    direction: rtl;
+    padding: 2%;
+}
+#ok{
+    margin-right: 42%;
 }
