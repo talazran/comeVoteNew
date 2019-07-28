@@ -19,6 +19,10 @@ closeBallot:boolean=false;
   {
     this.route.navigate(['addManager/'+"2"]);
   }
+  allFac()
+  {
+    this.route.navigate(['allFactions'])
+  }
 
   //פתיחת הקומפוננטה של מפלגות מאושרות
   chooseAgreeFaction()

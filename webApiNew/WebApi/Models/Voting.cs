@@ -7,13 +7,12 @@ namespace WebApi.Models
 {
     public class Voting
     {
-
         public int kodVote { get; set; }
         public DateTime dateVote { get; set; }
         public TimeSpan ballotsOpen { get; set; }
         public TimeSpan ballotsClose { get; set; }
 
-        public virtual ICollection<FinalResults> FinalResults { get; set; }
+        //public virtual ICollection<FinalResults> FinalResults { get; set; }
 
         public static DAL.Voting ConvertToDB(Models.Voting vot)
         {

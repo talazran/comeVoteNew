@@ -1,9 +1,13 @@
 ﻿using DAL;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
@@ -82,6 +86,136 @@ namespace WebApi.Controllers
             return false;
         }
 
+        [HttpPut]
+        [Route("editFaction/{id}")]
+        public async System.Threading.Tasks.Task<bool> EditFactionAsync()
+        {
+            try
+            {
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                }
+
+                string root = HttpContext.Current.Server.MapPath("~/App_Data");
+                var provider = new MultipartFormDataStreamProvider(root);
+                try
+                {
+                    await Request.Content.ReadAsMultipartAsync(provider);
+
+                    NameValueCollection formdata = provider.FormData;
+                    ///כל האוביקט שנשלח
+                    Factions factions = JsonConvert.DeserializeObject<Factions>(formdata["res"].ToString());
+
+                    foreach (MultipartFileData file in provider.FileData)
+                    {
+                        var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+                        byte[] documentData = File.ReadAllBytes(file.LocalFileName);
+                        if (Directory.GetFiles("", fileName).Length == 0)
+                        {
+                            string destFile = System.IO.Path.Combine("", fileName);
+                            ///destFile-ניתוב לשמירת התמונה אצלכם בפרויקט עצמו
+                            File.Copy(file.LocalFileName, destFile);
+                        }
+                        var fac = db.Factions.First(p => p.Id == factions.Id);
+                        fac.factionName = factions.factionName;
+                        fac.factionPic = System.IO.Path.Combine("", fileName);
+                        fac.IsAgree = factions.IsAgree;
+                        db.SaveChanges();
+                        return true;
+                    }
+                    return true;
+                }
+                catch (System.Exception e)
+                {
+
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        
+        }
+        [HttpGet]
+        [Route("deleteFaction/{id}")]
+        public bool DeleteFaction(int id)
+        {
+            try
+            {
+                var fac = db.Factions.First(p => p.Id == id);
+                db.Factions.Remove(fac);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+        [HttpPost]
+        [Route("addFaction")]
+        public async System.Threading.Tasks.Task<bool> AddFactionAsync()
+        {
+            //try
+            //{
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                }
+
+                string root = HttpContext.Current.Server.MapPath("~/App_Data");
+                var provider = new MultipartFormDataStreamProvider(root);
+                try
+                {
+                    await Request.Content.ReadAsMultipartAsync(provider);
+
+                    NameValueCollection formdata = provider.FormData;
+                    ///כל האוביקט שנשלח
+                    Factions factions = JsonConvert.DeserializeObject<Factions>(formdata["res"].ToString());
+
+                    foreach (MultipartFileData file in provider.FileData)
+                    {
+                        var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+                        byte[] documentData = File.ReadAllBytes(file.LocalFileName);
+                        if (Directory.GetFiles(@"C:\Users\User\Documents\חיה\comeVoteNew\webApiNew\WebApi\image", fileName).Length == 0)
+                        {
+                            string destFile = System.IO.Path.Combine(@"C:\Users\User\Documents\חיה\comeVoteNew\webApiNew\WebApi\image", fileName);                           
+                            ///destFile-ניתוב לשמירת התמונה אצלכם בפרויקט עצמו
+                            File.Copy(file.LocalFileName, destFile);
+                        }
+                        factions.factionPic = System.IO.Path.Combine(@"C:\Users\User\Documents\חיה\comeVoteNew\webApiNew\WebApi\image", fileName);
+                        db.Factions.Add(factions);
+                        db.SaveChanges();
+                    }
+                    return true;
+                //}
+                //catch (System.Exception e)
+                //{
+
+                //    return false;
+                //}
+              
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }         
+        }
+        [HttpGet]
+        [Route("getFactions")]
+        public List<Models.Faction> getAllFactions()
+        {
+            List<Models.Faction> factions = new List<Models.Faction>();
+            foreach (var item in db.Factions.ToList())
+            {
+                factions.Add(Models.Faction.ConvertToDto(item));
+            }
+            return factions;
+        }
+        
         #region מנהל ראשי
         //הפונקציה עובדת
         [HttpGet]
@@ -95,11 +229,11 @@ namespace WebApi.Controllers
             return q.ToList();
         }
 
-        //שינוי שדה המפלגה למאושרת 
+        //שינוי שדה המפלגה למאושרת או לא מאושרת
         [HttpGet]
         [ResponseType(typeof(Managers))]
-        [Route("putFieldAgreeFaction/{idFaction}")]
-        public IHttpActionResult PutFieldAgreeFaction(int idFaction)
+        [Route("putFieldIsAgree/{idFaction}")]
+        public IHttpActionResult PutFieldIsAgree(int idFaction)
         {
             Factions faction = db.Factions.Single(x => x.Id == idFaction);
             if (faction.IsAgree == false)
@@ -242,6 +376,23 @@ namespace WebApi.Controllers
             }
             return managers;
         }
+		
+		
+        [HttpGet]
+        [Route("allCityManagers")]
+        public List<Models.Manager> AllCityManagers()//מחזיר את רשימת מנהלי ערים
+        {
+            List<Models.Manager> managers = new List<Models.Manager>();
+            var q = from m in db.Managers
+                    where m.NumStatus.Equals("2")//מחפש את המנהלים שהסטטוס שלהם הוא 3 ז''א מנהלי קלפי
+                    select m;
+            foreach (var item in q.ToList())
+            {
+                managers.Add(Models.Manager.ConvertToDto(item));
+            }
+            return managers;
+        }
+
 
         [HttpPut]
         [Route("editManagerBallotBox/{managerId}")]
