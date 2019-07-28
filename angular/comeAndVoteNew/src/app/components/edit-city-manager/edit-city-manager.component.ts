@@ -25,7 +25,7 @@ export class EditCityManagerComponent implements OnInit {
     this.registerForm.patchValue({
       MIdentity:this.manager.MIdentity,
       MFullName:this.manager.MFullName,
-      MUserName:this.manager.MUserName,
+      // MUserName:this.manager.MUserName,
       MPassword:this.manager.MPassword,
       MCity:this.manager.MCity,
       MailM:this.manager.MailM
@@ -47,7 +47,7 @@ export class EditCityManagerComponent implements OnInit {
     this.registerForm.patchValue({
       MIdentity:this.manager.MIdentity,
       MFullName:this.manager.MFullName,
-      MUserName:this.manager.MUserName,
+      // MUserName:this.manager.MUserName,
       MPassword:this.manager.MPassword,
       MCity:this.manager.MCity,
       MailM:this.manager.MailM

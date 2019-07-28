@@ -27,7 +27,8 @@ export class OkNationalComponent implements ICellRendererAngularComp {
 
   okNationalToVote()
   {
-    // oknational זוהי פונקציה שנמצאת בקומפוננט
+    // oknational 
+    // זוהי פונקציה שנמצאת בקומפוננט
     // ballotBoxManager
     debugger;
     this.params.context.componentParent.okNational(this.params.node.rowIndex)

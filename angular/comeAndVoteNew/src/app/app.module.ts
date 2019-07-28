@@ -24,7 +24,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { BallotBoxManagerListComponent } from './components/ballot-box-manager-list/ballot-box-manager-list.component';
 import { EditBallotBoxManagerComponent } from './components/edit-ballot-box-manager/edit-ballot-box-manager.component';
 import { OkNationalComponent } from './components/ok-national/ok-national.component';
-        
+
+
 @NgModule({
   declarations:[
     AppComponent,

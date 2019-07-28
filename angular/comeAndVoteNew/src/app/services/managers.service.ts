@@ -36,18 +36,22 @@ export class ManagersService {
   returnIdOfManager(): number {
     return this.kindOfManager;
   }
-  // בדיקה האם אכן נכנס מנהל ראשי
-  checkIsHeadManager(userName:string,password:string):Observable<Managers>{
-    return this.http.get<Managers>(`http://localhost:60289/api/Managers/findHeadManager/${userName}/${password}`);
-  }
-  //בדיקה האם אכן נכנס מנהל ערים
-  checkIsCityManager(userName:string,password:string,cityOfManager:string):Observable<Managers>{
-    return this.http.get<Managers>(`http://localhost:60289/api/Managers/findCityManager/${userName}/${password}/${cityOfManager}`);
-  }
-  //בדיקה האם אכן נכנס מנהל קלפי
-  checkIsBallotBoxManager(userName:string,password:string,numOfBalloBox:number,cityOfBallotBox:string):Observable<Managers>{
-    return this.http.get<Managers>(`http://localhost:60289/api/Managers/findBallotBoxManager/${userName}/${password}/${numOfBalloBox}/${cityOfBallotBox}`);
-  }
+ // בדיקה האם אכן נכנס מנהל ראשי
+ checkIsHeadManager(identity:string,password:string):Observable<Managers>{
+  return this.http.get<Managers>(`http://localhost:60289/api/Managers/findHeadManager/${identity}/${password}`);
+}
+
+ //בדיקה האם אכן נכנס מנהל ערים
+ checkIsCityManager(identity:string,password:string,cityOfManager:string):Observable<Managers>{
+  return this.http.get<Managers>(`http://localhost:60289/api/Managers/findCityManager/${identity}/${password}/${cityOfManager}`);
+}
+
+ //בדיקה האם אכן נכנס מנהל קלפי
+ checkIsBallotBoxManager(identity:string,password:string,numOfBalloBox:number,cityOfBallotBox:string):Observable<Managers>{
+  return this.http.get<Managers>(`http://localhost:60289/api/Managers/findBallotBoxManager/${identity}/${password}/${numOfBalloBox}/${cityOfBallotBox}`);
+}
+
+
 
   //שמירת הערכים שהמנהל קלפי הכניס 
   //מספר קלפי ועיר קלפי

@@ -19,15 +19,15 @@ namespace WebApi.Controllers
         //הזדהות במערכת לגבי מנהל ראשי
         //הפונקציה עובדת
         [HttpGet]
-        [Route("findHeadManager/{userName}/{password}")]
-        public bool FindHeadManager(string userName, string password)
+        [Route("findHeadManager/{identity}/{password}")]
+        public bool FindHeadManager(string identity, string password)
         {
             //לקרוא לפונקציה שמצפינה את הסיסמא שהכניס
             //במקום ה-password להשתמש במשתנה שהוחזר החדש שמכיל את ההצפנה
 
             //חיפוש המנהל על פי שם משתמש וסיסמא
             //החזרת הסטטוס שלו
-            var kindOfManager = db.Managers.FirstOrDefault(x => x.MPassword == password && x.MUserName == userName);
+            var kindOfManager = db.Managers.FirstOrDefault(x => x.MPassword == password && x.MIdentity == identity);
             if (kindOfManager != null && kindOfManager.NumStatus == "1")
                 return true;
             return false;
@@ -36,8 +36,8 @@ namespace WebApi.Controllers
         //הזדהות במערכת לגבי מנהל עיר
         //הפונקציה עבדה
         [HttpGet]
-        [Route("findCityManager/{userName}/{password}/{cityOfManager}")]
-        public bool FindCityManager(string userName, string password, string cityOfManager)
+        [Route("findCityManager/{identity}/{password}/{cityOfManager}")]
+        public bool FindCityManager(string identity, string password, string cityOfManager)
         {
             //לקרוא לפונקציה שמצפינה את הסיסמא שהכניס
             //במקום ה-password להשתמש במשתנה שהוחזר החדש שמכיל את ההצפנה
@@ -51,7 +51,7 @@ namespace WebApi.Controllers
 
             //חיפוש המנהל על פי שם משתמש וסיסמא
             //החזרת הסטטוס שלו
-            var kindOfManager = db.Managers.FirstOrDefault(x => x.MPassword == password && x.MUserName == userName && x.MCity == idCity.FirstOrDefault());
+            var kindOfManager = db.Managers.FirstOrDefault(x => x.MPassword == password && x.MIdentity == identity && x.MCity == idCity.FirstOrDefault());
             if (kindOfManager != null && kindOfManager.NumStatus == "2")
                 return true;
             return false;
@@ -59,13 +59,13 @@ namespace WebApi.Controllers
 
 
 
+
         //הזדהות במערכת לגבי מנהל קלפי
         //הפונקציה עבדה
         [HttpGet]
-        [Route("findBallotBoxManager/{userName}/{password}/{numOfBalloBox}/{cityOfBallotBox}")]
-        public bool FindBallotBoxManager(string userName, string password, int numOfBalloBox, string cityOfBallotBox)
+        [Route("findBallotBoxManager/{identity}/{password}/{numOfBalloBox}/{cityOfBallotBox}")]
+        public bool FindBallotBoxManager(string identity, string password, int numOfBalloBox, string cityOfBallotBox)
         {
-
             //לקרוא לפונקציה שמצפינה את הסיסמא שהכניס
             //במקום ה-password להשתמש במשתנה שהוחזר החדש שמכיל את ההצפנה
 
@@ -76,7 +76,7 @@ namespace WebApi.Controllers
 
             //חיפוש המנהל על פי שם משתמש וסיסמא
             //החזרת הסטטוס שלו
-            var kindOfManager = db.Managers.FirstOrDefault(x => x.MPassword == password && x.MUserName == userName && x.MNumBallotBox == idBallotBox.FirstOrDefault() && x.MCity.ToString() == cityOfBallotBox);
+            var kindOfManager = db.Managers.FirstOrDefault(x => x.MPassword == password && x.MIdentity == identity && x.MNumBallotBox == idBallotBox.FirstOrDefault() && x.MCity.ToString() == cityOfBallotBox);
             if (kindOfManager != null && kindOfManager.NumStatus == "3")
                 return true;
             return false;

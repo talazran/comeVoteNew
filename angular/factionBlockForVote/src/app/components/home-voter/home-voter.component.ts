@@ -14,7 +14,7 @@ export class HomeVoterComponent implements OnInit {
   constructor(private national: NationalService, private route: Router) { }
   //האם לחצו על הכפתור ואותו אזרח אכן מאושר לבחירה
   isAgree:boolean=true;
-
+  
   ngOnInit() {}
 
   enterFactionBlockForVote() {

@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { TimeVotingComponent } from './components/time-voting/time-voting.component';
 import { CityManagerListComponent } from './components/city-manager-list/city-manager-list.component';
 import { BallotBoxManagerListComponent } from './components/ballot-box-manager-list/ballot-box-manager-list.component';
+import { FinalResulsFactionsComponent } from './components/final-resuls-factions/final-resuls-factions.component';
 
 const routes: Routes = [
   // {
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'ballotBoxManagerList',
     component: BallotBoxManagerListComponent,
+  },
+  {
+    path: 'finalResultFaction',
+    component: FinalResulsFactionsComponent,
   },
 ];
 
