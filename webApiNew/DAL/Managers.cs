@@ -16,7 +16,6 @@ namespace DAL
     {
         public string MIdentity { get; set; }
         public string MFullName { get; set; }
-        public string MUserName { get; set; }
         public string MPassword { get; set; }
         public string NumStatus { get; set; }
         public Nullable<int> MCity { get; set; }

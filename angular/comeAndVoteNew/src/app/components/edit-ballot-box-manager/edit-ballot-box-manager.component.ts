@@ -24,7 +24,7 @@ export class EditBallotBoxManagerComponent implements OnInit {
     this.registerForm.patchValue({
       MIdentity:this.manager.MIdentity,
       MFullName:this.manager.MFullName,
-      MUserName:this.manager.MUserName,
+      // MUserName:this.manager.MUserName,
       MPassword:this.manager.MPassword,
       MCity:this.manager.MCity,
       MNumBallotBox:this.manager.MNumBallotBox,
@@ -48,7 +48,7 @@ export class EditBallotBoxManagerComponent implements OnInit {
     this.registerForm.patchValue({
       MIdentity:this.manager.MIdentity,
       MFullName:this.manager.MFullName,
-      MUserName:this.manager.MUserName,
+      // MUserName:this.manager.MUserName,
       MPassword:this.manager.MPassword,
       MCity:this.manager.MCity,
       MNumBallotBox:this.manager.MNumBallotBox,

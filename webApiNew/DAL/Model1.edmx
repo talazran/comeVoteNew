@@ -33,6 +33,7 @@
           <Property Name="leadersMail" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="factionPic" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsAgree" Type="bit" Nullable="false" />
+          <Property Name="fanctionsStageName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="FinalResults">
           <Key>
@@ -55,7 +56,6 @@
           </Key>
           <Property Name="MIdentity" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MFullName" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="MUserName" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="MPassword" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="NumStatus" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="MCity" Type="int" />
@@ -252,6 +252,7 @@
           <Property Name="leadersMail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="factionPic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsAgree" Type="Boolean" Nullable="false" />
+          <Property Name="fanctionsStageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="FinalResults" Relationship="Self.FK_FinalResults1_Factions1" FromRole="Factions" ToRole="FinalResults" />
         </EntityType>
         <EntityType Name="FinalResults">
@@ -277,7 +278,6 @@
           </Key>
           <Property Name="MIdentity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MFullName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MUserName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NumStatus" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MCity" Type="Int32" />
@@ -477,6 +477,7 @@
                 <ScalarProperty Name="leadersMail" ColumnName="leadersMail" />
                 <ScalarProperty Name="factionPic" ColumnName="factionPic" />
                 <ScalarProperty Name="IsAgree" ColumnName="IsAgree" />
+                <ScalarProperty Name="fanctionsStageName" ColumnName="fanctionsStageName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -502,7 +503,6 @@
               <MappingFragment StoreEntitySet="Managers">
                 <ScalarProperty Name="MIdentity" ColumnName="MIdentity" />
                 <ScalarProperty Name="MFullName" ColumnName="MFullName" />
-                <ScalarProperty Name="MUserName" ColumnName="MUserName" />
                 <ScalarProperty Name="MPassword" ColumnName="MPassword" />
                 <ScalarProperty Name="NumStatus" ColumnName="NumStatus" />
                 <ScalarProperty Name="MCity" ColumnName="MCity" />

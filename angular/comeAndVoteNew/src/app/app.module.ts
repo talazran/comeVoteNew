@@ -31,6 +31,8 @@ import { AddFactionComponent } from './components/add-faction/add-faction.compon
 import { FactionBlockForVoteComponent } from './components/faction-block-for-vote/faction-block-for-vote.component';
 
         
+
+
 @NgModule({
   declarations:[
     AppComponent,

@@ -12,7 +12,7 @@ import { City } from 'src/app/classes/city';
 export class LogInToSiteComponent implements OnInit {
 
   //שם משתמש
-  userName:string;
+  identity:string;
   //סיסמא
   password:string;
   //עיר המנהל
@@ -42,7 +42,7 @@ export class LogInToSiteComponent implements OnInit {
   //כניסת מנהל ראשי
   enterHeadManager()
   {
-    this.manager.checkIsHeadManager(this.userName,this.password).subscribe((data)=>{
+    this.manager.checkIsHeadManager(this.identity,this.password).subscribe((data)=>{
       if(data)
         this.route.navigate(['openHeadManager']);
       else
@@ -53,7 +53,7 @@ export class LogInToSiteComponent implements OnInit {
   //כניסת מנהל עיר
   enterCityManager()
   {
-    this.manager.checkIsCityManager(this.userName,this.password,this.cityOfManager).subscribe((data)=>{
+    this.manager.checkIsCityManager(this.identity,this.password,this.cityOfManager).subscribe((data)=>{
       if(data)
         this.route.navigate(['openCityManager']);
       else
@@ -67,7 +67,7 @@ export class LogInToSiteComponent implements OnInit {
     //שמירת המשתנים מספר קלפי ועיר קלפי בסרביס
     //כדי שאוכל לשלוף את ערכם מקומפוננט אחר
     this.manager.saveNumAndCityBallotBox(this.numOfBalloBox,this.cityOfBallotBox);
-    this.manager.checkIsBallotBoxManager(this.userName,this.password,this.numOfBalloBox,this.cityOfBallotBox).subscribe((data)=>{
+    this.manager.checkIsBallotBoxManager(this.identity,this.password,this.numOfBalloBox,this.cityOfBallotBox).subscribe((data)=>{
       if(data)
         //פתיחת הדף של המנהל קלפי
         this.route.navigate(['openBallotBoxManager']);

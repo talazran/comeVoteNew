@@ -1,23 +1,22 @@
 <!-- מנהל ראשי -->
 <form id="enterHeadManager" *ngIf="checkManager()==1">
   <h1>LOGIN</h1>
-  <label>שם משתמש:</label>
-
-  <input type="text" id="userName" [(ngModel)]="userName" name="userName">
+  <label>תעודת זהות</label>
+  <input type="text" id="identity" [(ngModel)]="identity" name="identity">
   <br>
   <label>סיסמא:</label>
 
   <input type="password" id="password" [(ngModel)]="password" name="password">
   <br>
   <br>
-  <input id="enter" class="btn btn-secondary btn-lg" type="submit" value="כניסה" (click)="enterHeadManager()">
+  <input id="enter" type="submit" value="כניסה" (click)="enterHeadManager()">
 </form>
 
 <!-- מנהל עיר -->
 <form id="enterCityManager" *ngIf="checkManager()==2">
   <h1>LOGIN</h1>
-  <label>שם משתמש:</label>
-  <input type="text" id="userName" [(ngModel)]="userName" name="userName">
+  <label>תעודת זהות</label>
+    <input type="text" id="identity" [(ngModel)]="identity" name="identity">
   <br>
   <label>סיסמא:</label>
   <input type="password" name="password" [(ngModel)]="password">
@@ -29,14 +28,14 @@
   </select>
   <br>
   <br>
-  <input id="enter" class="btn btn-primary btn-lg active" type="submit" value="כניסה" (click)="enterCityManager()">
+  <input id="enter" type="submit" value="כניסה" (click)="enterCityManager()">
 </form>
 
 <!-- מנהל קלפי -->
 <form id="enterBallotBoxManager" *ngIf="checkManager()==3">
   <h1>LOGIN</h1>
-  <label>שם משתמש:</label>
-  <input type="text" id="userName" [(ngModel)]="userName" name="userName">
+  <label>תעודת זהות</label>
+  <input type="text" id="identity" [(ngModel)]="identity" name="identity">
   <br>
   <label>סיסמא:</label>
   <input type="password" id="password" [(ngModel)]="password" name="password">
@@ -51,5 +50,5 @@
   </select>
   <br>
   <br>
-  <input id="enter" class="btn btn-primary btn-lg active" type="submit" value="כניסה" (click)="enterBallotBoxManager()">
+  <input id="enter" type="submit" value="כניסה" (click)="enterBallotBoxManager()">
 </form>

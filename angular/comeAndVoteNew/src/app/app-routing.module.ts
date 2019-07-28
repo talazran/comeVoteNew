@@ -13,7 +13,8 @@ import { CityManagerListComponent } from './components/city-manager-list/city-ma
 import { FinishVoteComponent } from './components/finishVote/finishVote.component';
 import { AllFactionsComponent } from './components/all-factions/all-factions.component';
 import { BallotBoxManagerListComponent } from './components/ballot-box-manager-list/ballot-box-manager-list.component';
-import { CanActivateAuthGuard } from './CanActivateAuthGuard ';
+import { FinalResulsFactionsComponent } from './components/final-resuls-factions/final-resuls-factions.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -97,8 +98,11 @@ const routes: Routes = [
   {
     path: 'ballotBoxManagerList',
     component: BallotBoxManagerListComponent,
-  }
- ]}
+  },
+  {
+    path: 'finalResultFaction',
+    component: FinalResulsFactionsComponent,
+  },
 ];
 
 @NgModule({

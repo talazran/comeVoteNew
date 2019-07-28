@@ -20,6 +20,7 @@ namespace DAL
         public string leadersMail { get; set; }
         public string factionPic { get; set; }
         public bool IsAgree { get; set; }
+        public string fanctionsStageName { get; set; }
     
         public virtual FinalResults FinalResults { get; set; }
     }
