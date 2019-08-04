@@ -24,7 +24,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { BallotBoxManagerListComponent } from './components/ballot-box-manager-list/ballot-box-manager-list.component';
 import { EditBallotBoxManagerComponent } from './components/edit-ballot-box-manager/edit-ballot-box-manager.component';
 import { OkNationalComponent } from './components/ok-national/ok-national.component';
-
+import{FinalResulsFactionsComponent}from './components/final-resuls-factions/final-resuls-factions.component';
+import { StaticDayVotersCityComponent } from './components/static-day-voters-city/static-day-voters-city.component';
 
 @NgModule({
   declarations:[
@@ -43,7 +44,9 @@ import { OkNationalComponent } from './components/ok-national/ok-national.compon
     EditCityManagerComponent,
     BallotBoxManagerListComponent,
     EditBallotBoxManagerComponent,
-    OkNationalComponent
+    OkNationalComponent,
+    FinalResulsFactionsComponent,
+    StaticDayVotersCityComponent
   ],
   imports: [
     BrowserModule,
