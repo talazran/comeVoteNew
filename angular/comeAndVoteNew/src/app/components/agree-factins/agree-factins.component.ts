@@ -34,7 +34,7 @@ export class AgreeFactinsComponent implements OnInit {
 
   agreeFaction(idFaction: number) {
     // putFieldIsAgree/{idFaction}
-    this.manager.agreeFaction(idFaction).subscribe(res => {
+    this.manager.isAgreeFactins(idFaction).subscribe(res => {
       if (res)
         alert("המפלגה סומנה כמאושר");
       else

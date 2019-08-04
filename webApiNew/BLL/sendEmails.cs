@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 
-
 namespace BLL
 {
-  public class sendEmails
+    public class sendEmails
     {
         public void sendMailTest(string mailAddress)
         {
@@ -35,9 +34,7 @@ namespace BLL
             }
 
         }
-
-
-        public void sendMailForPassword(string mailAddress,string password)
+        public void sendMailForPassword(string mailAddress, string password)
         {
             try
             {
@@ -47,7 +44,7 @@ namespace BLL
                 mail.From = new MailAddress("votingpojectemails@gmail.com");
                 mail.To.Add(mailAddress);//לשלוח כמה כתובות
                 mail.Subject = "סיסמא למערכת ";//נושא
-                mail.Body = "סיסמתך למערכת הינה:"+password;//תוכן עם תגיות
+                mail.Body = "סיסמתך למערכת הינה:" + password;//תוכן עם תגיות
 
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("votingpojectemails", "vvvv1234");//שם וסיסמסמא
@@ -60,18 +57,6 @@ namespace BLL
             {
                 // MessageBox.Show(ex.ToString());
             }
-
         }
-
-
-
-
-
-
-
     }
-
-
-
 }
-

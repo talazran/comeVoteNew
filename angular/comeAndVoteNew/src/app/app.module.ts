@@ -24,8 +24,19 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { BallotBoxManagerListComponent } from './components/ballot-box-manager-list/ballot-box-manager-list.component';
 import { EditBallotBoxManagerComponent } from './components/edit-ballot-box-manager/edit-ballot-box-manager.component';
 import { OkNationalComponent } from './components/ok-national/ok-national.component';
+<<<<<<< HEAD
 import{FinalResulsFactionsComponent}from './components/final-resuls-factions/final-resuls-factions.component';
 import { StaticDayVotersCityComponent } from './components/static-day-voters-city/static-day-voters-city.component';
+=======
+import { FinishVoteComponent } from './components/finishVote/finishVote.component';
+import { AllFactionsComponent } from './components/all-factions/all-factions.component';
+import { EditFactionComponent } from './components/edit-faction/edit-faction.component';
+import { AddFactionComponent } from './components/add-faction/add-faction.component';
+import { FactionBlockForVoteComponent } from './components/faction-block-for-vote/faction-block-for-vote.component';
+
+        
+
+>>>>>>> b754b0e15d90e85adbd2c75433437ccdc3c898ae
 
 @NgModule({
   declarations:[
@@ -45,8 +56,17 @@ import { StaticDayVotersCityComponent } from './components/static-day-voters-cit
     BallotBoxManagerListComponent,
     EditBallotBoxManagerComponent,
     OkNationalComponent,
+<<<<<<< HEAD
     FinalResulsFactionsComponent,
     StaticDayVotersCityComponent
+=======
+    FinishVoteComponent,
+    AllFactionsComponent,
+    EditFactionComponent,
+    AddFactionComponent,
+    FactionBlockForVoteComponent
+
+>>>>>>> b754b0e15d90e85adbd2c75433437ccdc3c898ae
   ],
   imports: [
     BrowserModule,
@@ -60,7 +80,7 @@ import { StaticDayVotersCityComponent } from './components/static-day-voters-cit
     AngularFontAwesomeModule
 
   ],
-  entryComponents:[AddCityManagerComponent,EditCityManagerComponent],
+  entryComponents:[AddCityManagerComponent,EditCityManagerComponent,EditFactionComponent],
   providers: [ManagersService],
   bootstrap: [AppComponent]
 })

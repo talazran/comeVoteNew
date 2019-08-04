@@ -6,7 +6,7 @@ export class Factions {
     factionPic:string;
     IsAgree:boolean;
 
-    constructor(Id:number,factionName:string,voters:number,leadersMail:string,factionPic:string,IsAgree:boolean)
+    constructor(Id?:number,factionName?:string,voters?:number,leadersMail?:string,factionPic?:string,IsAgree?:boolean)
     {
         this.Id=Id;
         this.factionName=factionName;
