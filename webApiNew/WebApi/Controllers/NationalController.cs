@@ -7,6 +7,7 @@ using System.Web.Http;
 using DAL;
 using System.Web.Http.Description;
 using System.Web.Http.Cors;
+using System.Data;
 
 namespace WebApi.Controllers
 {
@@ -18,7 +19,7 @@ namespace WebApi.Controllers
         ComputerizedVotingNewEntities db = new ComputerizedVotingNewEntities();
 
         //שמירת תעודות הזהות של האזרחים המורשים לבחירה
-        public List<string> saveTzOfNational = new List<string>();
+        //public List<string> saveTzOfNational = new List<string>();
 
         //החזרת אוסף של האזרחים בקלפי הנוכחי
         [HttpGet]
@@ -63,32 +64,34 @@ namespace WebApi.Controllers
         }
 
         //הוספת תעודת זהות של אזרח
-        [HttpGet]
-        [Route("addTzNationalToList/{Identity}")]
-        public void AddTzNationalToList(string Identity)
-        {
-            int flag = 0;
-            foreach (var item in saveTzOfNational)
-            {
-                if (item.Equals(Identity))
-                {
-                    flag = 1;
-                    break;
-                }
-            }
-            if (flag == 0)//רק אם לא נמצאה התעודת זהות היא תתוסף
-               saveTzOfNational.Add(Identity);
-        }
+        //[HttpGet]
+        //[Route("addTzNationalToList/{Identity}")]
+        //public void AddTzNationalToList(string Identity)
+        //{
+        //    int flag = 0;
+        //    foreach (var item in saveTzOfNational)
+        //    {
+        //        if (item.Equals(Identity))
+        //        {
+        //            flag = 1;
+        //            break;
+        //        }
+        //    }
+        //    if (flag == 0)//רק אם לא נמצאה התעודת זהות היא תתוסף
+        //       saveTzOfNational.Add(Identity);
+        //}
 
+        
+        //עבדה
         //בדיקה האם אזרח קיים באוסף
         [HttpGet]
         [Route("checkIsExistNational/{Identity}")]
         public bool CheckIsExistNational(string Identity)
         {
             int flag = 0;
-            foreach (var item in saveTzOfNational)
+            foreach (var item in db.IsAgreeToVote)
             {
-                if (item.Equals(Identity))
+                if (item.tz.Trim()==Identity)
                 {
                     flag = 1;
                     break;
@@ -100,15 +103,16 @@ namespace WebApi.Controllers
         }
 
         //הסרת האזרח מהאוסף
-        [HttpGet]
+        [HttpDelete]
         [Route("deleteTzNationalToList/{Identity}")]
         public void DeleteTzNationalToList(string Identity)
         {
-            foreach (var item in saveTzOfNational)
+            foreach (var item in db.IsAgreeToVote)
             {
-                if (item.Equals(Identity))
+                if (item.tz.Trim() == Identity)
                 {
-                    saveTzOfNational.Remove(Identity);
+                    db.IsAgreeToVote.Remove(new IsAgreeToVote() { tz = Identity });
+                    db.SaveChanges();
                     break;
                 }
             }

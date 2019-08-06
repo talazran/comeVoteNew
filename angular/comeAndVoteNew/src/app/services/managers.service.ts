@@ -21,7 +21,7 @@ import { Voting } from '../classes/voting';
 export class ManagersService {
 
   //סוג המנהל
-  kindOfManager: number;
+  kindOfManager: number=1;
   //מספר קלפי
   numOfBalloBox: number;
   //עיר הקלפי
@@ -35,35 +35,35 @@ export class ManagersService {
 
   //שמירת מספר המזהה את המנהל במשתנה
   kindOfManagerService(kindOfManager: number) {
-    this.kindOfManager = kindOfManager;
-    var day = new Date();
-    var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    if (kindOfManager == 1)
-      var nextDay = new Date(day.setDate(day.getDate() + 7));
-    else if (kindOfManager == 2)
-      var nextDay = new Date(day.setDate(day.getDate() + 2));
-    else var nextDay = new Date();
-    var diffDays = Math.round(((new Date(this.finishService.voting.dateVote).getTime() - nextDay.getTime()) / (oneDay)));
-    if (new Date(this.finishService.voting['dateVote']) >= new Date()) {
-      if (diffDays < 0) {
-        working.open = true;
-        //location.reload();
-        if (kindOfManager == 1)
-          this.router.navigate(['headManager']);
-        if (kindOfManager == 2)
-          this.router.navigate(['cityManager']);
-        if (kindOfManager == 3)
-          this.router.navigate(['ballotBoxManager']);
-      }
-      else {
-        working.open = false;
-        this.router.navigate(['finishVote']);
-      }
-    }
-    else {
-      working.open = false;
-      this.router.navigate(['finishVote']);
-    }
+     this.kindOfManager = kindOfManager;
+    // var day = new Date();
+    // var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    // if (kindOfManager == 1)
+    //   var nextDay = new Date(day.setDate(day.getDate() + 7));
+    // else if (kindOfManager == 2)
+    //   var nextDay = new Date(day.setDate(day.getDate() + 2));
+    // else var nextDay = new Date();
+    // var diffDays = Math.round(((new Date(this.finishService.voting.dateVote).getTime() - nextDay.getTime()) / (oneDay)));
+    // if (new Date(this.finishService.voting['dateVote']) >= new Date()) {
+    //   if (diffDays < 0) {
+    //     working.open = true;
+    //     //location.reload();
+    //     if (kindOfManager == 1)
+    //       this.router.navigate(['headManager']);
+    //     if (kindOfManager == 2)
+    //       this.router.navigate(['cityManager']);
+    //     if (kindOfManager == 3)
+    //       this.router.navigate(['ballotBoxManager']);
+    //   }
+    //   else {
+    //     working.open = false;
+    //     this.router.navigate(['finishVote']);
+    //   }
+    // }
+    // else {
+    //   working.open = false;
+    //   this.router.navigate(['finishVote']);
+    // }
   }
   //החזרת המשתנה שאותחל בזיהוי המנהל
   returnIdOfManager(): number {
@@ -76,16 +76,16 @@ export class ManagersService {
     return this.http.post('http://localhost:60289/api/Managers/addFaction', uploadData)
   }
   // בדיקה האם אכן נכנס מנהל ראשי
-  checkIsHeadManager(userName: string, password: string): Observable<Managers> {
-    return this.http.get<Managers>(`http://localhost:60289/api/Managers/findHeadManager/${userName}/${password}`);
+  checkIsHeadManager(identity: string, password: string): Observable<Managers> {
+    return this.http.get<Managers>(`http://localhost:60289/api/Managers/findHeadManager/${identity}/${password}`);
   }
   //בדיקה האם אכן נכנס מנהל ערים
-  checkIsCityManager(userName: string, password: string, cityOfManager: string): Observable<Managers> {
-    return this.http.get<Managers>(`http://localhost:60289/api/Managers/findCityManager/${userName}/${password}/${cityOfManager}`);
+  checkIsCityManager(identity: string, password: string, cityOfManager: string): Observable<Managers> {
+    return this.http.get<Managers>(`http://localhost:60289/api/Managers/findCityManager/${identity}/${password}/${cityOfManager}`);
   }
   //בדיקה האם אכן נכנס מנהל קלפי
-  checkIsBallotBoxManager(userName: string, password: string, numOfBalloBox: number, cityOfBallotBox: string): Observable<Managers> {
-    return this.http.get<Managers>(`http://localhost:60289/api/Managers/findBallotBoxManager/${userName}/${password}/${numOfBalloBox}/${cityOfBallotBox}`);
+  checkIsBallotBoxManager(identity: string, password: string, numOfBalloBox: number, cityOfBallotBox: string): Observable<Managers> {
+    return this.http.get<Managers>(`http://localhost:60289/api/Managers/findBallotBoxManager/${identity}/${password}/${numOfBalloBox}/${cityOfBallotBox}`);
   }
 
   //שמירת הערכים שהמנהל קלפי הכניס 
@@ -114,7 +114,7 @@ export class ManagersService {
   //החזרת מערך המפלגות
   getAllFaction():Observable<Factions[]>
   {
-    return this.http.get<Factions[]>(`http://localhost:60289/api/Managers/allFactions`);
+    return this.http.get<Factions[]>(`http://localhost:60289/api/Managers/getFactions`);
   }
 
   //סימון מפלגה כמאושרת

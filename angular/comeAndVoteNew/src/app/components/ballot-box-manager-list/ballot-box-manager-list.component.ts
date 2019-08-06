@@ -26,7 +26,6 @@ export class BallotBoxManagerListComponent implements OnInit {
     this.columnDefs = [
       { headerName: 'תעודת זהות', field: 'MIdentity', sortable: true, filter: true },
       { headerName: 'שם', field: 'MFullName', sortable: true, filter: true },
-      { headerName: 'שם משתמש', field: 'MUserName', sortable: true, filter: true },
       { headerName: 'סיסמה', field: 'MPassword', sortable: true, filter: true },
       { headerName: 'מייל', field: 'MailM', sortable: true, filter: true },
       { headerName: 'מספר קלפי', field: 'MNumBallotBox', sortable: true, filter: true },

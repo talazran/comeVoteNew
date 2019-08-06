@@ -20,6 +20,6 @@ export class CityManagerComponent implements OnInit {
   // פתיחת הדף של דוח סטטיסטיקת בוחרים
   statisVoting()
   {
-    this.route.navigate([""]);
+    this.route.navigate(["StaticDayVotersCity"]);
   }
 }

@@ -55,13 +55,6 @@ export class StaticDayVotersCityComponent {
     console.log(event);
   }
 
-
-
-
   // https://swimlane.gitbook-
-
-
-
-
 }
 

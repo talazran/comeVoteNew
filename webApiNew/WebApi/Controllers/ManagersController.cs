@@ -136,7 +136,7 @@ namespace WebApi.Controllers
             {
                 return false;
             }
-        
+
         }
         [HttpGet]
         [Route("deleteFaction/{id}")]
@@ -160,62 +160,69 @@ namespace WebApi.Controllers
         {
             //try
             //{
-                if (!Request.Content.IsMimeMultipartContent())
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            string root = HttpContext.Current.Server.MapPath("~/App_Data");
+            var provider = new MultipartFormDataStreamProvider(root);
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                NameValueCollection formdata = provider.FormData;
+                ///כל האוביקט שנשלח
+                Factions factions = JsonConvert.DeserializeObject<Factions>(formdata["res"].ToString());
+
+                foreach (MultipartFileData file in provider.FileData)
                 {
-                    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-                }
-
-                string root = HttpContext.Current.Server.MapPath("~/App_Data");
-                var provider = new MultipartFormDataStreamProvider(root);
-                try
-                {
-                    await Request.Content.ReadAsMultipartAsync(provider);
-
-                    NameValueCollection formdata = provider.FormData;
-                    ///כל האוביקט שנשלח
-                    Factions factions = JsonConvert.DeserializeObject<Factions>(formdata["res"].ToString());
-
-                    foreach (MultipartFileData file in provider.FileData)
+                    var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+                    byte[] documentData = File.ReadAllBytes(file.LocalFileName);
+                    if (Directory.GetFiles(@"C:\Users\Tal\Desktop\vote\comeVoteNew\webApiNew\WebApi\image", fileName).Length == 0)
                     {
-                        var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
-                        byte[] documentData = File.ReadAllBytes(file.LocalFileName);
-                        if (Directory.GetFiles(@"C:\Users\User\Documents\חיה\comeVoteNew\webApiNew\WebApi\image", fileName).Length == 0)
-                        {
-                            string destFile = System.IO.Path.Combine(@"C:\Users\User\Documents\חיה\comeVoteNew\webApiNew\WebApi\image", fileName);                           
-                            ///destFile-ניתוב לשמירת התמונה אצלכם בפרויקט עצמו
-                            File.Copy(file.LocalFileName, destFile);
-                        }
-                        factions.factionPic = System.IO.Path.Combine(@"C:\Users\User\Documents\חיה\comeVoteNew\webApiNew\WebApi\image", fileName);
-                        db.Factions.Add(factions);
-                        db.SaveChanges();
+                        string destFile = System.IO.Path.Combine(@"C:\Users\Tal\Desktop\vote\comeVoteNew\webApiNew\WebApi\image", fileName);
+                        ///destFile-ניתוב לשמירת התמונה אצלכם בפרויקט עצמו
+                        File.Copy(file.LocalFileName, destFile);
                     }
-                    return true;
+                    factions.factionPic = System.IO.Path.Combine(@"C:\Users\Tal\Desktop\vote\comeVoteNew\webApiNew\WebApi\image", fileName);
+                    db.Factions.Add(factions);
+                    db.SaveChanges();
+                }
+                return true;
                 //}
                 //catch (System.Exception e)
                 //{
 
                 //    return false;
                 //}
-              
-                return false;
+
+                //return false;s
             }
             catch (Exception e)
             {
                 return false;
-            }         
+            }
         }
         [HttpGet]
         [Route("getFactions")]
-        public List<Models.Faction> getAllFactions()
+        public List<Models.Factions> getAllFactions()
         {
-            List<Models.Faction> factions = new List<Models.Faction>();
+            List<Models.Factions> factions = new List<Models.Factions>();
             foreach (var item in db.Factions.ToList())
             {
-                factions.Add(Models.Faction.ConvertToDto(item));
+                var i = Models.Factions.ConvertToDto(item);
+                byte[] Bytes = new byte[10000000];
+                string FileExtension = Path.GetExtension(i.factionPic);
+                //resourcesPathShow.TypeFile = FileExtension;
+                string root = HttpContext.Current.Server.MapPath("~");
+                Bytes = File.ReadAllBytes(root+"//Files//"+i.factionPic);
+                i.factionImageBase = Convert.ToBase64String(Bytes);
+                factions.Add(i);
             }
             return factions;
         }
-        
+
         #region מנהל ראשי
         //הפונקציה עובדת
         [HttpGet]
@@ -376,22 +383,6 @@ namespace WebApi.Controllers
             }
             return managers;
         }
-		
-		
-        [HttpGet]
-        [Route("allCityManagers")]
-        public List<Models.Manager> AllCityManagers()//מחזיר את רשימת מנהלי ערים
-        {
-            List<Models.Manager> managers = new List<Models.Manager>();
-            var q = from m in db.Managers
-                    where m.NumStatus.Equals("2")//מחפש את המנהלים שהסטטוס שלהם הוא 3 ז''א מנהלי קלפי
-                    select m;
-            foreach (var item in q.ToList())
-            {
-                managers.Add(Models.Manager.ConvertToDto(item));
-            }
-            return managers;
-        }
 
 
         [HttpPut]
@@ -434,6 +425,9 @@ namespace WebApi.Controllers
 
         #region מנהל קלפי
         //שינוי שדה הבוחר ל-בחר
+        //הוספת רשומה לטבלת המאושרים
+        //הוספת  קול לעיר של הבוחר
+
         [HttpGet]
         [ResponseType(typeof(Managers))]
         [Route("PutFieldIsChoose/{idVoter}")]
@@ -443,6 +437,10 @@ namespace WebApi.Controllers
             if (national.IsChoose == false)
             {
                 national.IsChoose = true;
+                db.SaveChanges();
+                db.IsAgreeToVote.Add(new IsAgreeToVote() { tz = national.Identity });
+                City city = db.City.Single(x => x.id == national.cityId);
+                city.nowCountValid += 1;
                 db.SaveChanges();
                 return Ok(national);
             }

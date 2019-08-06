@@ -39,16 +39,12 @@ export class EditCityManagerComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       MIdentity: [, Validators.required],
       MFullName: [, Validators.required],
-      MUserName: [, [Validators.required]],
-      MPassword: [, [Validators.required]],
       MCity: [, Validators.required],
       MailM: [, [Validators.required]]
     }, {});
     this.registerForm.patchValue({
       MIdentity:this.manager.MIdentity,
       MFullName:this.manager.MFullName,
-      // MUserName:this.manager.MUserName,
-      MPassword:this.manager.MPassword,
       MCity:this.manager.MCity,
       MailM:this.manager.MailM
 
@@ -58,13 +54,12 @@ export class EditCityManagerComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
+    debugger;
     this.submitted = true;
-    this.route.navigate(['cityManagerList']);
     if (this.registerForm.invalid) {
       return;
     }
     this.managerService.editManagersCity(this.registerForm.value).subscribe(res => {
-      alert('succsess');
       this.activeModal.close();
     }, err => {
       alert("error")

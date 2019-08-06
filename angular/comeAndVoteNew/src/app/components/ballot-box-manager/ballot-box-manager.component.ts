@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { EditBallotBoxManagerComponent } from '../edit-ballot-box-manager/edit-ballot-box-manager.component';
 import { ActionComponent } from '../action/action.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OkNationalComponent } from '../ok-national/ok-national.component';
 
 @Component({
   selector: 'app-ballot-box-manager',
@@ -52,7 +53,7 @@ export class BallotBoxManagerComponent implements OnInit {
     // this.rowData = [];
     this.context = { componentParent: this };
     this.frameworkComponents = {
-      ActionComponent: ActionComponent
+      OkNationalComponent: OkNationalComponent
     };
   }
 
@@ -103,7 +104,7 @@ export class BallotBoxManagerComponent implements OnInit {
   //   });
   // }
 
-  
+
   //פתיחת המסך של האזרח
   //בעת כניסה יתווסף קול לעיר וכן שינוי השדה לבחר
   //בעת לחיצה על אישור בחירה יתווסף קול למפלגה
@@ -113,13 +114,21 @@ export class BallotBoxManagerComponent implements OnInit {
     this.national.changeFieldIsChoose(this.arrNational[cell].Identity).subscribe((res) => {
       if (res)//אם האזרח עדיין לא בחר
       {
+        alert('מאושר לבחירה');
+        this.cityOfBallotBox = this.managerService.returnCityBallotBox();
+        this.numOfBalloBox = this.managerService.returnNumBallotBox();
+    
+        //איתחול המערך של האזרחים
+        this.national.listOfNationalInBallotBox(this.numOfBalloBox, this.cityOfBallotBox).subscribe(data => this.arrNational = data);
         //הוספת קול לעיר של הבוחר
-        this.national.addVoteToCity(this.arrNational[cell].cityId).subscribe(res => { });
-        //שמירת תעודת הזהות של האזרח בטבלה ב-webApi
-        this.national.addTzNational(this.arrNational[cell]).subscribe(res=>{});
+        // this.national.addVoteToCity(this.arrNational[cell].cityId).subscribe(res => { });
+        // //שמירת תעודת הזהות של האזרח בטבלה ב-webApi
+        // this.national.addTzNational(this.arrNational[cell]).subscribe(res=>{});
       }
       else
         alert("משתמש זה כבר בחר");
+     },cat=>{
+      alert("משתמש זה כבר בחר");
      });
   }
 }

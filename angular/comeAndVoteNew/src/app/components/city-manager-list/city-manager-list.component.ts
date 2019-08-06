@@ -22,7 +22,7 @@ export class CityManagerListComponent implements OnInit {
   private rowData;
   private context;
   private frameworkComponents;
-  constructor(public managerService: ManagersService, private modalService: NgbModal,private route:Router) {
+  constructor(public managerService: ManagersService, public modalService: NgbModal,private route:Router) {
     this.columnDefs = [
       { headerName: 'תעודת זהות', field: 'MIdentity', sortable: true, filter: true },
       { headerName: 'שם', field: 'MFullName', sortable: true, filter: true },

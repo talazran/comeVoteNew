@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,13 +10,13 @@ namespace WebApi.Controllers
 {
     public class WorkPogramController : ApiController
     {
-        DAL.ComputerizedVoting1Entities db = new DAL.ComputerizedVoting1Entities();
+        ComputerizedVotingNewEntities db = new ComputerizedVotingNewEntities();
 
         [HttpGet]
         [Route("api/getTimeVote")]
         public Models.Voting GetTimeVote()//מחזיר את רשימת הערים
         {          
-          return Models.Voting.ConvertToDTO( db.Voting.OrderByDescending(p => p.dateVote).FirstOrDefault());
+          return Models.Voting.ConvertToDto( db.Voting.OrderByDescending(p => p.dateVote).FirstOrDefault());
         }
     }
 }

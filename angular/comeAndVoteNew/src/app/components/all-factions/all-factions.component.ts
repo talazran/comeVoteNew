@@ -5,6 +5,7 @@ import { ActionComponent } from '../action/action.component';
 import Swal from 'sweetalert2'
 import { EditFactionComponent } from '../edit-faction/edit-faction.component';
 import { AddFactionComponent } from '../add-faction/add-faction.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-all-factions',
@@ -15,17 +16,35 @@ export class AllFactionsComponent implements OnInit {
 
   private gridApi;
   private gridColumnApi;
-
+  url: string = null;
+  blob: Blob;
+  urlShow: any;
   private columnDefs;
   private rowData;
   private context;
   private frameworkComponents;
+
+   myCellRenderer = (params)=> {
+    var binary = atob(params.value);
+    var array = [];
+    for (var i = 0; i < binary.length; i++) {
+      array.push(binary.charCodeAt(i));
+    }
+    var blob= new Blob([new Uint8Array(array)], {
+      type: 'image/png'
+    });
+    var url = window.URL.createObjectURL(blob);
+    var urlShow=this.sanitizer.bypassSecurityTrustResourceUrl(url)
+    params.value=urlShow;
+    return '<img style="width:12px;" [src]='+params.value+'>';
+}
   // valueFormatter: this.currencyFormatter,
-  constructor(public managerService: ManagersService, private modalService: NgbModal) {
+  constructor(public managerService: ManagersService, private modalService: NgbModal
+    ,public sanitizer: DomSanitizer) {
     this.columnDefs = [
       { headerName: 'שם מפלגה', field: 'factionName', sortable: true, filter: true },
       { headerName: 'מייל מנהל', field: 'leadersMail', sortable: true, filter: true },
-      { headerName: ' פתקית', field: 'factionPic', sortable: true, filter: true },
+      { headerName: ' פתקית', field: 'factionImageBase', sortable: true, filter: true,cellRenderer: this.myCellRenderer },
       { headerName: 'סטטוס', field: 'IsAgree', sortable: true, filter: true },
       {
         headerName: 'פעולות', field: 'MailM', sortable: true, filter: true,
@@ -89,11 +108,9 @@ export class AllFactionsComponent implements OnInit {
         })      
       }
     })
-    debugger;
- 
   }
 
-  newCityManager() {
+  newFaction() {
     let modalRef = this.modalService.open(AddFactionComponent)
     modalRef.result.then((result) => {
       this.managerService.getAllFaction().subscribe(res => {
@@ -106,6 +123,10 @@ export class AllFactionsComponent implements OnInit {
 
   currencyFormatter(params) {
     return params.value.cityName;
+  }
+
+  dataURItoBlob(dataURI) {
+   
   }
 
 }

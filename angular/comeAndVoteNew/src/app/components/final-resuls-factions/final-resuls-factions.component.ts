@@ -31,7 +31,7 @@ export class FinalResulsFactionsComponent implements OnInit {
   }
 
 
-view = [600,600];
+  view = [600,600];
   showXAxis = true;
   showYAxis = true;
   gradient = false;

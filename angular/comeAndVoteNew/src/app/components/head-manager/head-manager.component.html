@@ -2,8 +2,9 @@
 <br>
 <input type="button" class="btn btn-secondary btn-lg" value="בחר מפלגות מתוך הרשימה" (click)="chooseAgreeFaction()">
 <br>
-<button (click)="allFac()">allfactions</button>
+<input type="button" class="btn btn-secondary btn-lg" (click)="allFac()" value="כל המפלגות">
 <!-- הכפתור לא יהיה מאופשר עד לסיום הבחירות -->
+<!-- כאן תוצג הקומפוננטה שמכילה את הגרפים  הסופיים -->
 <input type="button" class="btn btn-secondary btn-lg" id="showResult"  value="צפה בתוצאות ספירת קולות" [disabled]="closeBallotBox()" (click)="addHeadManager()">
 <br>
 <input type="button" class="btn btn-secondary btn-lg" id="timeVoting"  value="הכנס זמני פתיחת וסגירת קלפיות" (click)="addtimeVoting()">

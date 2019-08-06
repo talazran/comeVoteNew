@@ -1,0 +1,3 @@
+<button *ngIf="isAgreeToVote()" id="buttonToEnter" value="אישור" class="btn btn-secondary btn-lg" (click)="enterFactionBlockForVote()">אישור</button>
+<input *ngIf="isAgreeToVote()" type="text" id="enterTz" placeholder="הכנס תעודת זהות" [(ngModel)]="tzNational">
+<!-- <input *ngIf="isAgreeToVote()" id="buttonToEnter" value="אישור" class="btn btn-secondary btn-lg" (click)="enterFactionBlockForVote()"> -->
