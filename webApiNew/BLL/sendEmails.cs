@@ -47,7 +47,7 @@ namespace BLL
                 mail.Body = "סיסמתך למערכת הינה:" + password;//תוכן עם תגיות
 
                 SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("votingpojectemails", "vvvv1234");//שם וסיסמסמא
+                SmtpServer.Credentials = new System.Net.NetworkCredential("votingpojectemails", "vvvv1234");//שם וסיסמא
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);//שליחת המייל

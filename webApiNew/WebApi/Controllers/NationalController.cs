@@ -8,6 +8,7 @@ using DAL;
 using System.Web.Http.Description;
 using System.Web.Http.Cors;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace WebApi.Controllers
 {
@@ -103,18 +104,46 @@ namespace WebApi.Controllers
         }
 
         //הסרת האזרח מהאוסף
+        //[HttpDelete]
+        //[Route("deleteTzNationalToList/{Identity}")]
+        //public void DeleteTzNationalToList(string Identity)
+        //{
+        //    foreach (var item in db.IsAgreeToVote)
+        //    {
+        //        if (item.tz.Trim() == Identity)
+        //        {
+        //            db.IsAgreeToVote.Remove(new IsAgreeToVote() { tz = Identity });
+        //            db.SaveChanges();
+        //            break;
+        //        }
+        //    }
+        //}
+
+        //יש לבדוק את הפונקציה
+        //הסרת האזרח מהאוסף
         [HttpDelete]
         [Route("deleteTzNationalToList/{Identity}")]
-        public void DeleteTzNationalToList(string Identity)
+        public static void deleteTzNational(string table, string columnName, string IDNumber)
         {
-            foreach (var item in db.IsAgreeToVote)
+            table = "IsAgreeToVote";
+            columnName = "tz";
+
+            try
             {
-                if (item.tz.Trim() == Identity)
+                using (SqlConnection con = new SqlConnection("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-E5SDQ8R/SQLEXPRESS;initial catalog=ComputerizedVoting;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;")
+                )
                 {
-                    db.IsAgreeToVote.Remove(new IsAgreeToVote() { tz = Identity });
-                    db.SaveChanges();
-                    break;
+                    con.Open();
+                    using (SqlCommand command = new SqlCommand("DELETE FROM " + table + " WHERE " + columnName + " = " + IDNumber, con))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    con.Close();
                 }
+            }
+            catch (SystemException ex)
+            {
+                //MessageBox.Show(string.Format("An error occurred: {0}", ex.Message));
             }
         }
     }
