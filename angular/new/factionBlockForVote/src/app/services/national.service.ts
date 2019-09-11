@@ -26,6 +26,7 @@ export class NationalService {
 
   //הסרת אזרח מהאוסף
   deleteNationalByTz(tzNational: string) {
+    debugger;
     return this.http.delete(`http://localhost:60289/api/National/deleteTzNationalToList/${tzNational}`);
   }
   //שמירת תעודת זהות של אזרח

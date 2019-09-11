@@ -63,25 +63,6 @@ namespace WebApi.Controllers
             db.SaveChanges();
             return Ok(faction);
         }
-
-        //הוספת תעודת זהות של אזרח
-        //[HttpGet]
-        //[Route("addTzNationalToList/{Identity}")]
-        //public void AddTzNationalToList(string Identity)
-        //{
-        //    int flag = 0;
-        //    foreach (var item in saveTzOfNational)
-        //    {
-        //        if (item.Equals(Identity))
-        //        {
-        //            flag = 1;
-        //            break;
-        //        }
-        //    }
-        //    if (flag == 0)//רק אם לא נמצאה התעודת זהות היא תתוסף
-        //       saveTzOfNational.Add(Identity);
-        //}
-
         
         //עבדה
         //בדיקה האם אזרח קיים באוסף
@@ -104,47 +85,15 @@ namespace WebApi.Controllers
         }
 
         //הסרת האזרח מהאוסף
-        //[HttpDelete]
-        //[Route("deleteTzNationalToList/{Identity}")]
-        //public void DeleteTzNationalToList(string Identity)
-        //{
-        //    foreach (var item in db.IsAgreeToVote)
-        //    {
-        //        if (item.tz.Trim() == Identity)
-        //        {
-        //            db.IsAgreeToVote.Remove(new IsAgreeToVote() { tz = Identity });
-        //            db.SaveChanges();
-        //            break;
-        //        }
-        //    }
-        //}
-
-        //יש לבדוק את הפונקציה
-        //הסרת האזרח מהאוסף
         [HttpDelete]
         [Route("deleteTzNationalToList/{Identity}")]
-        public static void deleteTzNational(string table, string columnName, string IDNumber)
+        public void DeleteTzNationalToList(string Identity)
         {
-            table = "IsAgreeToVote";
-            columnName = "tz";
-
-            try
-            {
-                using (SqlConnection con = new SqlConnection("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-E5SDQ8R/SQLEXPRESS;initial catalog=ComputerizedVoting;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;")
-                )
-                {
-                    con.Open();
-                    using (SqlCommand command = new SqlCommand("DELETE FROM " + table + " WHERE " + columnName + " = " + IDNumber, con))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                    con.Close();
-                }
-            }
-            catch (SystemException ex)
-            {
-                //MessageBox.Show(string.Format("An error occurred: {0}", ex.Message));
-            }
+            //חיפוש אזרח שאושר כבר לבחירה
+            IsAgreeToVote national = db.IsAgreeToVote.Single(x => x.tz == Identity);
+            //מחיקת האזרח מהטבלה
+            db.IsAgreeToVote.Remove(national);
+            db.SaveChanges();
         }
     }
 }

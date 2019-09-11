@@ -7,12 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { FactionBlockForVoteComponent } from './components/faction-block-for-vote/faction-block-for-vote.component';
 import { HomeVoterComponent } from './components/home-voter/home-voter.component';
+import { EndVotingComponent } from './components/end-voting/end-voting.component';
 
 @NgModule({
   declarations:[
     AppComponent,
     FactionBlockForVoteComponent,
     HomeVoterComponent,
+    EndVotingComponent,
   ],
   imports: [
     BrowserModule,

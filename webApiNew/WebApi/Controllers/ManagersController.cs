@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BLL;
+using DAL;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -292,25 +293,25 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpPost]
-        [Route("addManagerCity")]
-        public IHttpActionResult PostManagerCity([FromBody]Models.Manager manager)
-        {
-            try
-            {
+        //[HttpPost]
+        //[Route("addManagerCity")]
+        //public IHttpActionResult PostManagerCity([FromBody]Models.Manager manager)
+        //{
+        //    try
+        //    {
 
-                var managerDal = Models.Manager.ConvertToDAL(manager);
-                managerDal.City = db.City.First(p => p.id == manager.MCity);
-                managerDal.ManagersStatus = db.ManagersStatus.FirstOrDefault(p => p.numStatus == "2");
-                db.Managers.Add(managerDal);
-                db.SaveChanges();
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
-        }
+        //        var managerDal = Models.Manager.ConvertToDAL(manager);
+        //        managerDal.City = db.City.First(p => p.id == manager.MCity);
+        //        managerDal.ManagersStatus = db.ManagersStatus.FirstOrDefault(p => p.numStatus == "2");
+        //        db.Managers.Add(managerDal);
+        //        db.SaveChanges();
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
 
         [HttpPut]
         [Route("editManagerCity/{managerId}")]
@@ -365,10 +366,58 @@ namespace WebApi.Controllers
             }
             return managers;
         }
+
+        [HttpPost]
+        [ActionName("PostCityManager")]
+        [ResponseType(typeof(Managers))]
+        [Route("addManagerCity")]
+        public IHttpActionResult PostCityManager(Managers addCityManager)//הוספת מנהל עיר חדש, 
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            //בדיקה שהמנהל לא קיים
+            Managers m = db.Managers.FirstOrDefault(ma => ma.MIdentity == addCityManager.MIdentity);
+            if (m != null)
+                return BadRequest(ModelState);
+
+            //הגרלת סיסמא של המנהל החדש 
+            PasswordManager pm = new PasswordManager();
+            string password = pm.RandomPassword();
+            addCityManager.MPassword = password;
+            try
+            {
+                db.Managers.Add(addCityManager);
+                //סיסמת המשתמש המונפקת עי המערכת
+                db.SaveChanges();
+                //שליחת הסיסמא למייל המנהל
+                sendEmails se = new sendEmails();
+                se.sendMailForPassword(addCityManager.MailM, addCityManager.MPassword);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ModelState);
+            }
+            return CreatedAtRoute("DefaultApi", new { id = addCityManager.MIdentity }, addCityManager);
+        }
+
+
+        [HttpGet]//שליחת מיילים
+        [Route("getEmailsToFaction/{id}")]
+        public void GetsendEmail(int id)
+        {
+            var q = from f in db.Factions//חיפוש כתובת המייל של המפלגה שנלחצה
+                    where f.Id == id
+                    select f.leadersMail;
+            sendEmails se = new sendEmails();
+            se.sendMailTest(q.ToString());//שליחת המייל של המפלגה לפונקציית שליחה
+        }
+
         #endregion
 
 
-        #region מנהל עיר
+            #region מנהל עיר
         [HttpGet]
         [Route("allBallotBoxManagers")]
         public List<Models.Manager> AllBallotBoxManagers()//מחזיר את רשימת מנהלי הקלפיות
