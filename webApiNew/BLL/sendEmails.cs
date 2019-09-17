@@ -15,12 +15,10 @@ namespace BLL
             {
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
                 mail.From = new MailAddress("votingpojectemails@gmail.com");
                 mail.To.Add(mailAddress);//לשלוח כמה כתובות
                 mail.Subject = "מספר המנדטים ";//נושא
                 mail.Body = "מספר המנדטים הינו:";//תוכן עם תגיות
-
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("votingpojectemails", "vvvv1234");//שם וסיסמסמא
                 SmtpServer.EnableSsl = true;

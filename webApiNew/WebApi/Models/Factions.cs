@@ -47,9 +47,6 @@ namespace WebApi.Models
 
                // FinalResults = Models.FinalResults.ConvertToDto(fac.FinalResults)
             };
-        } 
-
-
-
+        }
     }
 }

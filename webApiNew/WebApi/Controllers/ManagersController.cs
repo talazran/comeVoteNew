@@ -209,7 +209,7 @@ namespace WebApi.Controllers
         [Route("getFactions")]
         public List<Models.Factions> getAllFactions()
         {
-            List<Models.Factions> factions = new List<Models.Factions>();
+           List<Models.Factions> factions = new List<Models.Factions>();
             foreach (var item in db.Factions.ToList())
             {
                 var i = Models.Factions.ConvertToDto(item);
@@ -404,14 +404,15 @@ namespace WebApi.Controllers
 
 
         [HttpGet]//שליחת מיילים
-        [Route("getEmailsToFaction/{id}")]
-        public void GetsendEmail(int id)
+        [Route("senfMailsToFaction/{id}")]
+        public IHttpActionResult GetsendEmail(int id)
         {
             var q = from f in db.Factions//חיפוש כתובת המייל של המפלגה שנלחצה
                     where f.Id == id
                     select f.leadersMail;
             sendEmails se = new sendEmails();
             se.sendMailTest(q.ToString());//שליחת המייל של המפלגה לפונקציית שליחה
+            return Ok();
         }
 
         #endregion
