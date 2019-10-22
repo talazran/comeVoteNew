@@ -40,6 +40,6 @@ closeBallot:boolean=false;
   }
   managerList()
   {
-    this.route.navigate(["/cityManagerList"])
+    this.route.navigate(["/openHeadManager/cityManagerList"])
   }
 }

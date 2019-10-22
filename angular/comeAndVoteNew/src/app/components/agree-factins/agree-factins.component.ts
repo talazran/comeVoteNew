@@ -4,6 +4,7 @@ import { Managers } from 'src/app/classes/managers';
 import { ManagersService } from 'src/app/services/managers.service';
 import { NationalService } from 'src/app/services/national.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-agree-factins',
@@ -36,9 +37,20 @@ export class AgreeFactinsComponent implements OnInit {
     // putFieldIsAgree/{idFaction}
     this.manager.isAgreeFactins(idFaction).subscribe(res => {
       if (res)
-        alert("המפלגה סומנה כמאושר");
+      {
+        Swal.fire(
+          'הצליח!',
+          'המפלגה סומנה כמאושר',
+          'success'
+        )
+      }  
       else
-        alert("המפלגה כבר מאושרת");
+      {
+        Swal.fire(
+          'המפלגה כבר מאושרת',
+          'success'
+        )
+      }
     });
   }
 
@@ -46,9 +58,20 @@ export class AgreeFactinsComponent implements OnInit {
     // putFieldIsAgree/{idFaction}
     this.manager.notAgreeFaction(idFaction).subscribe(res => {
       if (res)
-        alert("המפלגה סומנה כ-לא מאושר ");
+      {
+        Swal.fire(
+          'הצליח!',
+          'המפלגה סומנה כ-לא מאושר',
+          'success'
+        )
+      }  
       else
-        alert("המפלגה כבר לא מאושרת");
+      {
+        Swal.fire(
+          'המפלגה כבר לא מאושרת',
+          'success'
+        )
+      }
     });
   }
 

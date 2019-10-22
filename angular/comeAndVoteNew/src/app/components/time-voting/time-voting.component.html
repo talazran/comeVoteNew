@@ -1,18 +1,17 @@
-<input id="return" type="button" value="חזרה למנהל ראשי" (click)="returnHeadManage()">
 
 <form id="addTimeVoting">
     <label>הכנס קוד בחירות:</label>
-    <input type="number" id="kodVote" [(ngModel)]="formVoting.kodVote" name="kodVote">
+    <input class="form-control" type="number" id="kodVote" [(ngModel)]="formVoting.kodVote" name="kodVote">
     <br>
     <label>הכנס תאריך בחירות:</label>
-    <input type="date" name="dateVote" [(ngModel)]="formVoting.dateVote">
+    <input class="form-control" type="date" name="dateVote" [(ngModel)]="formVoting.dateVote">
     <br>
     <label>הכנס פתיחת קלפיות:</label>
-    <input type="time" name="ballotsOpen" [(ngModel)]="formVoting.ballotsOpen">
+    <input class="form-control" type="time" name="ballotsOpen" [(ngModel)]="formVoting.ballotsOpen">
     <br>
     <label>הכנס סגירת קלפיות</label>
-    <input type="time" name="ballotsClose" [(ngModel)]="formVoting.ballotsClose">
+    <input class="form-control" type="time" name="ballotsClose" [(ngModel)]="formVoting.ballotsClose">
     <br>
     <br>
-    <input type="submit" id="ok" value="אישור" (click)="saveTimeVoting()">
+    <input class="form-control" class="btn btn-info" type="submit" id="ok" value="אישור" (click)="saveTimeVoting()">
   </form>

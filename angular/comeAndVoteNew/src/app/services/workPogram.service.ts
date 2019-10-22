@@ -10,7 +10,7 @@ export class WorkPogramService {
 
   constructor(public httpClient: HttpClient) {}
 
-  // getTimeVote() {
-  //  return this.httpClient.get('http://localhost:60289/api/getTimeVote');
-  // }
+  getTimeVote() {
+   return this.httpClient.get('http://localhost:60289/api/Managers/getTimeVote');
+  }
 }

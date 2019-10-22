@@ -5,6 +5,8 @@ import { City } from 'src/app/classes/city';
 import { Factions } from 'src/app/classes/factions';
 import { ManagersService } from 'src/app/services/managers.service';
 import { BallotBox } from 'src/app/classes/ballot-box';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-add-ballotbox-manager',
@@ -21,7 +23,7 @@ export class AddBallotboxManagerComponent implements OnInit {
     ballosForCity:BallotBox[]=[];//בעת הכנסת העיר יאותחל מערך זה 
   
     constructor(private formBuilder: FormBuilder, public managerService: ManagersService,
-      // public activeModal:NgbActiveModal
+       public activeModal:NgbActiveModal
       ) { }
   
     ngOnInit() {
@@ -36,7 +38,7 @@ export class AddBallotboxManagerComponent implements OnInit {
         MFullName: ['', Validators.required],
         MCity: ['', Validators.required],
         Mfaction: [''],
-        MNumOfBallot: [''],
+        MNumBallotBox: [''],
         MailM: ['', [Validators.required, Validators.email]]
       }, {
           // validator: MustMatch('password', 'confirmPassword')
@@ -53,10 +55,27 @@ export class AddBallotboxManagerComponent implements OnInit {
       }
       debugger;
       this.managerService.AddNewballotBoxManager(this.registerForm.value).subscribe(res=>{
-        alert('succsess');
-       // this.activeModal.close();
+        Swal.fire(
+          'הצליח!',
+          'מנהל קלפי נוסף בהצלחה',
+          'success'
+        )       
+         this.activeModal.close();
+        this.activeModal.dismiss();
       },err=>{
-        alert("error")
+        Swal.fire({
+          type: 'error',
+          title: 'נכשל',
+          text: 'הוספת מנהל קלפי נכשלה'
+        })
+      })
+    }
+
+    chooseCity()
+    {
+      debugger;
+      this.managerService.getBallotBoxByCity(this.registerForm.controls['MCity'].value).subscribe(res=>{
+        this.ballosForCity=res;
       })
     }
   

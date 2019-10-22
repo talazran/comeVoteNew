@@ -1,22 +1,54 @@
+<!-- <app-home></app-home> -->
 <!-- מנהל ראשי -->
 <form id="enterHeadManager" *ngIf="checkManager()==1">
+  <div class="col-md-offset-5 col-md-3">
+    <div class="form-login">
+      <h4>כניסה</h4>
+      <input type="text" id="userName" [(ngModel)]="identity" name="identity" class="form-control input-sm chat-input"
+        placeholder="תעודת זהות" />
+      <br>
+      <input type="password" id="userPassword" [(ngModel)]="password" name="password"
+        class="form-control input-sm chat-input" placeholder="סיסמה" />
+      <br>
+      <div class="wrapper">
+        <span class="group-btn" (click)="enterHeadManager()">
+          <a class="btn btn-primary btn-md">כניסה <i class="fa fa-sign-in"></i></a>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</form>
+
+<form id="enterCityManager" *ngIf="checkManager()==2">
+  <div class="col-md-offset-5 col-md-3">
+    <div class="form-login">
+      <h4>כניסה</h4>
+      <input type="text" id="userName" [(ngModel)]="identity" name="identity" class="form-control input-sm chat-input"
+        placeholder="תעודת זהות" />
+      <br>
+      <input type="password" id="userPassword" [(ngModel)]="password" name="password"
+        class="form-control input-sm chat-input" placeholder="סיסמה" />
+      <br>
+      <select [(ngModel)]="cityOfManager" class="form-control input-sm chat-input" name="cityName">
+        <option hidden>העיר בה הנך מנהל:</option>
+        <option *ngFor="let c of optionCity" [ngValue]="c.id">{{c.cityName}}</option>
+      </select>
+      <br>
+      <div class="wrapper">
+        <span class="group-btn" (click)="enterCityManager()">
+          <a class="btn btn-primary btn-md">כניסה <i class="fa fa-sign-in"></i></a>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</form>
+<!-- מנהל עיר -->
+<!-- <form id="enterCityManager" *ngIf="checkManager()==2">
   <h1>LOGIN</h1>
   <label>תעודת זהות</label>
   <input type="text" id="identity" [(ngModel)]="identity" name="identity">
-  <br>
-  <label>סיסמא:</label>
-
-  <input type="password" id="password" [(ngModel)]="password" name="password">
-  <br>
-  <br>
-  <input id="enter" type="submit" value="כניסה" (click)="enterHeadManager()">
-</form>
-
-<!-- מנהל עיר -->
-<form id="enterCityManager" *ngIf="checkManager()==2">
-  <h1>LOGIN</h1>
-  <label>תעודת זהות</label>
-    <input type="text" id="identity" [(ngModel)]="identity" name="identity">
   <br>
   <label>סיסמא:</label>
   <input type="password" name="password" [(ngModel)]="password">
@@ -24,15 +56,44 @@
   <br>
   <select [(ngModel)]="cityOfManager" name="cityName">
     <option hidden>העיר בה הנך מנהל:</option>
-    <option *ngFor="let c of optionCity">{{c.cityName}}</option>
+    <option *ngFor="let c of optionCity" [ngValue]="c.id">{{c.cityName}}</option>
   </select>
   <br>
   <br>
   <input id="enter" type="submit" value="כניסה" (click)="enterCityManager()">
-</form>
+</form> -->
 
 <!-- מנהל קלפי -->
 <form id="enterBallotBoxManager" *ngIf="checkManager()==3">
+  <div class="col-md-offset-5 col-md-3">
+    <div class="form-login">
+      <h4>כניסה</h4>
+      <input type="text" id="userName" [(ngModel)]="identity" name="identity" class="form-control input-sm chat-input"
+        placeholder="תעודת זהות" />
+      <br>
+      <input type="password" id="userPassword" [(ngModel)]="password" name="password"
+        class="form-control input-sm chat-input" placeholder="סיסמה" />
+      <br>
+      <label>מספר קלפי:</label>
+      <input type="password" id="userPassword" [(ngModel)]="numOfBalloBox" name="numBallotBox"
+        class="form-control input-sm chat-input" placeholder="מספר קלפי" />
+<br>
+      <select [(ngModel)]="cityOfManager" class="form-control input-sm chat-input" name="cityName">
+        <option hidden>העיר בה הנך מנהל:</option>
+        <option *ngFor="let c of optionCity" [value]="c.id">{{c.cityName}}</option>
+      </select>
+      <br>
+      <div class="wrapper">
+        <span class="group-btn" (click)="enterBallotBoxManager()">
+          <a class="btn btn-primary btn-md">כניסה <i class="fa fa-sign-in"></i></a>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</form>
+
+<!-- <form id="enterBallotBoxManager" *ngIf="checkManager()==3">
   <h1>LOGIN</h1>
   <label>תעודת זהות</label>
   <input type="text" id="identity" [(ngModel)]="identity" name="identity">
@@ -51,4 +112,4 @@
   <br>
   <br>
   <input id="enter" type="submit" value="כניסה" (click)="enterBallotBoxManager()">
-</form>
+</form> -->

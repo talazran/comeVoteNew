@@ -24,29 +24,16 @@ export class AppComponent {
 
   finishVote() {
 
-    // this.workPogramService.getTimeVote().subscribe((res: Voting) => {
-    //   debugger;
-    //   this.workPogramService.voting = res as Voting;
-    //   var day=new Date();
-    //   var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-    //   var nextDay = new Date(day.setDate(day.getDate() + 7));
-    //   var diffDays = Math.round(((new Date(res.dateVote).getTime() - nextDay.getTime())/(oneDay)));
-    //   if (new Date(res['dateVote']) >=new Date()) {
-    //     if(diffDays<0)
-    //     {
-    //       working.open = true;
-    //       //location.reload();
-    //       this.router.navigate(['']);
-    //     }
-    //     else {
-    //       working.open = false;
-    //       this.router.navigate(['finishVote']);
-    //     }
-    //   }
-    //   else {
-    //     working.open = false;
-    //     this.router.navigate(['finishVote']);
-    //   }
-    // })
+    this.workPogramService.getTimeVote().subscribe((res) => {
+      if (res) {
+        working.open = true;
+        //location.reload();
+       // this.router.navigate(['']);
+      }
+      else {
+        working.open = false;
+        this.router.navigate(['finishVote']);
+      }
+    })
   }
 }

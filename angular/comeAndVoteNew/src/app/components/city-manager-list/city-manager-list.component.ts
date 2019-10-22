@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ManagersService } from 'src/app/services/managers.service';
 import { ActionComponent } from '../action/action.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,19 +15,20 @@ import { Router } from '@angular/router';
 })
 export class CityManagerListComponent implements OnInit {
 
-  private gridApi;
-  private gridColumnApi;
+   gridApi;
+   gridColumnApi;
 
-  private columnDefs;
-  private rowData;
-  private context;
-  private frameworkComponents;
-  constructor(public managerService: ManagersService, public modalService: NgbModal,private route:Router) {
+   columnDefs;
+   rowData;
+   context;
+   frameworkComponents;
+  constructor(public managerService: ManagersService, public modalService: NgbModal,private route:Router,
+    private cdRef:ChangeDetectorRef) {
     this.columnDefs = [
       { headerName: 'תעודת זהות', field: 'MIdentity', sortable: true, filter: true },
       { headerName: 'שם', field: 'MFullName', sortable: true, filter: true },
       // { headerName: 'שם משתמש', field: 'MUserName', sortable: true, filter: true },
-      { headerName: 'סיסמה', field: 'MPassword', sortable: true, filter: true },
+      // { headerName: 'סיסמה', field: 'MPassword', sortable: true, filter: true },
       { headerName: 'מייל', field: 'MailM', sortable: true, filter: true },
       {
         headerName: 'עיר', field: 'City.cityName', sortable: true, filter: true,
@@ -64,6 +65,7 @@ export class CityManagerListComponent implements OnInit {
       })
       this.managerService.getManagersCity().subscribe(res => {
         this.rowData = res;
+        this.cdRef.detectChanges();
       })
     }).catch((error) => {
       console.log(error);
@@ -85,8 +87,8 @@ export class CityManagerListComponent implements OnInit {
       if (result.value) {
         this.managerService.deleteManagersCity(this.rowData[cell].MIdentity).subscribe(res=>{
           Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
+            'נמחק!',
+            'המנהל עיר נמחק',
             'success'
           )
           this.managerService.getManagersCity().subscribe(res => {
@@ -113,9 +115,12 @@ export class CityManagerListComponent implements OnInit {
   currencyFormatter(params) {
     return params.value.cityName;
   }
-  // חזרה למנהל ראשי
-  returnHeadManage()
-  {
-    this.route.navigate(['openHeadManager']);
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+
+    params.api.sizeColumnsToFit();
   }
+  // חזרה למנהל ראשי
 }

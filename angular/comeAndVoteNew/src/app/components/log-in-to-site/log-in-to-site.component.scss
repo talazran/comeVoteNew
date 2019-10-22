@@ -1,48 +1,83 @@
 
-// מנהל ראשי
-#enterHeadManager{
-    height: 34vh;
-    border: solid;
-    width: 21vw;
-    border-radius: 29px;
-    margin-left: 42%;
-    position: absolute;
-    margin-top: 12%;
-    background-color: #bae6f0;
-    color: #538fd2;
-    padding: 2%;
-    direction: rtl;
-}
-// מנהל עיר
-#enterCityManager{
-    height: 34vh;
-    border: solid;
-    width: 21vw;
-    border-radius: 29px;
-    margin-left: 42%;
-    position: absolute;
-    margin-top: 12%;
-    background-color: #bae6f0;
-    color: #538fd2;
-    padding: 2%;
-    direction: rtl;
+// // מנהל ראשי
+// #enterHeadManager{
+//     height: 34vh;
+//     border: solid;
+//     width: 21vw;
+//     border-radius: 29px;
+//     margin-left: 42%;
+//     position: absolute;
+//     margin-top: 12%;
+//     background-color: #bae6f0;
+//     color: #538fd2;
+//     padding: 2%;
+//     direction: rtl;
+// }
+// // מנהל עיר
+// #enterCityManager{
+//     height: 34vh;
+//     border: solid;
+//     width: 21vw;
+//     border-radius: 29px;
+//     margin-left: 42%;
+//     position: absolute;
+//     margin-top: 12%;
+//     background-color: #bae6f0;
+//     color: #538fd2;
+//     padding: 2%;
+//     direction: rtl;
 
+// }
+// // מנהל קלפי
+// #enterBallotBoxManager{
+//     height: 35vh;
+//     border: solid;
+//     width: 21vw;
+//     border-radius: 29px;
+//     margin-left: 42%;
+//     position: absolute;
+//     margin-top: 12%;
+//     background-color: #bae6f0;
+//     color: #538fd2;
+//     padding: 2%;
+//     direction: rtl;
+// }
+// //כפתור כניסה מה-logIn
+// #enter{
+//     margin-left: 5vw;
+// }
+form{
+    margin-left: 0px;
+    position: relative;
+    left: 35.5%;    // top: 10%;
+    top: -87.312px;
+    margin-top: 14%;
+    //direction: rtl;
 }
-// מנהל קלפי
-#enterBallotBoxManager{
-    height: 35vh;
-    border: solid;
-    width: 21vw;
-    border-radius: 29px;
-    margin-left: 42%;
-    position: absolute;
-    margin-top: 12%;
-    background-color: #bae6f0;
-    color: #538fd2;
-    padding: 2%;
-    direction: rtl;
+.form-login {
+    direction: rtl !important;
+    background-color: #EDEDED;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+    box-shadow:0 1px 0 #cfcfcf;
 }
-//כפתור כניסה מה-logIn
-#enter{
-    margin-left: 5vw;
+
+h4 { 
+ border:0 solid #fff; 
+ border-bottom-width:1px;
+ padding-bottom:10px;
+ text-align: center;
+}
+
+.form-control {
+    border-radius: 10px;
+}
+
+.wrapper {
+    text-align: center;
 }

@@ -4,6 +4,7 @@ import { Factions } from '../../classes/factions';
 import { City } from 'src/app/classes/city';
 import { ManagersService } from 'src/app/services/managers.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-add-faction',
@@ -39,10 +40,19 @@ export class AddFactionComponent implements OnInit {
     }
     debugger;
     this.managerService.addFaction(this.registerForm.value,this.imagePath).subscribe(res=>{
-      alert('succsess');
+      Swal.fire(
+        'הצליח!',
+        ' הפלגה נוספסה ',
+        'success'
+      )
       this.activeModal.close();
+      this.activeModal.dismiss();
     },err=>{
-      alert("error")
+      Swal.fire({
+        type: 'error',
+        title: 'נכשל',
+        text: 'הוספת מפלגה נכשלה'
+      })
     })
   }
 

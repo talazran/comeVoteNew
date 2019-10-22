@@ -30,6 +30,8 @@ import { FinishVoteComponent } from './components/finishVote/finishVote.componen
 import { AllFactionsComponent } from './components/all-factions/all-factions.component';
 import { EditFactionComponent } from './components/edit-faction/edit-faction.component';
 import { AddFactionComponent } from './components/add-faction/add-faction.component';
+import { AddBallotboxManagerComponent } from './components/add-ballotbox-manager/add-ballotbox-manager.component';
+import { StaticDayVotersCityComponent } from './components/static-day-voters-city/static-day-voters-city.component';
 
 @NgModule({
   declarations:[
@@ -53,8 +55,9 @@ import { AddFactionComponent } from './components/add-faction/add-faction.compon
     AllFactionsComponent,
     EditFactionComponent,
     AddFactionComponent,
+    AddBallotboxManagerComponent,
     // FinalResulsFactionsComponent,
-    // StaticDayVotersCityComponent
+     StaticDayVotersCityComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { AddFactionComponent } from './components/add-faction/add-faction.compon
     AngularFontAwesomeModule
 
   ],
-  entryComponents:[AddCityManagerComponent,EditCityManagerComponent,EditFactionComponent,AddFactionComponent],
+  entryComponents:[AddCityManagerComponent,AddBallotboxManagerComponent,
+    EditBallotBoxManagerComponent,EditCityManagerComponent,EditFactionComponent,AddFactionComponent],
   providers: [ManagersService],
   bootstrap: [AppComponent]
 })

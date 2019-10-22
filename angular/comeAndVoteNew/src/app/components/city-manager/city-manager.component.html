@@ -1,4 +1,20 @@
 <!-- מנהל עיר מורשה לצפות במנהלי קלפיות -->
-<input type="button" class="buttonOfCityManager btn btn-secondary btn-lg" value="מנהלי קלפיות" (click)="openAllBallotBox()">
-<br>
-<input type="button" class="buttonOfCityManager btn btn-secondary btn-lg" value="דוח סטטיסטיקת בוחרים" (click)="statisVoting()">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="direction: rtl;">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <img id="logo" src="..\..\assets\factionPic\logoturkiz.png">
+            
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="ballotBoxManagerList">מנהלי קלפיות</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="StaticDayVotersCity">דוח סטטיסטיקת בוחרים</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" routerLink="">יציאה</a>
+                    </li>
+            </ul>
+        </div>
+    </nav>
+    <img id="mainPic" src="..\..\assets\factionPic\menoraNew.png">
+    <router-outlet></router-outlet>

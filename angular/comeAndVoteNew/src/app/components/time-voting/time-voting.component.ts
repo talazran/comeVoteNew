@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ManagersService } from 'src/app/services/managers.service';
 import { Time } from '@angular/common';
 import { Voting } from 'src/app/classes/voting';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-time-voting',
@@ -23,7 +24,11 @@ export class TimeVotingComponent implements OnInit {
     debugger;
     this.manager.timeVoting(this.formVoting).subscribe(res=>{
       if(res)
-        alert("הנתונים נשמרו בהצלחה");
+      Swal.fire(
+        'הצליח!',
+        'הנתונים נשמרו בהצלחה',
+        'success'
+      )
     });
   }
   returnHeadManage()

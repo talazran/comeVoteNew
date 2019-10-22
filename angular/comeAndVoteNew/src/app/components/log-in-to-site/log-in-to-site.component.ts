@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterModule, Route, Router } from '@angular/router';
 import { ManagersService } from 'src/app/services/managers.service';
 import { disableBindings } from '@angular/core/src/render3';
 import { City } from 'src/app/classes/city';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-log-in-to-site',
@@ -46,7 +47,11 @@ export class LogInToSiteComponent implements OnInit {
       if(data)
         this.route.navigate(['openHeadManager']);
       else
-        alert("שם משתמש או סיסמא שגויים");
+      Swal.fire({
+        type: 'error',
+        title: 'נכשל',
+        text: 'שם משתמש או סיסמא שגויים'
+      })
     });
   }
 
@@ -57,7 +62,11 @@ export class LogInToSiteComponent implements OnInit {
       if(data)
         this.route.navigate(['openCityManager']);
       else
-        alert("שם משתמש או סיסמא שגויים");
+      Swal.fire({
+        type: 'error',
+        title: 'נכשל',
+        text: 'שם משתמש או סיסמא שגויים'
+      })
     });
   }
 
@@ -72,7 +81,11 @@ export class LogInToSiteComponent implements OnInit {
         //פתיחת הדף של המנהל קלפי
         this.route.navigate(['openBallotBoxManager']);
       else
-        alert("שם משתמש או סיסמא שגויים");
+      Swal.fire({
+        type: 'error',
+        title: 'נכשל',
+        text: 'שם משתמש או סיסמא שגויים'
+      })
     });
   }
 }

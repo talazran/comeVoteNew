@@ -14,15 +14,15 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AllFactionsComponent implements OnInit {
 
-  private gridApi;
-  private gridColumnApi;
+   gridApi;
+   gridColumnApi;
   url: string = null;
   blob: Blob;
   urlShow: any;
-  private columnDefs;
-  private rowData;
-  private context;
-  private frameworkComponents;
+   columnDefs;
+   rowData;
+   context;
+   frameworkComponents;
 
    myCellRenderer = (params)=> {
     var binary = atob(params.value);
@@ -36,7 +36,7 @@ export class AllFactionsComponent implements OnInit {
     var url = window.URL.createObjectURL(blob);
     var urlShow=this.sanitizer.bypassSecurityTrustResourceUrl(url)
     params.value=urlShow;
-    return '<img style="width:12px;" [src]='+params.value+'>';
+    return '<img style="width: 68px;height: 42px;" [src]='+params.value+'>';
 }
   // valueFormatter: this.currencyFormatter,
   constructor(public managerService: ManagersService, private modalService: NgbModal
@@ -67,7 +67,7 @@ export class AllFactionsComponent implements OnInit {
 
   methodFromParentEdit(cell) {
     let modalRef = this.modalService.open(EditFactionComponent)
-    modalRef.componentInstance.manager=this.rowData[cell]
+    modalRef.componentInstance.faction=this.rowData[cell]
     modalRef.result.then((result) => {
       Swal.fire({
         position: 'top-end',
@@ -96,10 +96,10 @@ export class AllFactionsComponent implements OnInit {
       confirmButtonText: 'מחק!'
     }).then((result) => {
       if (result.value) {
-        this.managerService.deleteManagersCity(this.rowData[cell].MIdentity).subscribe(res=>{
+        this.managerService.deleteFaction(this.rowData[cell].id).subscribe(res=>{
           Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
+            'נמחק!',
+            'המלגה נמחקה בהצלחה',
             'success'
           )
           this.managerService.getAllFaction().subscribe(res => {
@@ -111,6 +111,7 @@ export class AllFactionsComponent implements OnInit {
   }
 
   newFaction() {
+    debugger;
     let modalRef = this.modalService.open(AddFactionComponent)
     modalRef.result.then((result) => {
       this.managerService.getAllFaction().subscribe(res => {
@@ -127,6 +128,12 @@ export class AllFactionsComponent implements OnInit {
 
   dataURItoBlob(dataURI) {
    
+  }
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+
+    params.api.sizeColumnsToFit();
   }
 
 }

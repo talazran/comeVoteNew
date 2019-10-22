@@ -1,10 +1,40 @@
-<input type="button" class="btn btn-secondary btn-lg" (click)="managerList()" value=" מנהלי ערים">
+<!-- <input type="button" class="btn btn-secondary btn-lg" (click)="managerList()" value=" מנהלי ערים">
 <br>
 <input type="button" class="btn btn-secondary btn-lg" value="בחר מפלגות מתוך הרשימה" (click)="chooseAgreeFaction()">
 <br>
-<input type="button" class="btn btn-secondary btn-lg" (click)="allFac()" value="כל המפלגות">
+<input type="button" class="btn btn-secondary btn-lg" (click)="allFac()" value="כל המפלגות"> -->
 <!-- הכפתור לא יהיה מאופשר עד לסיום הבחירות -->
 <!-- כאן תוצג הקומפוננטה שמכילה את הגרפים  הסופיים -->
-<input type="button" class="btn btn-secondary btn-lg" id="showResult"  value="צפה בתוצאות ספירת קולות" [disabled]="closeBallotBox()" (click)="addHeadManager()">
+<!-- <input type="button" class="btn btn-secondary btn-lg" id="showResult"  value="צפה בתוצאות ספירת קולות"  (click)="addHeadManager()">
 <br>
 <input type="button" class="btn btn-secondary btn-lg" id="timeVoting"  value="הכנס זמני פתיחת וסגירת קלפיות" (click)="addtimeVoting()">
+<router-outlet></router-outlet> -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="direction: rtl;">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <img id="logo" src="..\..\assets\factionPic\logoturkiz.png">
+            
+            <li class="nav-item">
+                <a class="nav-link" routerLink="cityManagerList">מנהלי ערים</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="openAgreeFaction">בחר מפלגות מתוך הרשימה</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="allFactions">מפלגות</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="openTimeVoting">הכנס זמני פתיחת וסגירת קלפיות</a>
+            </li>
+            <li class="nav-item">
+                <!-- [disabled]="closeBallotBox()" -->
+                    <a class="nav-link" name="dis"  routerLink="StaticDayVotersCity">תוצאות בחירות</a>
+                </li>
+                <li class="nav-item">
+                        <a style="margin-right: 624px;" class="nav-link" routerLink="">יציאה</a>
+                    </li>
+        </ul>
+    </div>
+</nav>
+<img id="mainPic" src="..\..\assets\factionPic\menoraNew.png">
+<router-outlet></router-outlet>

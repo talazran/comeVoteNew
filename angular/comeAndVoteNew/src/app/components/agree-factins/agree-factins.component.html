@@ -1,11 +1,10 @@
-<input id="return" type="button" value="חזרה למנהל ראשי" (click)="returnHeadManage()">
 <div class="wrapper text-center"> 
     <h1 id="titleOfblockVote">בחר את המפלגות המאושרות לשנה זו</h1>
     <div class="row">
     <div class="col-auto" *ngFor="let p of arrFaction">
         <!-- בעת לחיצה על תמונה ישמר קוד המפלגה -->
         <div class="img" [class.active-faction]="p.Id == idFaction" (click)="clickOnFactionPic(p.Id)" [style.backgroundImage]="'url(../../../assets/factionPic/' + p.factionPic + ')'"></div>
-        <input type="button" value="אישור"  (click)="agreeFaction(p.Id)">
-        <input type="button" value="ביטול"  (click)="notAgreeFaction(p.Id)">
+        <button type="button" class="btn btn-light" (click)="notAgreeFaction(p.Id)">ביטול</button>
+        <button type="button" class="btn btn-light" (click)="agreeFaction(p.Id)">אישור</button>
       </div>
   </div>

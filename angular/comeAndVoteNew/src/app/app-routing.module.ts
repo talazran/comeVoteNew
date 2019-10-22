@@ -12,38 +12,66 @@ import { CityManagerListComponent } from './components/city-manager-list/city-ma
 import { BallotBoxManagerListComponent } from './components/ballot-box-manager-list/ballot-box-manager-list.component';
 import { FinishVoteComponent } from './components/finishVote/finishVote.component';
 import { AllFactionsComponent } from './components/all-factions/all-factions.component';
-// import { FinalResulsFactionsComponent } from './components/final-resuls-factions/final-resuls-factions.component';
-// import { StaticDayVotersCityComponent } from './components/static-day-voters-city/static-day-voters-city.component';
+/// import { FinalResulsFactionsComponent } from './components/final-resuls-factions/final-resuls-factions.component';
+ import { StaticDayVotersCityComponent } from './components/static-day-voters-city/static-day-voters-city.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+    children: [
+      {
+        path: 'headManager',
+        component: LogInToSiteComponent,
+      },
+      {
+        path: 'cityManager',
+        component: LogInToSiteComponent,
+      },
+      {
+        path: 'ballotBoxManager',
+        component: LogInToSiteComponent,
+      },
+    ]
+  },
   {
     path: 'home',
     component: LogInToSiteComponent,
   },
-  {
-    path: 'headManager',
-    component: LogInToSiteComponent,
-  },
-  {
-    path: 'cityManager',
-    component: LogInToSiteComponent,
-  },
-  {
-    path: 'ballotBoxManager',
-    component: LogInToSiteComponent,
-  },
+
   {
     path: 'openHeadManager',//פתיחת הפונקציונאליות של המנהל הראשי
     component: HeadManagerComponent,
+    children: [
+      {
+        path: 'cityManagerList',//פתיחת הפונקציונאליות של המנהל עיר
+        component: CityManagerListComponent,
+      },
+      {
+        path: 'openAgreeFaction',//פתיחת הקומפוננטה של פתיחת מפלגות
+        component: AgreeFactinsComponent,
+      },
+      {
+        path: 'allFactions',
+        component: AllFactionsComponent,
+      },
+      {
+        path: 'openTimeVoting',//פתיחת הקומפוננטה של הכנסת שמני פתיחת וסגירת קלפיות 
+        component: TimeVotingComponent,
+      },
+    ]
   },
   {
     path: 'openCityManager',//פתיחת הפונקציונאליות של המנהל עיר
     component: CityManagerComponent,
+    children: [
+      {
+        path: 'ballotBoxManagerList',
+        component: BallotBoxManagerListComponent,
+      },
+    ]
   },
-  {
-    path: 'cityManagerList',//פתיחת הפונקציונאליות של המנהל עיר
-    component: CityManagerListComponent,
-  },
+
   {
     path: 'openBallotBoxManager',//פתיחת הפונקציונאליות של המנהל קלפי
     component: BallotBoxManagerComponent,
@@ -64,34 +92,21 @@ const routes: Routes = [
     path: 'addManager',//הוספת מנהל עיר
     component: BallotBoxManagerComponent,
   },
-  {
-    path: 'openAgreeFaction',//פתיחת הקומפוננטה של פתיחת מפלגות
-    component: AgreeFactinsComponent,
-  },
-  {
-    path: 'openTimeVoting',//פתיחת הקומפוננטה של הכנסת שמני פתיחת וסגירת קלפיות 
-    component: TimeVotingComponent,
-  },
-  {
-    path: 'ballotBoxManagerList',
-    component: BallotBoxManagerListComponent,
-  },
+
+
   {
     path: 'finishVote',
     component: FinishVoteComponent,
   },
-  {
-    path: 'allFactions',
-    component: AllFactionsComponent,
-  },
+
   // {
   //   path: 'finalResultFaction',
   //   component: FinalResulsFactionsComponent,
   // },
-  // {
-  //   path: 'StaticDayVotersCity',
-  //   component: StaticDayVotersCityComponent,
-  // },
+  {
+    path: 'StaticDayVotersCity',
+    component: StaticDayVotersCityComponent,
+  },
 ];
 
 @NgModule({

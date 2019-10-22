@@ -14,6 +14,7 @@ import { WorkPogramService } from './workPogram.service';
 import { working } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Voting } from '../classes/voting';
+import { BallotBox } from '../classes/ballot-box';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,13 @@ export class ManagersService {
     uploadData.append('myFile', img[0], img[0].name);
     uploadData.append('res', JSON.stringify(value));
     return this.http.post('http://localhost:60289/api/Managers/addFaction', uploadData)
+  }
+  editFaction(value, img) {
+    debugger;
+    const uploadData = new FormData();
+    uploadData.append('myFile', img[0], img[0].name);
+    uploadData.append('res', JSON.stringify(value));
+    return this.http.put('http://localhost:60289/api/Managers/editFaction/'+value.id, uploadData)
   }
   // בדיקה האם אכן נכנס מנהל ראשי
   checkIsHeadManager(identity: string, password: string): Observable<Managers> {
@@ -156,6 +164,10 @@ export class ManagersService {
   {
     return this.http.delete(`http://localhost:60289/api/Managers/deleteManagerCityOrBallotBox/${managerId}`);
   }
+  deleteFaction(factionId)
+  {
+    return this.http.delete(`http://localhost:60289/api/Managers/deleteFaction/${factionId}`);
+  }
   //מחיקת מנהל קלפי או עיר
   deleteManagersBallotBox(managerId)
   {
@@ -181,5 +193,9 @@ export class ManagersService {
   AddNewballotBoxManager(newBalotBoxManageobj:Managers):Observable<Managers>
   {
    return this.http.post<Managers>(`http://localhost:60289/api/Managers/postballotBoxManager/`,newBalotBoxManageobj);
+  }
+  getBallotBoxByCity(idCity):Observable<BallotBox[]>
+  {
+   return this.http.get<BallotBox[]>('http://localhost:60289/api/Managers/getBallotBoxByCity/'+idCity);
   }
 }

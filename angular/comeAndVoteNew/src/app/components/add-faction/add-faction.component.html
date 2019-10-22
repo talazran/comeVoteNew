@@ -1,43 +1,39 @@
-<div class="">
-  <div class="container">
-      <div class="row">
-          <div class="col-md-6 offset-md-3">
-              <h3>הוספת מנהל עיר</h3>
-              <form [formGroup]="registerForm" name="form" (ngSubmit)="onSubmit()">
-                  <div class="form-group">
-                      <label>Name</label>
-                      <input type="text" formControlName="factionName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.factionName.errors }" />
-                      <div *ngIf="submitted && f.factionName.errors" class="invalid-feedback">
-                          <div *ngIf="f.factionName.errors.required"> Name is required</div>
-                      </div>
-                  </div>
-           
-                  <div class="form-group">
-                      <label>Email</label>
-                      <input type="text" formControlName="leadersMail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.leadersMail.errors }" />
-                      <div *ngIf="submitted && f.leadersMail.errors" class="invalid-feedback">
-                          <div *ngIf="f.leadersMail.errors.required">Email is required</div>
-                          <div *ngIf="f.leadersMail.errors.email">Email must be a valid email address</div>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label>note</label>
-                      <span style="color:red;" *ngIf="message">{{message}}</span>
-                      <input #file type="file" accept='image/*' (change)="preview(file.files)" />
-                      <img [src]="imgURL" height="200" *ngIf="imgURL">
-                  </div>
-                  <div class="form-group">
-                    <label>status</label>
-                    <select formControlName="IsAgree">
-                        <option value="true">מאושר</option>
-                        <option value="false">מבוטל</option>
-                    </select>              
-                </div>
-                  <div class="form-group">
-                      <button class="btn btn-primary">הוספה</button>
-                  </div>
-              </form>
-          </div>
-      </div>
-  </div>
-</div>
+
+<form [formGroup]="registerForm" name="form" (ngSubmit)="onSubmit()" 
+style="margin: 12px;direction: rtl;text-align: right;">
+        <h3>הוספת מנהל עיר</h3>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" formControlName="factionName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.factionName.errors }" />
+        <div *ngIf="submitted && f.factionName.errors" class="invalid-feedback">
+            <div *ngIf="f.factionName.errors.required"> Name is required</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" formControlName="leadersMail" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.leadersMail.errors }" />
+        <div *ngIf="submitted && f.leadersMail.errors" class="invalid-feedback">
+            <div *ngIf="f.leadersMail.errors.required">Email is required</div>
+            <div *ngIf="f.leadersMail.errors.email">Email must be a valid email address</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>note</label>
+        <span style="color:red;" *ngIf="message">{{message}}</span>
+        <input #file type="file" accept='image/*' (change)="preview(file.files)" />
+        <img [src]="imgURL" height="200" *ngIf="imgURL">
+    </div>
+    <div class="form-group">
+        <label>status</label>
+        <select formControlName="IsAgree">
+            <option value="true">מאושר</option>
+            <option value="false">מבוטל</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">הוספה</button>
+    </div>
+</form>

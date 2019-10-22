@@ -5,6 +5,7 @@ import { City } from 'src/app/classes/city';
 import { ManagersService } from 'src/app/services/managers.service';
 import { ActivationEnd, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -47,10 +48,19 @@ export class AddCityManagerComponent implements OnInit {
       return;
     }
     this.managerService.addManagersCity(this.registerForm.value).subscribe(res=>{
-      alert('succsess');
+  
+     Swal.fire(
+      'הצליח!',
+      'מנהל העיר נוסף בהצלחה',
+      'success'
+    )
       this.activeModal.close();
     },err=>{
-      alert("error")
+      Swal.fire({
+        type: 'error',
+        title: 'נכשל',
+        text: 'הוספת משתמש העיר נכשלה'
+      })
     })
     // this.router.navigate(['headManager']);
   }

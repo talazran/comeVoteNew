@@ -1,10 +1,15 @@
 <!-- מנהל עיר צופה -->
 <!-- באוסף כל מנהלי הקלפיות -->
-<input id="return" type="button" value="חזרה למנהל עיר" (click)="returnCityManage()">
-<button class="btn btn-secondary btn-lg" (click)="newBallotBoxManager()">new</button>
-
+<div style="direction: rtl !important;margin-right: 6%;margin-top: 1%;">
+        <div class="row">
+            <button type="button"  (click)="newBallotBoxManager()" class="btn bg-blue fs-it-btn">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span class="fs-it-btn-vertical-line"></span>
+                הוספת חדש</button>
+        </div>
+    </div>
 <ag-grid-angular 
-    style="width: 1324px;height: 250px; margin-top: 12%;position: absolute;"
+style="width: 1500px; height:800px;margin-top: 2%;" 
     class="ag-theme-material"
     [rowData]="rowData" 
     [columnDefs]="columnDefs"

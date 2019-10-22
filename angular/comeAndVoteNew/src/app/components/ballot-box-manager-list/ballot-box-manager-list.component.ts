@@ -15,12 +15,12 @@ import { disableBindings } from '@angular/core/src/render3';
 })
 export class BallotBoxManagerListComponent implements OnInit {
   
-  private gridApi;
-  private gridColumnApi;
-  private columnDefs;
-  private rowData;
-  private context;
-  private frameworkComponents;
+   gridApi;
+   gridColumnApi;
+   columnDefs;
+   rowData;
+   context;
+   frameworkComponents;
 
   constructor(private route:Router,public managerService: ManagersService, private modalService: NgbModal) {
     this.columnDefs = [
@@ -59,6 +59,7 @@ export class BallotBoxManagerListComponent implements OnInit {
 
   methodFromParentEdit(cell) {
     //העריכה לא עובדת
+    debugger;
     let modalRef = this.modalService.open(EditBallotBoxManagerComponent)
     modalRef.componentInstance.manager=this.rowData[cell]
     modalRef.result.then((result) => {
@@ -73,6 +74,7 @@ export class BallotBoxManagerListComponent implements OnInit {
         this.rowData = res;
       })
     }).catch((error) => {
+      //alert("error")
       console.log(error);
     });
   }

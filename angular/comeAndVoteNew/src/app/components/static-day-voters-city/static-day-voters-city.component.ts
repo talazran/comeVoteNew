@@ -3,7 +3,7 @@ import { CityVoters } from './data';
 import { City } from 'src/app/classes/city';
 import { Route } from '@angular/router';
 import { ManagersService } from 'src/app/services/managers.service';
-
+import * as CanvasJS from '../../../assets/canvasjs.min';
 
 @Component({
   selector: 'app-static-day-voters-city',
@@ -31,16 +31,34 @@ export class StaticDayVotersCityComponent {
   constructor(private manage: ManagersService) {
     
   }
-  ngOnInit() {
-    
-    this.manage.getOptionCity().subscribe((data) => {
-      debugger;
-      this.inityArrOfCity(data);
-    }); //return all the cities from the service
 
+    
+    ngOnInit() {
+      let chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      exportEnabled: true,
+      title: {
+        text: "Basic Column Chart in Angular"
+      },
+      data: [{
+        type: "column",
+        dataPoints: [
+          { y: 71, label: "Apple" },
+          { y: 55, label: "Mango" },
+          { y: 50, label: "Orange" },
+          { y: 65, label: "Banana" },
+          { y: 95, label: "Pineapple" },
+          { y: 68, label: "Pears" },
+          { y: 28, label: "Grapes" },
+          { y: 34, label: "Lychee" },
+          { y: 14, label: "Jackfruit" }
+        ]
+      }]
+    });
+      
+    chart.render();
+      }
    
-   
-  }
   inityArrOfCity(data){
    if (data != null) {//במידה והערים לא יחזרו עדיין מהשרת שלא ירוץ על ריק
       for (let index = 0; index < data.length; index++) {//עובר על כול רשימת הערים
@@ -57,4 +75,3 @@ export class StaticDayVotersCityComponent {
 
   // https://swimlane.gitbook-
 }
-

@@ -54,15 +54,15 @@ export class EditCityManagerComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
-    debugger;
     this.submitted = true;
     if (this.registerForm.invalid) {
       return;
     }
     this.managerService.editManagersCity(this.registerForm.value).subscribe(res => {
       this.activeModal.close();
+      this.activeModal.dismiss();
     }, err => {
-      alert("error")
+      
     })
   }
 }
