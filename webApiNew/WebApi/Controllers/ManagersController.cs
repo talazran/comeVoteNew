@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -20,7 +22,7 @@ namespace WebApi.Controllers
     public class ManagersController : ApiController
     {
         DAL.ComputerizedVotingNewEntities db = new ComputerizedVotingNewEntities();
-
+        string destination = HttpContext.Current.Server.MapPath("~")+ "//Files//";
         //הזדהות במערכת לגבי מנהל ראשי
         //הפונקציה עובדת
         [HttpGet]
@@ -42,21 +44,21 @@ namespace WebApi.Controllers
         //הפונקציה עבדה
         [HttpGet]
         [Route("findCityManager/{identity}/{password}/{cityOfManager}")]
-        public bool FindCityManager(string identity, string password, string cityOfManager)
+        public bool FindCityManager(string identity, string password, int cityOfManager)
         {
             //לקרוא לפונקציה שמצפינה את הסיסמא שהכניס
             //במקום ה-password להשתמש במשתנה שהוחזר החדש שמכיל את ההצפנה
 
             //שליפת קוד עיר על פי שם עיר
-            var idCity = from c in db.City
-                         where c.cityName == cityOfManager
-                         select c.id;
+            //var idCity = from c in db.City
+            //             where c.cityName == cityOfManager
+            //             select c.id;
 
 
 
             //חיפוש המנהל על פי שם משתמש וסיסמא
             //החזרת הסטטוס שלו
-            var kindOfManager = db.Managers.FirstOrDefault(x => x.MPassword == password && x.MIdentity == identity && x.MCity == idCity.FirstOrDefault());
+            var kindOfManager = db.Managers.FirstOrDefault(x => x.MPassword == password && x.MIdentity == identity && x.MCity.Value==cityOfManager);
             if (kindOfManager != null && kindOfManager.NumStatus == "2")
                 return true;
             return false;
@@ -112,15 +114,15 @@ namespace WebApi.Controllers
                     {
                         var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
                         byte[] documentData = File.ReadAllBytes(file.LocalFileName);
-                        if (Directory.GetFiles("", fileName).Length == 0)
+                        if (Directory.GetFiles(destination, fileName).Length == 0)
                         {
-                            string destFile = System.IO.Path.Combine("", fileName);
+                            string destFile = System.IO.Path.Combine(destination, fileName);
                             ///destFile-ניתוב לשמירת התמונה אצלכם בפרויקט עצמו
                             File.Copy(file.LocalFileName, destFile);
                         }
                         var fac = db.Factions.First(p => p.Id == factions.Id);
                         fac.factionName = factions.factionName;
-                        fac.factionPic = System.IO.Path.Combine("", fileName);
+                        fac.factionPic =  fileName;
                         fac.IsAgree = factions.IsAgree;
                         db.SaveChanges();
                         return true;
@@ -180,13 +182,13 @@ namespace WebApi.Controllers
                 {
                     var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
                     byte[] documentData = File.ReadAllBytes(file.LocalFileName);
-                    if (Directory.GetFiles(@"C:\Users\Tal\Desktop\vote\comeVoteNew\webApiNew\WebApi\image", fileName).Length == 0)
+                    if (Directory.GetFiles(destination, fileName).Length == 0)
                     {
-                        string destFile = System.IO.Path.Combine(@"C:\Users\Tal\Desktop\vote\comeVoteNew\webApiNew\WebApi\image", fileName);
+                        string destFile = System.IO.Path.Combine(destination, fileName);
                         ///destFile-ניתוב לשמירת התמונה אצלכם בפרויקט עצמו
                         File.Copy(file.LocalFileName, destFile);
                     }
-                    factions.factionPic = System.IO.Path.Combine(@"C:\Users\Tal\Desktop\vote\comeVoteNew\webApiNew\WebApi\image", fileName);
+                    factions.factionPic = fileName;
                     db.Factions.Add(factions);
                     db.SaveChanges();
                 }
@@ -292,6 +294,34 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("getTimeVote")]
+        public IHttpActionResult getTimeVote()
+        {
+            try
+            {
+               var vot= db.Voting.ToList().Last();
+                if(DateTime.Now.DayOfYear<vot.dateVote.Date.DayOfYear)
+                {
+                    if((vot.dateVote- DateTime.Now).Days>7)
+                        return Ok(false);
+                    return Ok(true);
+                }
+                else if (DateTime.Now.TimeOfDay < vot.ballotsOpen)
+                {
+                    return Ok(true);
+
+                }
+                else return Ok(false);
+            }
+
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+        }
+
 
         //[HttpPost]
         //[Route("addManagerCity")]
@@ -320,11 +350,13 @@ namespace WebApi.Controllers
             try
             {
                 var manager1 = db.Managers.First(p => p.MIdentity == managerId);
-                manager1 = Models.Manager.ConvertToDAL(manager);
+                //manager1 = Models.Manager.ConvertToDAL(manager);
                 manager1.City = db.City.First(p => p.id == manager.MCity);
                 manager1.ManagersStatus = db.ManagersStatus.FirstOrDefault(p => p.numStatus == "2");
+                manager1.MFullName = manager.MFullName;
+                manager1.MailM = manager.MailM;
                 db.SaveChanges();
-                return Ok();
+                return Ok(true);
             }
             catch (Exception ex)
             {
@@ -388,6 +420,7 @@ namespace WebApi.Controllers
             addCityManager.MPassword = password;
             try
             {
+                addCityManager.NumStatus = "2";
                 db.Managers.Add(addCityManager);
                 //סיסמת המשתמש המונפקת עי המערכת
                 db.SaveChanges();
@@ -399,7 +432,7 @@ namespace WebApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            return CreatedAtRoute("DefaultApi", new { id = addCityManager.MIdentity }, addCityManager);
+            return Ok();
         }
 
 
@@ -442,7 +475,10 @@ namespace WebApi.Controllers
             try
             {
                 var manager1 = db.Managers.First(p => p.MIdentity == managerId);
-                manager1 = Models.Manager.ConvertToDAL(manager);
+                manager1.BallotBox = db.BallotBox.Where(p=>p.id==manager.MNumBallotBox).First();
+                manager1.MFullName = manager.MFullName;
+                manager1.MailM = manager.MailM;
+                //manager1 = Models.Manager.ConvertToDAL(manager);
                 manager1.City = db.City.First(p => p.id == manager.MCity);
                 manager1.ManagersStatus = db.ManagersStatus.FirstOrDefault(p => p.numStatus == "3");
                 db.SaveChanges();
@@ -453,6 +489,18 @@ namespace WebApi.Controllers
                 return BadRequest();
             }
         }
+        private static Random random = new Random();
+
+        public static string GetVoucherNumber(int length)
+        {
+            var chars = "abcdefghijklmnopkrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var result = new string(
+                Enumerable.Repeat(chars, length)
+                          .Select(s => s[random.Next(s.Length)])
+                          .ToArray());
+
+            return result;
+        }
 
         [HttpPost]
         [ResponseType(typeof(Managers))]
@@ -462,6 +510,8 @@ namespace WebApi.Controllers
             {
                 var managerDal = Models.Manager.ConvertToDAL(manager);
                 managerDal.ManagersStatus = db.ManagersStatus.FirstOrDefault(p => p.numStatus == "3");
+                managerDal.MUserName = GetVoucherNumber(10);
+                managerDal.MPassword = GetVoucherNumber(9);
                 db.Managers.Add(managerDal);
                 db.SaveChanges();
                 return Ok();
@@ -499,6 +549,11 @@ namespace WebApi.Controllers
         }
         #endregion
 
-
+        [HttpGet]
+        [Route("getBallotBoxByCity/{idCity}")]
+        public IHttpActionResult GetBallotBoxByCityId(int idCity)
+        {
+            return Ok(db.BallotBox.Where(p => p.cityId == idCity).ToList());
+        }
     }
 }
