@@ -48,8 +48,8 @@ export class FactionBlockForVoteComponent implements OnInit {
     this.national.addVoteToFaction(this.idFaction).subscribe(res => { });
     //הסרת האזרח מהטבלה של המאושרים
     this.national.deleteNationalByTz(this.national.getNational()).subscribe(res => {
-      if (res)
-        this.routeNavigate.navigate(['endVoting']);
+      //if (res)
+        this.routeNavigate.navigate(['returnHomePage']);
     });
   }
 
